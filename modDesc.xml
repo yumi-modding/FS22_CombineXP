@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="53">
+    <author>yumi</author>
+    <version>1.0.0.0</version>        
+    <title>
+        <en>Combine XPerience</en>
+        <fr>Combine XPerience</fr>
+        <de>Combine XPerience</de>
+    </title>
+    <description>
+        <en><![CDATA[
+If you're tired of harvesting any crops with any combine at 10 kph, this mod is for you.
+The goal of this mod is to provide a new experience when using combine harvesters in the game to be closer to real life harvesting. This is a first release and new features under development will arrive soon.
+New features:
+  - Capability to activate combine and cutter independently as IRL
+  - Harvesting speed limit based on material quantity gathered, crop type and combine performance (based on power)
+  - Display several data in HUD when harvesting: material capacity (T/h), combine load (%), instant yield (T/ha)
+]]></en>
+        <fr><![CDATA[
+Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
+Le but de ce mod est de fournir une nouvelle expérience lors de l'utilisation des moissonneuses-batteuses dans le jeu pour être plus proche de la réalité. Il s'agit d'une première version et de nouvelles fonctionnalités en cours de développement arriveront bientôt.
+Nouvelles fonctionnalités:
+   - Possibilité d'activer la moissonneuse-batteuse et la barre de coupe indépendamment comme IRL
+   - Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture et des performances de la moissonneuse (basées sur sa puissance)
+   - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
+]]></fr>
+        <de><![CDATA[
+Wenn Sie es satt haben, Ernten mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das Richtige für Sie.
+Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um der Ernte im wirklichen Leben näher zu kommen. Dies ist eine erste Version und neue Funktionen, die derzeit entwickelt werden, werden in Kürze verfügbar sein.
+Neue Eigenschaften:
+   - Fähigkeit, Mähdrescher und Fräser unabhängig voneinander als IRL zu aktivieren
+   - Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart und der Mähdrescherleistung (basierend auf der Power)
+   - Zeigen Sie bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
+]]></de>        
+    </description>
+    <iconFilename>modIcon.dds</iconFilename>
+    <multiplayer supported="true"/>
+    
+    <extraSourceFiles>
+        <sourceFile filename="src/main.lua" />
+    </extraSourceFiles>
+
+    <l10n>
+        <text name="warning_firstStartThreshing">
+            <fr>Vous devez d&apos;abord démarrer le système de battage</fr>
+            <en>You first need to start combine threshing</en>
+            <de>Starten Sie zuerst das Mähdrescher-Dreschsystem!</de>
+        </text>
+    </l10n>
+
+</modDesc>
