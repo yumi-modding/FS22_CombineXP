@@ -17,7 +17,7 @@ function CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilena
     instance.i18n = i18n
     instance.modDirectory = modDirectory
     instance.uiFilename = uiFilename
-    instance.atlasRefSize = { 1280, 256 }
+    instance.atlasRefSize = { 256, 128 }
 
     instance.speedMeterDisplay = mission.hud.speedMeter
 
@@ -231,11 +231,11 @@ CombineHUD.SIZE = {
 }
 
 CombineHUD.UV = {
-    MASS = { 0, 0, 256, 256 },
-    AREA = { 256, 0, 256, 256 },
-    SLASH = { 512, 0, 256, 256 },
-    ENGINE_LOAD = { 768, 0, 256, 256 },
-    FILL = { 1024, 0, 256, 256 }
+    MASS = { 0, 0, 64, 64 },
+    AREA = { 64, 0, 64, 64 },
+    SLASH = { 128, 0, 64, 64 },
+    ENGINE_LOAD = { 192, 0, 64, 64 },
+    FILL = { 0, 64, 64, 64 }
 }
 
 CombineHUD.COLOR = {
