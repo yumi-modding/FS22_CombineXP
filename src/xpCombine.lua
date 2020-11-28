@@ -107,6 +107,11 @@ function xpCombine:onLoad(savegame)
 
     if basePerf <= 0 then
     -- Then motorConfiguration hp
+        local coef = 1.5
+        local keyCategory = "vehicle.storeData.category"
+        if getXMLString(self.xmlFile, keyCategory) == "forageHarvesters" then
+            coef = 6.
+        end
         local key, motorId = ConfigurationUtil.getXMLConfigurationKey(self.xmlFile, self.configurations.motor, "vehicle.motorized.motorConfigurations.motorConfiguration", "vehicle.motorized", "motor")
         local fallbackConfigKey = "vehicle.motorized.motorConfigurations.motorConfiguration(0)"
         local fallbackOldKey = "vehicle"
@@ -115,14 +120,14 @@ function xpCombine:onLoad(savegame)
             -- print("key "..key)
             -- print("motorId "..motorId)
             -- print("power "..power)
-            basePerf = tonumber(power) * 1.50
+            basePerf = tonumber(power) * coef
             print("Combine basePerf computed from motorConfiguration hp: "..tostring(power).." => "..tostring(basePerf))
         else
     -- Then specs power
             key = "vehicle.storeData.specs.power"
             local specsPower = getXMLString(self.xmlFile, key)
             if specsPower ~= nil and tonumber(specsPower) > 0 then
-                basePerf = tonumber(specsPower) * 1.50
+                basePerf = tonumber(specsPower) * coef
                 print("Combine basePerf computed from specs power declared in store: "..tostring(specsPower).." => "..tostring(basePerf))
             end
         end
