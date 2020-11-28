@@ -15,7 +15,7 @@
     <vehicle xmlPath="data/vehicles/holmer/terraDosT4_40/terraDosT4_40.xml" basePerf="350" /> 
     <vehicle xmlPath="data/vehicles/johnDeere/S790/S790.xml" basePerf="950" /> 
     <vehicle xmlPath="data/vehicles/johnDeere/T560/T560.xml" basePerf="590" /> 
-    <vehicle xmlPath="data/vehicles/masseyFerguson/activa7347/activa7347.xml" basePerf="370" /> 
+    <vehicle xmlPath="data/vehicles/masseyFerguson/activa7347/activa7347.xml" basePerf="470" /> 
     <vehicle xmlPath="data/vehicles/newHolland/cr1090/cr1090.xml" basePerf="963" /> 
     <vehicle xmlPath="data/vehicles/newHolland/TX32/TX32.xml" basePerf="0" /> 
     <vehicle xmlPath="data/vehicles/ropa/panther2/panther2.xml" basePerf="0" /> 
