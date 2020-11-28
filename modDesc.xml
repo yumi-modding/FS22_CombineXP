@@ -13,6 +13,9 @@ New features:
 - Capability to activate combine and cutter independently as IRL
 - Harvesting speed limit based on material quantity gathered, crop type and combine performance (based on power)
 - Display several data in HUD when harvesting: material capacity (T/h), combine load (%), instant yield (T/ha)
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Higher speed for MF Activa 7347 and forage harvesters
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -21,6 +24,9 @@ Nouvelles fonctionnalités:
 - Possibilité d'activer la moissonneuse-batteuse et la barre de coupe indépendamment comme IRL
 - Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture et des performances de la moissonneuse (basées sur sa puissance)
 - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Vitesse plus élevé pour MF Activa 7347 et les ensileuses
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -29,6 +35,9 @@ Eigenschaften:
 - Mähdrescher und das Schneidwerk unabhängig voneinander als IRL zu aktivieren
 - Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart und der Mähdrescherleistung (basierend auf der Power)
 - Zeigt Ihnen bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Höhere Geschwindigkeit für MF Activa 7347 und Feldhäcksler
 ]]></de>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
