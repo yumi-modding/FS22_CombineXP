@@ -3,6 +3,7 @@
 xpCombine.debug = false --true --
 
 xpCombine.myCurrentModDirectory = g_currentModDirectory;
+xpCombine.modName = g_currentModName
 
 -- @TODO:
 -- [x] Manage worker not starting
@@ -67,7 +68,7 @@ end
 -- Load basePerf and initialize data
 function xpCombine:onLoad(savegame)
     if xpCombine.debug then print("xpCombine:onLoad") end
-    self.spec_xpCombine = self[("spec_%s.xpCombine"):format(g_combinexp.modName)]
+    self.spec_xpCombine = self[("spec_%s.xpCombine"):format(xpCombine.modName)]
     local spec = self.spec_xpCombine
 
     local basePerf = 0.    --basePerf=max Ha per Hour wanted in 100% fertilized Wheat

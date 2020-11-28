@@ -30,11 +30,11 @@ end
 function load(mission)
     -- print("load(mission)")
     if not isActive() then return end
-    assert(combinexp == nil)
+    assert(g_combinexp == nil)
 
     combinexp = CombineXP:new(mission, g_i18n, g_inputBinding, g_gui, g_soundManager, modDirectory, modName)
 
-    getfenv(0)["g_combinexp"] = combinexp
+    getfenv(0).g_combinexp = combinexp
 
     addModEventListener(combinexp)
 
@@ -110,7 +110,7 @@ function unload()
     if combinexp ~= nil then
         combinexp:delete()
         combinexp = nil -- Allows garbage collecting
-        getfenv(0)["g_combinexp"] = nil
+        getfenv(0).g_combinexp = nil
     end
 end
 
