@@ -288,7 +288,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                     spec.speedLimit = spec.mrGenuineSpeedLimit;
                 else
 
-                    local maxAvgArea = spec.mrCombineLimiter.basePerfAvgArea;
+                    local maxAvgArea = 1.2 * spec.mrCombineLimiter.basePerfAvgArea;
                     local predictLimitSet = false
                     --take into account the areaAcc
                     if areaAcc>0 then
