@@ -15,7 +15,10 @@ New features:
 - Display several data in HUD when harvesting: material capacity (T/h), combine load (%), instant yield (T/ha)
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
+- Capability to reach combine load up to 120% to be able to keep 100% more easily with high yield crop
 - Higher speed for MF Activa 7347 and forage harvesters
+- No more error when mod zip file is renamed
+- Warning message translation
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -26,7 +29,10 @@ Nouvelles fonctionnalités:
 - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
-- Vitesse plus élevé pour MF Activa 7347 et les ensileuses
+- Possibilité d'atteindre une charge machine de 120% pour être en mesure de conserver 100% plus facilement lors d'une récolte à haut rendement
+- Vitesse plus élevée pour MF Activa 7347 et les ensileuses
+- Plus d'erreur lorsque le fichier zip mod est renommé
+- Traduction des messages d'avertissement
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -37,7 +43,10 @@ Eigenschaften:
 - Zeigt Ihnen bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
+- Möglichkeit, eine Maschinenlast von bis zu 120% zu erreichen, um während einer Ernte mit hohem Ertrag 100% leichter zu halten
 - Höhere Geschwindigkeit für MF Activa 7347 und Feldhäcksler
+- Kein Fehler mehr beim Umbenennen der Mod-Zip-Datei
+- Übersetzung von Warnmeldungen
 ]]></de>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
