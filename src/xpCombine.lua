@@ -610,7 +610,7 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
                 end
             end
             if cutterIsTurnedOn then
-                g_currentMission:showBlinkingWarning("Please start the treshing system", 2000) --g_i18n:getText("warning_doNotThreshDuringRainOrHail"), 2000)
+                g_currentMission:showBlinkingWarning(g_i18n:getText("warning_firstStartThreshing"), 2000)
             end
         end
     end
