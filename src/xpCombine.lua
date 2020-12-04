@@ -144,7 +144,7 @@ function xpCombine:onLoad(savegame)
 
     spec.mrCombineLimiter.totalOutputMass = 0.
     spec.mrCombineLimiter.yield = 0.
-    spec.mrCombineLimiter.load = 0.
+    spec.mrCombineLimiter.engineLoad = 0.
 
     spec.mrCombineLastTotalPower = 0;
 
@@ -195,7 +195,7 @@ function xpCombine:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelectio
         local speedDependantPtoPowerWhenFilling = 0.
         local chopperPtoPower = 0.
         local areaDependantPtoPower = 0.
-        local tonPerHour = Utils.getNoNil(spec.mrCombineDebugTonPerHour, 0.)
+        local tonPerHour = Utils.getNoNil(spec.mrCombineLimiter.tonPerHour, 0.)
         -- spec.speedLimit = Utils.getNoNil(spec.speedLimit, spec.mrGenuineSpeedLimit)
 
         local str = string.format(" turnedOnPtoPower=%.1f\n speedDependantPtoPowerWhenFilling=%.1f\n chopperPtoPower=%.1f\n areaDependantPtoPower=%.1f\n lastTotalPower=%.1f\n Current Speed Limit=%.1f\n Base Perf=%.0f/Current perf= %.0f\n Ton per Hour=%.1f", turnedOnPtoPower, speedDependantPtoPowerWhenFilling, chopperPtoPower, areaDependantPtoPower, spec.mrCombineLastTotalPower, spec.speedLimit, spec.mrCombineLimiter.basePerfAvgArea*36,spec.mrCombineLimiter.currentAvgArea*36, tonPerHour);
@@ -261,10 +261,10 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                     local fillType = spec_combine.lastCuttersOutputFillType
                     local desc = g_fillTypeManager:getFillTypeByIndex(fillType)
                     local massPerLiter = desc.massPerLiter
-                    spec.mrCombineDebugTonPerHour = equivalentSqmPerHour * fruitDesc.literPerSqm * massPerLiter
+                    spec.mrCombineLimiter.tonPerHour = equivalentSqmPerHour * fruitDesc.literPerSqm * massPerLiter
                     local yield = spec.lastMultiplier * spec.mrCombineLimiter.totalOutputMass / MathUtil.areaToHa(spec.mrCombineLimiter.totalArea, g_currentMission:getFruitPixelsToSqm())
                     spec.mrCombineLimiter.yield = yield + (0.02 * yield * math.random(-1, 1))
-                    spec.mrCombineLimiter.load = spec.mrCombineLimiter.currentAvgArea / spec.mrCombineLimiter.basePerfAvgArea
+                    spec.mrCombineLimiter.engineLoad = spec.mrCombineLimiter.currentAvgArea / spec.mrCombineLimiter.basePerfAvgArea
         -- end
 
                 end
@@ -329,9 +329,12 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
             spec.speedLimit = spec.mrGenuineSpeedLimit;
             spec.mrCombineLimiter.currentAvgArea = 0;
             --self.mrAvgCombineCuttersArea = 0;
-            spec.mrCombineDebugTonPerHour = 0
+            spec.mrCombineLimiter.tonPerHour = 0
         end
     end
+
+    local hud = g_combinexp.hud
+    hud:setData(spec.mrCombineLimiter)
 
 end
 
@@ -584,20 +587,8 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
     --     return
     -- end
     if spec and self:getIsTurnedOn() then
-        local yield = spec.mrCombineLimiter.yield
-        if yield ~= yield then
-            yield = 0.
-        end
-        setTextAlignment(RenderText.ALIGN_RIGHT);
-        setTextColor(1, 1, 1, 0.75);
-        setTextBold(true)
-        -- Get these values from HUD
-        local x = 0.775
-        local y = 0.55
-        local textSize = 0.02
-        renderText(x, 0.1, textSize, string.format("%.1f T/h", spec.mrCombineDebugTonPerHour))
-        renderText(x, 0.065, textSize, string.format("%.1f %%", 100 * spec.mrCombineLimiter.load))
-        renderText(x, 0.030, textSize, string.format("%.1f T/ha", yield))
+        local hud = g_combinexp.hud
+        hud:drawText()
     else
         if spec_combine.numAttachedCutters > 0 then
             local cutterIsTurnedOn = false

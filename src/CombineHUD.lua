@@ -21,6 +21,8 @@ function CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilena
 
     instance.speedMeterDisplay = mission.hud.speedMeter
 
+    instance.tonPerHour = 0.
+    instance.engineLoad = 0.
     instance.yield = 0.
 
     return instance
@@ -91,9 +93,6 @@ function CombineHUD:createElements()
     local posX, posY = self.base:getPosition()
     posX = posX + paddingWidth
     posY = posY + paddingHeight
-
-    local textSize = self:getCorrectedTextSize(CombineHUD.TEXT_SIZE.SMALL)
-
 
     self.iconMass = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.MASS)
     self.Mass = HUDElement:new(self.iconMass)
@@ -196,21 +195,47 @@ function CombineHUD:isVehicleActive(vehicle)
     return vehicle == self.vehicle
 end
 
--- NEVER CALLED
-function CombineHUD:draw()
-    --print("CombineHUD:draw")
-    local paddingWidth, paddingHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX_PADDING)
+function CombineHUD:setData(mrCombineLimiter)
+    --print("CombineHUD:setData")
+    self.tonPerHour = mrCombineLimiter.tonPerHour
+    self.engineLoad = 100 * mrCombineLimiter.engineLoad
+    local yield = mrCombineLimiter.yield
+    if yield ~= yield then
+        yield = 0.
+    end
+    self.yield = yield
+end
 
-    local iconSmallMarginWidth, _ = self:scalePixelToScreenVector(CombineHUD.SIZE.ICON_SMALL_MARGIN)
+function CombineHUD:drawText()
+    --print("CombineHUD:drawText")
+
+    local _, paddingHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX_PADDING)
+    local iconMarginWidth, _ = self:scalePixelToScreenVector(CombineHUD.SIZE.ICON_MARGIN)
+    local textMarginWidth, _ = self:scalePixelToScreenVector(CombineHUD.SIZE.TEXT_MARGIN)
+    local textSize = self:scalePixelToScreenHeight(self:getCorrectedTextSize(CombineHUD.TEXT_SIZE.HIGHLIGHT))
+    local _, iconSmallHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.ICON_SMALL)
+    iconSmallHeight = iconSmallHeight * 0.6
+
+    setTextAlignment(RenderText.ALIGN_RIGHT)
+    setTextColor(unpack(CombineHUD.COLOR.TEXT_WHITE))
+    setTextBold(true)
+
     local posX, posY = self.base:getPosition()
-    posY = posY + paddingHeight
-    local textX = posX + iconSmallMarginWidth
-    local textY = posY
-    local textSize = self:getCorrectedTextSize(CombineHUD.TEXT_SIZE.SMALL)
+    local textX = posX + textMarginWidth
+    local textY = posY + paddingHeight + paddingHeight
+    renderText(textX, textY, textSize, string.format("%.1f T/ha", self.yield))
 
-    setTextAlignment(RenderText.ALIGN_RIGHT);
-    setTextColor(unpack(CombineHUD.COLOR.TEXT_WHITE));
-    renderText(textX, textY, textSize, string.format("%.1f", 100 * self.yield))
+    textY = textY + iconSmallHeight + iconMarginWidth
+    if self.engineLoad > 100 and self.engineLoad <= 120 then
+        setTextColor(unpack(CombineHUD.COLOR.ORANGE))
+    elseif self.engineLoad > 120 then
+        setTextColor(unpack(CombineHUD.COLOR.RED))
+    end
+    renderText(textX, textY, textSize, string.format("%.1f %%", self.engineLoad))
+    setTextColor(unpack(CombineHUD.COLOR.TEXT_WHITE))
+
+    textY = textY + iconSmallHeight + iconMarginWidth
+    renderText(textX, textY, textSize, string.format("%.1f T/h", self.tonPerHour))
 
 end
 
@@ -227,7 +252,8 @@ CombineHUD.SIZE = {
     ICON = { 40, 40 },
     ICON_MARGIN = { 15, 0 },
     ICON_SMALL = { 48, 48 },
-    ICON_SMALL_MARGIN = { 5, 0 }
+    ICON_SMALL_MARGIN = { 5, 0 },
+    TEXT_MARGIN = { 182, 0 }
 }
 
 CombineHUD.UV = {
@@ -239,12 +265,9 @@ CombineHUD.UV = {
 }
 
 CombineHUD.COLOR = {
-    TEXT = { 0, 0, 0, 1 },
     TEXT_WHITE = { 1, 1, 1, 0.75 },
     INACTIVE = { 1, 1, 1, 0.75 },
-    ACTIVE = { 0.9910, 0.3865, 0.0100, 1 },
-    BORDER = { 0.718, 0.716, 0.715, 0.25 },
+    ORANGE = { 0.718, 0.5, 0, 0.75 },
     RED = { 0.718, 0, 0, 0.75 },
-    DARK_GLASS = { 0.018, 0.016, 0.015, 0.9 },
     MEDIUM_GLASS = { 0.018, 0.016, 0.015, 0.8 },
 }
