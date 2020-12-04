@@ -59,6 +59,10 @@ end
 function xpCombine.registerEventListeners(vehicleType)
     if xpCombine.debug then print("xpCombine:registerEventListeners") end
     SpecializationUtil.registerEventListener(vehicleType, "onLoad", xpCombine)
+    SpecializationUtil.registerEventListener(vehicleType, "onReadStream", xpCombine)
+    SpecializationUtil.registerEventListener(vehicleType, "onWriteStream", xpCombine)
+    SpecializationUtil.registerEventListener(vehicleType, "onReadUpdateStream", xpCombine)
+    SpecializationUtil.registerEventListener(vehicleType, "onWriteUpdateStream", xpCombine)
     SpecializationUtil.registerEventListener(vehicleType, "onUpdate", xpCombine)
     SpecializationUtil.registerEventListener(vehicleType, "onUpdateTick", xpCombine)
     SpecializationUtil.registerEventListener(vehicleType, "onDraw", xpCombine)
@@ -107,10 +111,13 @@ function xpCombine:onLoad(savegame)
 
     if basePerf <= 0 then
     -- Then motorConfiguration hp
+        local vehicleName = self:getFullName()
         local coef = 1.5
         local keyCategory = "vehicle.storeData.category"
         if getXMLString(self.xmlFile, keyCategory) == "forageHarvesters" then
             coef = 6.
+        elseif getXMLString(self.xmlFile, keyCategory) == "beetVehicles" then
+            coef = 0.6
         end
         local key, motorId = ConfigurationUtil.getXMLConfigurationKey(self.xmlFile, self.configurations.motor, "vehicle.motorized.motorConfigurations.motorConfiguration", "vehicle.motorized", "motor")
         local fallbackConfigKey = "vehicle.motorized.motorConfigurations.motorConfiguration(0)"
@@ -121,14 +128,14 @@ function xpCombine:onLoad(savegame)
             -- print("motorId "..motorId)
             -- print("power "..power)
             basePerf = tonumber(power) * coef
-            print("Combine basePerf computed from motorConfiguration hp: "..tostring(power).." => "..tostring(basePerf))
+            print("Combine basePerf computed for "..vehicleName.. " from motorConfiguration hp: "..tostring(power).." => "..tostring(basePerf))
         else
     -- Then specs power
             key = "vehicle.storeData.specs.power"
             local specsPower = getXMLString(self.xmlFile, key)
             if specsPower ~= nil and tonumber(specsPower) > 0 then
                 basePerf = tonumber(specsPower) * coef
-                print("Combine basePerf computed from specs power declared in store: "..tostring(specsPower).." => "..tostring(basePerf))
+                print("Combine basePerf computed for "..vehicleName.. " from specs power declared in store: "..tostring(specsPower).." => "..tostring(basePerf))
             end
         end
     end
@@ -143,8 +150,9 @@ function xpCombine:onLoad(savegame)
     spec.mrCombineLimiter.currentAvgArea = 0;
 
     spec.mrCombineLimiter.totalOutputMass = 0.
-    spec.mrCombineLimiter.yield = 0.
+    spec.mrCombineLimiter.tonPerHour = 0.
     spec.mrCombineLimiter.engineLoad = 0.
+    spec.mrCombineLimiter.yield = 0.
 
     spec.mrCombineLastTotalPower = 0;
 
@@ -153,6 +161,7 @@ function xpCombine:onLoad(savegame)
     spec.lastRealArea = 0.
     spec.lastMultiplier = 1
 
+    spec.dirtyFlag = self:getNextDirtyFlag()
 end
 
 -- NEVER CALLED since no power computation yet
@@ -168,6 +177,49 @@ function xpCombine:getConsumedPtoTorque(superfunc)
                 areaValue = spec.mrCombineLimiter.basePerfAvgArea + (areaValue-spec.mrCombineLimiter.basePerfAvgArea)^0.8; --smooth power requirement above "maxAvgArea" to avoid "stalling" the engine too often when entering the field too fast while combining
             end
             if Vehicle.debugRendering then self.mrDebugCombineLastAreaDependantPtoPower = totalAreaDependantPtoPower * 0.1 * areaValue end
+        end
+    end
+end
+
+---Called on read stream.
+function xpCombine:onReadStream(streamId, connection)
+    local spec = self.spec_xpCombine
+    -- self:setSowingData(allowSound, allowFertilizer, true)
+    spec.mrCombineLimiter.tonPerHour = streamReadFloat32(streamId)
+    spec.mrCombineLimiter.engineLoad = streamReadFloat32(streamId)
+    spec.mrCombineLimiter.yield = streamReadFloat32(streamId)
+end
+
+---Called on write stream.
+function xpCombine:onWriteStream(streamId, connection)
+    local spec = self.spec_xpCombine
+    streamWriteFloat32(streamId, spec.mrCombineLimiter.tonPerHour)
+    streamWriteFloat32(streamId, spec.mrCombineLimiter.engineLoad)
+    streamWriteFloat32(streamId, spec.mrCombineLimiter.yield)
+end
+
+---Called on read update stream.
+function xpCombine:onReadUpdateStream(streamId, timestamp, connection)
+    if connection:getIsServer() then
+        local spec = self.spec_xpCombine
+
+        if streamReadBool(streamId) then
+            spec.mrCombineLimiter.tonPerHour = streamReadFloat32(streamId)
+            spec.mrCombineLimiter.engineLoad = streamReadFloat32(streamId)
+            spec.mrCombineLimiter.yield = streamReadFloat32(streamId)
+        end
+    end
+end
+
+---Called on write update stream.
+function xpCombine:onWriteUpdateStream(streamId, connection, dirtyMask)
+    if not connection:getIsServer() then
+        local spec = self.spec_xpCombine
+
+        if streamWriteBool(streamId, bitAND(dirtyMask, spec.dirtyFlag) ~= 0) then
+            streamWriteFloat32(streamId, spec.mrCombineLimiter.tonPerHour)
+            streamWriteFloat32(streamId, spec.mrCombineLimiter.engineLoad)
+            streamWriteFloat32(streamId, spec.mrCombineLimiter.yield)
         end
     end
 end
@@ -272,7 +324,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                 -- str = tostring(spec.lastMultiplier).." - "..tostring(spec.mrCombineLimiter.totalArea).." - "..tostring(g_currentMission:getFruitPixelsToSqm()).." - "..tostring(spec.mrCombineLimiter.currentTime)
                 -- print(str)
                 -- 588 = 1000 / 1.7 since max yield = 1.7 base yield when fertilized
-                local avgArea = 588 * spec.mrCombineLimiter.totalArea * materialFx * g_currentMission:getFruitPixelsToSqm() / spec.mrCombineLimiter.currentTime; -- m2 per second (takes into account fertilizer state and so, since our reference capacity is with full yield, we have to multiply by 0.5
+                local avgArea = 500 * spec.mrCombineLimiter.totalArea * materialFx * g_currentMission:getFruitPixelsToSqm() / spec.mrCombineLimiter.currentTime; -- m2 per second (takes into account fertilizer state and so, since our reference capacity is with full yield, we have to multiply by 0.5
                 local avgSpeed = 1000 * spec.mrCombineLimiter.totaldistance / spec.mrCombineLimiter.currentTime; --m/s
                 -- print("avgArea: "..tostring(avgArea).." - ".."avgSpeed: "..tostring(avgSpeed))
                 --20170606 - check the current increase "acceleration" for the avgArea
@@ -331,10 +383,8 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
             --self.mrAvgCombineCuttersArea = 0;
             spec.mrCombineLimiter.tonPerHour = 0
         end
+        self:raiseDirtyFlags(spec.dirtyFlag)
     end
-
-    local hud = g_combinexp.hud
-    hud:setData(spec.mrCombineLimiter)
 
 end
 

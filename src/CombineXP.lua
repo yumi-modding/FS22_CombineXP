@@ -2,8 +2,6 @@
 CombineXP = {};
 
 modDirectory = g_currentModDirectory
-CombineXP.VERSION = 1.0
-
 local CombineXP_mt = Class(CombineXP)
 
 function CombineXP:new(mission, i18n, inputBinding, gui, soundManager, modDirectory, modName)
@@ -16,7 +14,6 @@ function CombineXP:new(mission, i18n, inputBinding, gui, soundManager, modDirect
     self.modName = modName
 
     self.mission = mission
-    self.version = CombineXP.VERSION
 
     local uiFilename = Utils.getFilename("resources/combineXP.dds", modDirectory)
     self.hud = CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilename)
@@ -39,7 +36,7 @@ function CombineXP:loadMaterialQtyFx()
     end
 
     local i = 0;
-    while true do
+    while xmlFile do
         local fruitTypeName = string.format("fruitTypes.fruitType(%d)", i);
         if not hasXMLProperty(xmlFile, fruitTypeName) then break; end;
 
@@ -72,8 +69,9 @@ function CombineXP:loadMaterialQtyFx()
         i = i + 1;
     end
 
-    --print("delete")
-    delete(xmlFile);
+    if xmlFile then
+        delete(xmlFile);
+    end
 
 end
 
@@ -97,8 +95,11 @@ end
 ---Mission was loaded (without vehicles and items)
 function CombineXP:onMissionLoaded(mission)
     -- print("CombineXP:onMissionLoaded")
-
     self.hud:load()
+end
+
+function CombineXP:update(dt)
+    self.hud:update(dt)
 end
 
 function CombineXP.installSpecializations(vehicleTypeManager, specializationManager, modDirectory, modName)
@@ -110,5 +111,3 @@ function CombineXP.installSpecializations(vehicleTypeManager, specializationMana
         end
     end
 end
-
-addModEventListener(CombineXP);

@@ -195,9 +195,22 @@ function CombineHUD:isVehicleActive(vehicle)
     return vehicle == self.vehicle
 end
 
+
+---Called on mouse event.
+function CombineHUD:update(dt)
+    if self.vehicle ~= nil then
+        local spec = self.vehicle.spec_xpCombine
+        self:setData(spec.mrCombineLimiter)
+    end
+end
+
 function CombineHUD:setData(mrCombineLimiter)
     --print("CombineHUD:setData")
-    self.tonPerHour = mrCombineLimiter.tonPerHour
+    local tonPerHour = mrCombineLimiter.tonPerHour
+    if tonPerHour ~= tonPerHour then
+        tonPerHour = 0.
+    end
+    self.tonPerHour = tonPerHour
     self.engineLoad = 100 * mrCombineLimiter.engineLoad
     local yield = mrCombineLimiter.yield
     if yield ~= yield then
