@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="53">
     <author>yumi</author>
-    <version>1.0.0.1</version>        
+    <version>1.0.0.2</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -19,6 +19,10 @@ Fixed in v1.0.0.1
 - Higher speed for MF Activa 7347 and forage harvesters
 - No more error when mod zip file is renamed
 - Warning message translation
+Fixed in v1.0.0.2
+- HUD text scaling issue
+- HUD error when playing on Dedicated Server
+- Better management of sugarbeet and potatoes harvesters
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -33,6 +37,10 @@ Fixed in v1.0.0.1
 - Vitesse plus élevée pour MF Activa 7347 et les ensileuses
 - Plus d'erreur lorsque le fichier zip mod est renommé
 - Traduction des messages d'avertissement
+Fixed in v1.0.0.2
+- Problème de mise à l'échelle du HUD
+- Erreur du HUD lors d'une partie sur Dedicated Server
+- Meilleure gestion des récolteuses de betteraves et de pommes de terre
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -47,6 +55,10 @@ Fixed in v1.0.0.1
 - Höhere Geschwindigkeit für MF Activa 7347 und Feldhäcksler
 - Kein Fehler mehr beim Umbenennen der Mod-Zip-Datei
 - Übersetzung von Warnmeldungen
+Fixed in v1.0.0.2
+- Problem mit der HUD-Textskalierung
+- HUD-Fehler beim Spielen auf einem dedizierten Server
+- Besseres Management von Zuckerrüben- und Kartoffelerntern
 ]]></de>
     </description>
     <iconFilename>modIcon.dds</iconFilename>

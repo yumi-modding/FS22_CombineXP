@@ -114,10 +114,13 @@ function xpCombine:onLoad(savegame)
         local vehicleName = self:getFullName()
         local coef = 1.5
         local keyCategory = "vehicle.storeData.category"
-        if getXMLString(self.xmlFile, keyCategory) == "forageHarvesters" then
+        local category = getXMLString(self.xmlFile, keyCategory)
+        if category == "forageHarvesters" then
             coef = 6.
-        elseif getXMLString(self.xmlFile, keyCategory) == "beetVehicles" then
+        elseif category == "beetVehicles" then
             coef = 0.6
+		elseif category == "potatoVehicles" then
+            coef = 0.3
         end
         local key, motorId = ConfigurationUtil.getXMLConfigurationKey(self.xmlFile, self.configurations.motor, "vehicle.motorized.motorConfigurations.motorConfiguration", "vehicle.motorized", "motor")
         local fallbackConfigKey = "vehicle.motorized.motorConfigurations.motorConfiguration(0)"
@@ -130,12 +133,20 @@ function xpCombine:onLoad(savegame)
             basePerf = tonumber(power) * coef
             print("Combine basePerf computed for "..vehicleName.. " from motorConfiguration hp: "..tostring(power).." => "..tostring(basePerf))
         else
-    -- Then specs power
+        -- Then specs power
             key = "vehicle.storeData.specs.power"
             local specsPower = getXMLString(self.xmlFile, key)
             if specsPower ~= nil and tonumber(specsPower) > 0 then
                 basePerf = tonumber(specsPower) * coef
                 print("Combine basePerf computed for "..vehicleName.. " from specs power declared in store: "..tostring(specsPower).." => "..tostring(basePerf))
+            else
+            -- Then specs neededPower
+                key = "vehicle.storeData.specs.neededPower"
+                local specsNeededPower = getXMLString(self.xmlFile, key)
+                if specsNeededPower ~= nil and tonumber(specsNeededPower) > 0 then
+                    basePerf = tonumber(specsNeededPower) * coef
+                    print("Combine basePerf computed for "..vehicleName.. " from specs needed power declared in store: "..tostring(specsNeededPower).." => "..tostring(basePerf))
+                end
             end
         end
     end
@@ -329,6 +340,9 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                 -- print("avgArea: "..tostring(avgArea).." - ".."avgSpeed: "..tostring(avgSpeed))
                 --20170606 - check the current increase "acceleration" for the avgArea
                 local areaAcc = (avgArea - spec.mrCombineLimiter.currentAvgArea)/spec.mrCombineLimiter.currentTime
+
+                -- local str = string.format(" currentAvgArea=%.1f\n basePerfAvgArea=%.1f\n avgArea=%.1f\n avgSpeed=%.1f\n areaAcc=%.3f", spec.mrCombineLimiter.currentAvgArea, spec.mrCombineLimiter.basePerfAvgArea, avgArea, avgSpeed, areaAcc);
+                -- print(str)
 
                 if spec.mrCombineLimiter.currentAvgArea>(0.75*spec.mrCombineLimiter.basePerfAvgArea) then
                     avgArea = 0.5 * spec.mrCombineLimiter.currentAvgArea + 0.5 * avgArea; --small smooth
