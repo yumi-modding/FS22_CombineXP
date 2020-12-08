@@ -652,6 +652,7 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
     -- end
     if spec and self:getIsTurnedOn() then
         local hud = g_combinexp.hud
+        hud:setVehicle(self)
         hud:drawText()
     else
         if spec_combine.numAttachedCutters > 0 then
