@@ -39,6 +39,12 @@ function CombineHUD:load()
     --print("CombineHUD:load")
     self.uiScale = self:getUIScale()
 
+    if g_languageShort == "fr" then
+        self.l10nHour = "h"
+    else
+        self.l10nHour = string.gsub(string.gsub(g_i18n:getText("ui_hours_none"), "--:--", ""), "%s", "")
+    end
+
     self:createElements()
     self:setVehicle(nil)
 end
@@ -236,7 +242,7 @@ function CombineHUD:drawText()
     local posX, posY = self.base:getPosition()
     local textX = posX + textMarginWidth
     local textY = posY + paddingHeight + paddingHeight
-    renderText(textX, textY, textSize, string.format("%.1f T/ha", self.yield))
+    renderText(textX, textY, textSize, string.format("%.1f T/"..g_i18n:getAreaUnit(false), self.yield / g_i18n:getArea(1)))
 
     textY = textY + iconSmallHeight + iconMarginWidth
     if self.engineLoad > 100 and self.engineLoad <= 120 then
@@ -248,7 +254,7 @@ function CombineHUD:drawText()
     setTextColor(unpack(CombineHUD.COLOR.TEXT_WHITE))
 
     textY = textY + iconSmallHeight + iconMarginWidth
-    renderText(textX, textY, textSize, string.format("%.1f T/h", self.tonPerHour))
+    renderText(textX, textY, textSize, string.format("%.1f T/"..self.l10nHour, self.tonPerHour))
 
 end
 
