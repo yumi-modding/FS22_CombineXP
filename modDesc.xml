@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="53">
     <author>yumi</author>
-    <version>1.0.0.2</version>        
+    <version>1.0.0.3</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -23,6 +23,8 @@ Fixed in v1.0.0.2
 - HUD text scaling issue
 - HUD error when playing on Dedicated Server
 - Better management of sugarbeet and potatoes harvesters
+New in v1.0.0.3
+- Adding russian translation
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -41,6 +43,8 @@ Fixed in v1.0.0.2
 - Problème de mise à l'échelle du HUD
 - Erreur du HUD lors d'une partie sur Dedicated Server
 - Meilleure gestion des récolteuses de betteraves et de pommes de terre
+New in v1.0.0.3
+- Ajout de la traduction russe
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -59,7 +63,29 @@ Fixed in v1.0.0.2
 - Problem mit der HUD-Textskalierung
 - HUD-Fehler beim Spielen auf einem dedizierten Server
 - Besseres Management von Zuckerrüben- und Kartoffelerntern
+New in v1.0.0.3
+- Russische Übersetzung hinzufügen
 ]]></de>
+        <ru><![CDATA[
+Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
+Цель этого мода - дать новый опыт использования комбайнов в игре, чтобы приблизиться к реальному. Это первая версия, и вскоре будут доступны новые функции, которые разрабатываются в настоящее время.
+Свойства:
+- Активировать комбайн и жатку независимо друг от друга как "в реальной жизни"(IRL)
+- Ограничение скорости сбора урожая в зависимости от количества собранного урожая, типа урожая и производительности комбайна (в зависимости от его мощности)
+- Отображает несколько данных в HUD во время уборки: производительность комбайна (т/ч), загрузка комбайна (%), текущая урожайность (т/га)
+==== ИЗМЕНЕНИЯ ====
+Fixed in 1.0.0.1
+- Возможность достижения нагрузки комбайна до 120%, чтобы было легче удерживать 100% при высокой урожайности
+- Более высокая скорость для MF Activa 7347 и кормоуборочных комбайнов
+- Больше нет ошибок при переименовании zip-файла мода
+- Перевод предупреждающего сообщения
+Fixed in 1.0.0.2
+- Проблема с масштабированием текста HUD
+- Ошибка HUD при игре на выделенном сервере
+- Лучшее управление свёкло- и картофелеуборочными комбайнами
+New in  1.0.0.3
+- Добавление русского перевода
+]]></ru>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
     <multiplayer supported="true"/>
@@ -73,6 +99,7 @@ Fixed in v1.0.0.2
             <fr>Vous devez d'abord démarrer le système de battage</fr>
             <en>You first need to start combine threshing</en>
             <de>Starten Sie zuerst das Mähdrescher-Dreschsystem!</de>
+            <ru>Сначала запустите систему обмолота комбайна!</ru>
         </text>
     </l10n>
 
