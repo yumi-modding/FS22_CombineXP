@@ -129,6 +129,13 @@ function CombineHUD:createElements()
     self.iconHour:setUVs(getNormalizedUVs(SpeedMeterDisplay.UV.OPERATING_TIME))
     self.Hour = HUDElement:new(self.iconHour)
 
+    if g_seasons then
+        local seasonsModDirectory = g_seasons.modDirectory
+        posX = posX - iconSmallWidth - iconMarginWidth
+        posY = posY + iconSmallHeight + iconMarginWidth
+        self.iconMoisture = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.MOISTURE)
+        self.Moisture = HUDElement:new(self.iconMoisture)
+    end
 
     self.base:addChild(self.Mass)
     self.base:addChild(self.Slash)
@@ -137,7 +144,10 @@ function CombineHUD:createElements()
     self.base:addChild(self.Mass2)
     self.base:addChild(self.Slash2)
     self.base:addChild(self.Hour)
-
+    if g_seasons then
+        print("add icon")
+        self.base:addChild(self.Moisture)
+    end
 end
 
 ---Create main movable box.
@@ -217,7 +227,11 @@ function CombineHUD:setData(mrCombineLimiter)
         tonPerHour = 0.
     end
     self.tonPerHour = tonPerHour
-    self.engineLoad = 100 * mrCombineLimiter.engineLoad
+    local loadMultiplier = mrCombineLimiter.loadMultiplier
+    if loadMultiplier ~= loadMultiplier then
+        loadMultiplier = 1
+    end
+    self.engineLoad = 100 * mrCombineLimiter.engineLoad * loadMultiplier
     local yield = mrCombineLimiter.yield
     if yield ~= yield then
         yield = 0.
@@ -256,6 +270,12 @@ function CombineHUD:drawText()
     textY = textY + iconSmallHeight + iconMarginWidth
     renderText(textX, textY, textSize, string.format("%.1f T/"..self.l10nHour, self.tonPerHour))
 
+    if g_seasons then
+        if g_seasons.weather.cropMoistureContent then
+            textY = textY + iconSmallHeight + iconMarginWidth
+            renderText(textX, textY, textSize, string.format("%.1f %%", g_seasons.weather.cropMoistureContent))
+        end
+    end
 end
 
 CombineHUD.TEXT_SIZE = {
@@ -265,7 +285,7 @@ CombineHUD.TEXT_SIZE = {
 }
 
 CombineHUD.SIZE = {
-    BOX = { 190, 110 }, -- 4px border correction
+    BOX = { 190, 146 }, -- 4px border correction
     BOX_MARGIN = { 400, 400 },
     BOX_PADDING = { 4, 4 },
     ICON = { 40, 40 },
@@ -280,7 +300,8 @@ CombineHUD.UV = {
     AREA = { 64, 0, 64, 64 },
     SLASH = { 128, 0, 64, 64 },
     ENGINE_LOAD = { 192, 0, 64, 64 },
-    FILL = { 0, 64, 64, 64 }
+    FILL = { 0, 64, 64, 64 },
+    MOISTURE = { 64, 64, 64, 64 }
 }
 
 CombineHUD.COLOR = {

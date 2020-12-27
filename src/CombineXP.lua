@@ -18,6 +18,9 @@ function CombineXP:new(mission, i18n, inputBinding, gui, soundManager, modDirect
     local uiFilename = Utils.getFilename("resources/combineXP.dds", modDirectory)
     self.hud = CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilename)
 
+    self.timeDependantSpeed = {}
+    self.moistureDependantSpeed = {}
+
     return self
 end
 
@@ -75,11 +78,31 @@ function CombineXP:loadMaterialQtyFx()
 
 end
 
+function CombineXP:loadDependantSpeed()
+    --print("CombineXP:loadDependantSpeed")
+    local xmlFile = nil
+
+    if modDirectory then
+        xmlFile = loadXMLFile("combineXP", modDirectory .. "data/combineXP.xml");
+    end
+    if xmlFile then
+        g_combinexp.timeDependantSpeed.cereal = AnimCurve:new(linearInterpolator1)
+        g_combinexp.timeDependantSpeed.cereal:loadCurveFromXML(xmlFile, "combineXP.timeDependantSpeed.cereal", loadInterpolator1Curve)
+        g_combinexp.timeDependantSpeed.maize = AnimCurve:new(linearInterpolator1)
+        g_combinexp.timeDependantSpeed.maize:loadCurveFromXML(xmlFile, "combineXP.timeDependantSpeed.maize", loadInterpolator1Curve)
+        g_combinexp.moistureDependantSpeed.default = AnimCurve:new(linearInterpolator1)
+        g_combinexp.moistureDependantSpeed.default:loadCurveFromXML(xmlFile, "combineXP.moistureDependantSpeed.default", loadInterpolator1Curve)
+        delete(xmlFile);
+    end
+
+end
+
 ---Called when the player clicks the Start button
 function CombineXP:onMissionStart(mission)
     -- print("CombineXP:onMissionStart")
 
     CombineXP.loadMaterialQtyFx()
+    CombineXP.loadDependantSpeed()
 
 end
 

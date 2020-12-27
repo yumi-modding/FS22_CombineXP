@@ -6,20 +6,67 @@
         basePerf=max Ha per Hour wanted in 100% fertilized Wheat: 884 => 8.84 ha/h
         when basePerf=0 xpCombine will compute a value based on machine hp (1.5 * hp) 
     -->
-    <vehicle xmlPath="data/vehicles/agco/ideal9/IDEAL9.xml" basePerf="0" /> 
-    <vehicle xmlPath="data/vehicles/bizon/z056/z056.xml" basePerf="130" /> 
-    <vehicle xmlPath="data/vehicles/caseIH/A8800MR/A8800MR.xml" basePerf="165" /> 
-    <vehicle xmlPath="data/vehicles/caseIH/axial9240/axial9240.xml" basePerf="984" /> 
-    <vehicle xmlPath="data/vehicles/caseIH/moduleExpress635/moduleExpress635.xml" basePerf="0" /> 
-    <vehicle xmlPath="data/vehicles/grimme/varitron470/varitron470.xml" basePerf="330" /> 
-    <vehicle xmlPath="data/vehicles/holmer/terraDosT4_40/terraDosT4_40.xml" basePerf="350" /> 
-    <vehicle xmlPath="data/vehicles/johnDeere/S790/S790.xml" basePerf="950" /> 
-    <vehicle xmlPath="data/vehicles/johnDeere/T560/T560.xml" basePerf="590" /> 
-    <vehicle xmlPath="data/vehicles/masseyFerguson/activa7347/activa7347.xml" basePerf="470" /> 
-    <vehicle xmlPath="data/vehicles/newHolland/cr1090/cr1090.xml" basePerf="963" /> 
-    <vehicle xmlPath="data/vehicles/newHolland/TX32/TX32.xml" basePerf="0" /> 
-    <vehicle xmlPath="data/vehicles/ropa/panther2/panther2.xml" basePerf="0" /> 
-    <vehicle xmlPath="data/vehicles/ropa/tiger6/tiger6.xml" basePerf="0" /> 
-    <vehicle xmlPath="data/vehicles/rostselmash/161/161.xml" basePerf="620" /> 
-    <vehicle xmlPath="data/vehicles/rostselmash/nova330/nova330.xml" basePerf="0" /> 
+    <vehicles>
+        <vehicle xmlPath="data/vehicles/agco/ideal9/IDEAL9.xml" basePerf="0" /> 
+        <vehicle xmlPath="data/vehicles/bizon/z056/z056.xml" basePerf="130" /> 
+        <vehicle xmlPath="data/vehicles/caseIH/A8800MR/A8800MR.xml" basePerf="165" /> 
+        <vehicle xmlPath="data/vehicles/caseIH/axial9240/axial9240.xml" basePerf="984" /> 
+        <vehicle xmlPath="data/vehicles/caseIH/moduleExpress635/moduleExpress635.xml" basePerf="0" /> 
+        <vehicle xmlPath="data/vehicles/grimme/varitron470/varitron470.xml" basePerf="330" /> 
+        <vehicle xmlPath="data/vehicles/holmer/terraDosT4_40/terraDosT4_40.xml" basePerf="350" /> 
+        <vehicle xmlPath="data/vehicles/johnDeere/S790/S790.xml" basePerf="950" /> 
+        <vehicle xmlPath="data/vehicles/johnDeere/T560/T560.xml" basePerf="590" /> 
+        <vehicle xmlPath="data/vehicles/masseyFerguson/activa7347/activa7347.xml" basePerf="470" /> 
+        <vehicle xmlPath="data/vehicles/newHolland/cr1090/cr1090.xml" basePerf="963" /> 
+        <vehicle xmlPath="data/vehicles/newHolland/TX32/TX32.xml" basePerf="0" /> 
+        <vehicle xmlPath="data/vehicles/ropa/panther2/panther2.xml" basePerf="0" /> 
+        <vehicle xmlPath="data/vehicles/ropa/tiger6/tiger6.xml" basePerf="0" /> 
+        <vehicle xmlPath="data/vehicles/rostselmash/161/161.xml" basePerf="620" /> 
+        <vehicle xmlPath="data/vehicles/rostselmash/nova330/nova330.xml" basePerf="0" /> 
+    </vehicles>
+    <timeDependantSpeed>
+        <cereal>
+            <key value="9" time="0" />
+            <key value="8" time="2" />
+            <key value="6" time="4" />
+            <key value="2" time="6" />
+            <key value="2" time="8" />
+            <key value="4" time="10" />
+            <key value="9" time="12" />
+            <key value="10" time="14" />
+            <key value="10" time="16" />
+            <key value="10" time="18" />
+            <key value="10" time="20" />
+            <key value="9" time="22" />
+            <key value="9" time="24" />
+        </cereal>
+        <maize>
+            <key value="9" time="0" />
+            <key value="8" time="2" />
+            <key value="6" time="4" />
+            <key value="2" time="6" />
+            <key value="6" time="8" />
+            <key value="8" time="10" />
+            <key value="9" time="12" />
+            <key value="10" time="14" />
+            <key value="10" time="16" />
+            <key value="10" time="18" />
+            <key value="10" time="20" />
+            <key value="9" time="22" />
+            <key value="9" time="24" />
+        </maize>
+    </timeDependantSpeed>
+    <moistureDependantSpeed>
+        <default>
+            <key value="10" time="10" />
+            <key value="10" time="15" />
+            <key value="9" time="16" />
+            <key value="8" time="17" />
+            <key value="7" time="18" />
+            <key value="5" time="19" />
+            <key value="3" time="20" />
+            <key value="2" time="21" />
+            <key value="2" time="80" />
+        </default>
+    </moistureDependantSpeed>
 </combineXP>

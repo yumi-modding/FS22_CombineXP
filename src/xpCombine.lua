@@ -5,19 +5,6 @@ xpCombine.debug = false --true --
 xpCombine.myCurrentModDirectory = g_currentModDirectory;
 xpCombine.modName = g_currentModName
 
--- @TODO:
--- [x] Manage worker not starting
--- [x] modIcon
--- [x] FS19 coding style: xpCombine as new spec for Combine + registerOverwrittenFunction
--- [x] Move some overwritten functions to other file
--- [x] Retrieve basePerf from FS17 mr / mrMods
--- [x] Fix issue with helper
--- [x] Show HUD only when combine is on
--- [ ] Video showing yield / speed / load on several field with several crops
--- [ ] Test zip
--- [ ] Full test
--- [ ] Clean useless code / traces
-
 -- @TEST:
 -- [x] Start threshing without cutter
 -- [x] Start threshing with cutter attached
@@ -87,8 +74,8 @@ function xpCombine:onLoad(savegame)
 
         local i = 0
         local xmlVehicleName = ''
-        while hasXMLProperty(xmlFile, "combineXP"..string.format(".vehicle(%d)", i)) do
-            local xmlPath = "combineXP"..string.format(".vehicle(%d)", i)
+        while hasXMLProperty(xmlFile, "combineXP"..string.format(".vehicles.vehicle(%d)", i)) do
+            local xmlPath = "combineXP"..string.format(".vehicles.vehicle(%d)", i)
             xmlVehicleName = getXMLString(xmlFile, xmlPath.."#xmlPath")
             --> ==Manage DLC & mods thanks to dural==
             --replace $pdlcdir by the full path
@@ -163,6 +150,7 @@ function xpCombine:onLoad(savegame)
     spec.mrCombineLimiter.totalOutputMass = 0.
     spec.mrCombineLimiter.tonPerHour = 0.
     spec.mrCombineLimiter.engineLoad = 0.
+    spec.mrCombineLimiter.loadMultiplier = 1.
     spec.mrCombineLimiter.yield = 0.
 
     spec.mrCombineLastTotalPower = 0;
@@ -171,6 +159,17 @@ function xpCombine:onLoad(savegame)
 
     spec.lastRealArea = 0.
     spec.lastMultiplier = 1
+
+    local spec_powerConsumer = self.spec_powerConsumer
+    if spec_powerConsumer then
+        -- Set default values to powerConsumer to rev up when starting threshing and overloading
+        if spec_powerConsumer.neededMaxPtoPower == nil then
+            spec_powerConsumer.neededMaxPtoPower =  10
+        end
+        if spec_powerConsumer.ptoRpm == nil then
+            spec_powerConsumer.ptoRpm = 350
+        end
+    end
 
     spec.dirtyFlag = self:getNextDirtyFlag()
 end
@@ -198,6 +197,7 @@ function xpCombine:onReadStream(streamId, connection)
     -- self:setSowingData(allowSound, allowFertilizer, true)
     spec.mrCombineLimiter.tonPerHour = streamReadFloat32(streamId)
     spec.mrCombineLimiter.engineLoad = streamReadFloat32(streamId)
+    spec.mrCombineLimiter.loadMultiplier = streamReadFloat32(streamId)
     spec.mrCombineLimiter.yield = streamReadFloat32(streamId)
 end
 
@@ -206,6 +206,7 @@ function xpCombine:onWriteStream(streamId, connection)
     local spec = self.spec_xpCombine
     streamWriteFloat32(streamId, spec.mrCombineLimiter.tonPerHour)
     streamWriteFloat32(streamId, spec.mrCombineLimiter.engineLoad)
+    streamWriteFloat32(streamId, spec.mrCombineLimiter.loadMultiplier)
     streamWriteFloat32(streamId, spec.mrCombineLimiter.yield)
 end
 
@@ -217,6 +218,7 @@ function xpCombine:onReadUpdateStream(streamId, timestamp, connection)
         if streamReadBool(streamId) then
             spec.mrCombineLimiter.tonPerHour = streamReadFloat32(streamId)
             spec.mrCombineLimiter.engineLoad = streamReadFloat32(streamId)
+            spec.mrCombineLimiter.loadMultiplier = streamReadFloat32(streamId)
             spec.mrCombineLimiter.yield = streamReadFloat32(streamId)
         end
     end
@@ -230,6 +232,7 @@ function xpCombine:onWriteUpdateStream(streamId, connection, dirtyMask)
         if streamWriteBool(streamId, bitAND(dirtyMask, spec.dirtyFlag) ~= 0) then
             streamWriteFloat32(streamId, spec.mrCombineLimiter.tonPerHour)
             streamWriteFloat32(streamId, spec.mrCombineLimiter.engineLoad)
+            streamWriteFloat32(streamId, spec.mrCombineLimiter.loadMultiplier)
             streamWriteFloat32(streamId, spec.mrCombineLimiter.yield)
         end
     end
@@ -420,127 +423,65 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
             end
 
             -- TODO: To be activated on a future release
-            -- local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec.fillUnitIndex))
-            -- if fruitType ~= nil and fruitType ~= FruitType.UNKNOWN then
-            --     limit = xpCombine:getTimeDependantSpeed(fruitType, limit)
-            --     -- print("speedLimit from Time       : "..tostring(limit))
-            -- end
+            local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec_combine.fillUnitIndex))
+            if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN then
+                local loadLimit = limit
+                -- print("speedLimit                 : "..tostring(limit))
+                if g_seasons and g_seasons.weather.cropMoistureContent then
+                    limit = xpCombine:getMoistureDependantSpeed(fruitType, loadLimit)
+                    spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
+                    -- print("speedLimit from Moisture   : "..tostring(limit))
+                    -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
+                else
+                    limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
+                    spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
+                    -- print("speedLimit from Time       : "..tostring(limit))
+                    -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
+                end
+            end
         end
     end
     return limit, doCheckSpeedLimit
 end
 Vehicle.getSpeedLimit = Utils.overwrittenFunction(Vehicle.getSpeedLimit, xpCombine.getSpeedLimit)
 
+-- Reduce speedLimit based on moisture given by Seasons and fruitType
+function xpCombine:getMoistureDependantSpeed(fruitType, defaultSpeedLimit)
+    -- if xpCombine.debug then print("xpCombine:getTimeDependantSpeed") end
+    local speed = defaultSpeedLimit
+    if fruitType == FruitType.WHEAT or
+        fruitType == FruitType.BARLEY or
+        fruitType == FruitType.OAT or
+        fruitType == FruitType.CANOLA or
+        fruitType == FruitType.SOYBEAN or
+        fruitType == FruitType.SUNFLOWER or
+        fruitType == FruitType.MAIZE then
+        local time = g_seasons.weather.cropMoistureContent
+        speed = g_combinexp.moistureDependantSpeed.default:get(time)
+    else
+        speed = 10
+    end
+    return defaultSpeedLimit * 0.1 * speed
+end
+
 -- Reduce speedLimit based on time of the day and fruitType
 function xpCombine:getTimeDependantSpeed(fruitType, defaultSpeedLimit)
     -- if xpCombine.debug then print("xpCombine:getTimeDependantSpeed") end
     local speed = defaultSpeedLimit
-    local speedCurve = AnimCurve:new(linearInterpolator1)
-    -- TODO: to retrieve from xml file
-    -- local currentTemp = SeasonsWeather:getCurrentAirTemperature()
-    if fruitType == FruitType.WHEAT then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})   -- SeasonsLighting.dayEnd + 6
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})  -- SeasonsLighting.dayStart + 4
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    elseif fruitType == FruitType.BARLEY then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    elseif fruitType == FruitType.OAT then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    elseif fruitType == FruitType.CANOLA then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    elseif fruitType == FruitType.SOYBEAN then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    elseif fruitType == FruitType.SUNFLOWER then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    elseif fruitType == FruitType.MAIZE then
-        speedCurve:addKeyframe({9, time = 0})
-        speedCurve:addKeyframe({8, time = 2})
-        speedCurve:addKeyframe({6, time = 4})
-        speedCurve:addKeyframe({2, time = 6})
-        speedCurve:addKeyframe({2, time = 8})
-        speedCurve:addKeyframe({4, time = 10})
-        speedCurve:addKeyframe({9, time = 12})
-        speedCurve:addKeyframe({10, time = 14})
-        speedCurve:addKeyframe({10, time = 16})
-        speedCurve:addKeyframe({10, time = 18})
-        speedCurve:addKeyframe({10, time = 20})
-        speedCurve:addKeyframe({9, time = 22})
-        speedCurve:addKeyframe({9, time = 24})
-    else
-        speedCurve:addKeyframe({defaultSpeedLimit, time = 0})
-    end
     local time = g_currentMission.environment.currentHour + g_currentMission.environment.currentMinute / 60
-    speed = speedCurve:get(time)
+
+    if fruitType == FruitType.WHEAT or
+        fruitType == FruitType.BARLEY or
+        fruitType == FruitType.OAT or
+        fruitType == FruitType.CANOLA or
+        fruitType == FruitType.SOYBEAN or
+        fruitType == FruitType.SUNFLOWER then
+        speed = g_combinexp.timeDependantSpeed.cereal:get(time)
+    elseif fruitType == FruitType.MAIZE then
+        speed = g_combinexp.timeDependantSpeed.maize:get(time)
+    else
+        speed = 10
+    end
     return defaultSpeedLimit * 0.1 * speed
 end
 
