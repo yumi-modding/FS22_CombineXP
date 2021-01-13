@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="53">
     <author>yumi</author>
-    <version>1.0.1.0</version>        
+    <version>1.0.1.1</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -27,6 +27,8 @@ New in v1.0.1.0
 - Adding russian translation
 - Engine revs up when threshing and overloading
 - Engine load and speed depending on crop moisture if Seasons mod enabled or on time of the day
+Fixed in v1.0.1.1
+- Higher speed for forage harvesters cutters like mex5
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -49,6 +51,8 @@ New in v1.0.1.0
 - Ajout de la traduction russe
 - Le moteur monte en régime lors du battage et du déchargement
 - Charge machine et vitesse dépendante de l'humidité de la culture si le mod Seasons est actif ou de l'heure de la journée sinon
+Fixed in v1.0.1.1
+- Vitesse plus élevée pour les ensileuses trainées telles que la mex5
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -71,6 +75,8 @@ New in v1.0.1.0
 - Russische Übersetzung hinzufügen
 - Motor beschleunigt beim Dreschen und Überladen
 - Motorlast und Drehzahl hängen von der Feuchtigkeit der Ernte ab, wenn der Seasons Mod aktiviert ist oder von der Tageszeit
+Fixed in v1.0.1.1
+- Higher speed for forage harvesters cutters like mex5
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
@@ -93,6 +99,8 @@ New in 1.0.1.0
 - Добавление русского перевода
 - Двигатель набирает обороты при обмолоте и разгрузке
 - Нагрузка на двигатель и скорость в зависимости от влажности урожая, если включен мод Seasons, или от времени суток
+Fixed in v1.0.1.1
+- Higher speed for forage harvesters cutters like mex5
 ]]></ru>
     </description>
     <iconFilename>modIcon.dds</iconFilename>

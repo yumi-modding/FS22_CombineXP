@@ -102,7 +102,7 @@ function xpCombine:onLoad(savegame)
         local coef = 1.5
         local keyCategory = "vehicle.storeData.category"
         local category = getXMLString(self.xmlFile, keyCategory)
-        if category == "forageHarvesters" then
+        if category == "forageHarvesters" or category == "forageHarvesterCutters" then
             coef = 6.
         elseif category == "beetVehicles" then
             coef = 0.6
