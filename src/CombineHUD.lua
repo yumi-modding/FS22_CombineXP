@@ -45,6 +45,12 @@ function CombineHUD:load()
         self.l10nHour = string.gsub(string.gsub(g_i18n:getText("ui_hours_none"), "--:--", ""), "%s", "")
     end
 
+    if g_seasons then
+        CombineHUD.SIZE.BOX = { 190, 146 } -- 4px border correction
+    else
+        CombineHUD.SIZE.BOX = { 190, 110 } -- 4px border correction
+    end
+
     self:createElements()
     self:setVehicle(nil)
 end
@@ -145,7 +151,6 @@ function CombineHUD:createElements()
     self.base:addChild(self.Slash2)
     self.base:addChild(self.Hour)
     if g_seasons then
-        print("add icon")
         self.base:addChild(self.Moisture)
     end
 end
@@ -285,7 +290,6 @@ CombineHUD.TEXT_SIZE = {
 }
 
 CombineHUD.SIZE = {
-    BOX = { 190, 146 }, -- 4px border correction
     BOX_MARGIN = { 400, 400 },
     BOX_PADDING = { 4, 4 },
     ICON = { 40, 40 },
