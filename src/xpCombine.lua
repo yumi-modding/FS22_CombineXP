@@ -424,7 +424,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
 
             -- TODO: To be activated on a future release
             local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec_combine.fillUnitIndex))
-            if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN then
+            if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN and not spec_combine.allowThreshingDuringRain then
                 local loadLimit = limit
                 -- print("speedLimit                 : "..tostring(limit))
                 if g_seasons and g_seasons.weather.cropMoistureContent then
