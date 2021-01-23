@@ -69,7 +69,13 @@ function xpCombine:onLoad(savegame)
         local xmlFile = nil
 
         if xpCombine.myCurrentModDirectory then
-            xmlFile = loadXMLFile("combineXP", xpCombine.myCurrentModDirectory .. "data/combineXP.xml");
+            local modSettingsDir = xpCombine.myCurrentModDirectory .. "../../modsSettings"
+            local xmlFilePath = modSettingsDir.."/combineXP.xml"
+            if fileExists(xmlFilePath) then
+                xmlFile = loadXMLFile("combineXP", xmlFilePath);
+            else
+                xmlFile = loadXMLFile("combineXP", xpCombine.myCurrentModDirectory .. "data/combineXP.xml");
+            end
         end
 
         local i = 0
@@ -378,6 +384,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                             spec.speedLimit = math.max(2, math.min(spec.speedLimit, avgSpeed*3.6) - 10 * (1 - avgArea/maxAvgArea)^2); --0.1kph step --allow 5% margin to avoid "yo-yo" effect
                             if xpCombine.debug then print("reduce speedlimit "..tostring(spec.speedLimit)) end
                         elseif (3.6*avgSpeed)>spec.speedLimit and avgArea<maxAvgArea then -- not limited by the engine, nor by the combine capacity
+                        -- elseif avgArea<maxAvgArea then -- not limited by the engine, nor by the combine capacity
                             --increase speedlimit
                             spec.speedLimit = math.min(spec.mrGenuineSpeedLimit, spec.speedLimit + 0.1 * (maxAvgArea / avgArea)^3);
                             if xpCombine.debug then print("increase speedlimit "..tostring(spec.speedLimit)) end
@@ -416,27 +423,32 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
     if spec_xpCombine then
         local isTurnedOn = self:getIsTurnedOn()
         if isTurnedOn then
-            spec_xpCombine.mrGenuineSpeedLimit = 1.5 * limit
-            if spec_xpCombine.speedLimit and spec_xpCombine.speedLimit > 0 then
-                limit = spec_xpCombine.speedLimit
-                -- if xpCombine.debug then print("speedLimit from materialQty: "..tostring(limit)) end
+            if g_combinexp.powerDependantSpeed.isActive then
+                spec_xpCombine.mrGenuineSpeedLimit = 1.5 * limit
+                if spec_xpCombine.speedLimit and spec_xpCombine.speedLimit > 0 then
+                    limit = spec_xpCombine.speedLimit
+                    -- if xpCombine.debug then print("speedLimit from materialQty: "..tostring(limit)) end
+                end
+            else
+                spec_xpCombine.mrGenuineSpeedLimit = limit
             end
 
-            -- TODO: To be activated on a future release
             local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec_combine.fillUnitIndex))
             if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN and not spec_combine.allowThreshingDuringRain then
                 local loadLimit = limit
                 -- print("speedLimit                 : "..tostring(limit))
-                if g_seasons and g_seasons.weather.cropMoistureContent then
+                if g_seasons and g_seasons.weather.cropMoistureContent and g_combinexp.moistureDependantSpeed.isActive then
                     limit = xpCombine:getMoistureDependantSpeed(fruitType, loadLimit)
                     spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
                     -- print("speedLimit from Moisture   : "..tostring(limit))
                     -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
                 else
-                    limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
-                    spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
-                    -- print("speedLimit from Time       : "..tostring(limit))
-                    -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
+                    if g_combinexp.timeDependantSpeed.isActive then
+                        limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
+                        spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
+                        -- print("speedLimit from Time       : "..tostring(limit))
+                        -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
+                    end
                 end
             end
         end

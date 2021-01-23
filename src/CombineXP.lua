@@ -18,6 +18,7 @@ function CombineXP:new(mission, i18n, inputBinding, gui, soundManager, modDirect
     local uiFilename = Utils.getFilename("resources/combineXP.dds", modDirectory)
     self.hud = CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilename)
 
+    self.powerDependantSpeed = {}
     self.timeDependantSpeed = {}
     self.moistureDependantSpeed = {}
 
@@ -83,13 +84,22 @@ function CombineXP:loadDependantSpeed()
     local xmlFile = nil
 
     if modDirectory then
-        xmlFile = loadXMLFile("combineXP", modDirectory .. "data/combineXP.xml");
+        local modSettingsDir = modDirectory .. "../../modsSettings"
+        local xmlFilePath = modSettingsDir.."/combineXP.xml"
+        if fileExists(xmlFilePath) then
+            xmlFile = loadXMLFile("combineXP", xmlFilePath);
+        else
+            xmlFile = loadXMLFile("combineXP", modDirectory .. "data/combineXP.xml");
+        end
     end
     if xmlFile then
+        g_combinexp.powerDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.powerDependantSpeed" .. string.format("#isActive")), true)
+        g_combinexp.timeDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.timeDependantSpeed" .. string.format("#isActive")), true)
         g_combinexp.timeDependantSpeed.cereal = AnimCurve:new(linearInterpolator1)
         g_combinexp.timeDependantSpeed.cereal:loadCurveFromXML(xmlFile, "combineXP.timeDependantSpeed.cereal", loadInterpolator1Curve)
         g_combinexp.timeDependantSpeed.maize = AnimCurve:new(linearInterpolator1)
         g_combinexp.timeDependantSpeed.maize:loadCurveFromXML(xmlFile, "combineXP.timeDependantSpeed.maize", loadInterpolator1Curve)
+        g_combinexp.moistureDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.moistureDependantSpeed" .. string.format("#isActive")), true)
         g_combinexp.moistureDependantSpeed.default = AnimCurve:new(linearInterpolator1)
         g_combinexp.moistureDependantSpeed.default:loadCurveFromXML(xmlFile, "combineXP.moistureDependantSpeed.default", loadInterpolator1Curve)
         delete(xmlFile);
@@ -97,10 +107,29 @@ function CombineXP:loadDependantSpeed()
 
 end
 
+-- @doc Copy default parameters from mod zip file to modsSettings directory so end-user can edit it
+function CombineXP:copyCombineXPXML()
+    if modDirectory then
+        local modSettingsDir = modDirectory .. "../../modsSettings"
+        local xmlFilePath = modSettingsDir.."/combineXP.xml"
+        local xmlFile;
+        if not fileExists(xmlFilePath) then
+            local xmlSourceFilePath = modDirectory .. "/data/combineXP.xml"
+            local xmlSourceFile;
+            if fileExists(xmlSourceFilePath) then
+            xmlSourceFile = loadXMLFile('combineXP', xmlSourceFilePath);
+            createFolder(modSettingsDir)
+            saveXMLFileTo(xmlSourceFile, xmlFilePath);
+            end
+        end
+    end
+end
+
 ---Called when the player clicks the Start button
 function CombineXP:onMissionStart(mission)
     -- print("CombineXP:onMissionStart")
 
+    CombineXP.copyCombineXPXML()
     CombineXP.loadMaterialQtyFx()
     CombineXP.loadDependantSpeed()
 
