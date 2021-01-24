@@ -63,6 +63,7 @@ function xpCombine:onLoad(savegame)
     local spec = self.spec_xpCombine
 
     local basePerf = 0.    --basePerf=max Ha per Hour wanted in 100% fertilized Wheat
+    local powerBoost = 0.
 
     -- First load from data xmlFile
     if xpCombine.myCurrentModDirectory then
@@ -79,9 +80,10 @@ function xpCombine:onLoad(savegame)
         end
 
         local i = 0
-        local xmlVehicleName = ''
+        local xmlVehicleName = ""
+        local xmlPath = ""
         while hasXMLProperty(xmlFile, "combineXP"..string.format(".vehicles.vehicle(%d)", i)) do
-            local xmlPath = "combineXP"..string.format(".vehicles.vehicle(%d)", i)
+            xmlPath = "combineXP"..string.format(".vehicles.vehicle(%d)", i)
             xmlVehicleName = getXMLString(xmlFile, xmlPath.."#xmlPath")
             --> ==Manage DLC & mods thanks to dural==
             --replace $pdlcdir by the full path
@@ -100,6 +102,8 @@ function xpCombine:onLoad(savegame)
             end
             i = i + 1
         end
+        xmlPath = "combineXP.vehicles"..string.format("#powerBoost")
+        powerBoost = Utils.getNoNil(tonumber(getXMLString(xmlFile, xmlPath)), 0)
     end
 
     if basePerf <= 0 then
@@ -151,6 +155,7 @@ function xpCombine:onLoad(savegame)
     spec.mrCombineLimiter.distanceForMeasuring = 3; -- 3 meters
     spec.mrCombineLimiter.currentTime = 0;
     spec.mrCombineLimiter.basePerfAvgArea = basePerf / 36; -- m2 per second (fully fertilized)
+    spec.mrCombineLimiter.powerBoost = 1 + 0.01 * powerBoost;
     spec.mrCombineLimiter.currentAvgArea = 0;
 
     spec.mrCombineLimiter.totalOutputMass = 0.
@@ -287,8 +292,10 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
         -- if self:getIsTurnedOn() and self.movingDirection~=-1 then -- and (self:isLowered(true) or self.cutterAllowCuttingWhileRaised) then    --20170427 - check lower/raise state too (especially useful for combine with cutter embedded
         local cutterIsTurnedOn = false
         for cutter,_ in pairs(spec_combine.attachedCutters) do
-            local spec_cutter = cutter.spec_cutter
-            cutterIsTurnedOn = self.movingDirection == spec_cutter.movingDirection and self:getLastSpeed() > 0.5 and (spec_cutter.allowCuttingWhileRaised or cutter:getIsLowered(true))
+            -- if cutter.spec_cutter then
+                local spec_cutter = cutter.spec_cutter
+                cutterIsTurnedOn = self.movingDirection == spec_cutter.movingDirection and self:getLastSpeed() > 0.5 and (spec_cutter.allowCuttingWhileRaised or cutter:getIsLowered(true))
+            -- end
         end
 
         if self:getIsTurnedOn() and self.movingDirection~=-1 and cutterIsTurnedOn then
@@ -363,7 +370,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                     spec.speedLimit = spec.mrGenuineSpeedLimit;
                 else
 
-                    local maxAvgArea = 1.2 * spec.mrCombineLimiter.basePerfAvgArea;
+                    local maxAvgArea = spec.mrCombineLimiter.powerBoost * spec.mrCombineLimiter.basePerfAvgArea;
                     local predictLimitSet = false
                     --take into account the areaAcc
                     if areaAcc>0 then
@@ -383,8 +390,8 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                             --reduce speedlimit
                             spec.speedLimit = math.max(2, math.min(spec.speedLimit, avgSpeed*3.6) - 10 * (1 - avgArea/maxAvgArea)^2); --0.1kph step --allow 5% margin to avoid "yo-yo" effect
                             if xpCombine.debug then print("reduce speedlimit "..tostring(spec.speedLimit)) end
-                        elseif (3.6*avgSpeed)>spec.speedLimit and avgArea<maxAvgArea then -- not limited by the engine, nor by the combine capacity
-                        -- elseif avgArea<maxAvgArea then -- not limited by the engine, nor by the combine capacity
+                        -- elseif (3.6*avgSpeed)>spec.speedLimit and avgArea<maxAvgArea then -- not limited by the engine, nor by the combine capacity
+                        elseif avgArea<maxAvgArea then -- not limited by the engine, nor by the combine capacity
                             --increase speedlimit
                             spec.speedLimit = math.min(spec.mrGenuineSpeedLimit, spec.speedLimit + 0.1 * (maxAvgArea / avgArea)^3);
                             if xpCombine.debug then print("increase speedlimit "..tostring(spec.speedLimit)) end

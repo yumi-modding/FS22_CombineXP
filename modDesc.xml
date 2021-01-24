@@ -31,6 +31,8 @@ Fixed in v1.0.1.1
 - Higher speed for forage harvesters cutters like mex5
 - Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
 - HUD size fixed
+- Capability to enable/disable mod behavior with Settings in xml file
+- Error when attaching front shield cutter
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -57,6 +59,8 @@ Fixed in v1.0.1.1
 - Vitesse plus élevée pour les ensileuses trainées telles que la mex5
 - Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
 - HUD size fixed
+- Capability to enable/disable mod behavior with Settings in xml file
+- Error when attaching front shield cutter
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -83,6 +87,8 @@ Fixed in v1.0.1.1
 - Higher speed for forage harvesters cutters like mex5
 - Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
 - HUD size fixed
+- Capability to enable/disable mod behavior with Settings in xml file
+- Error when attaching front shield cutter
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
@@ -109,6 +115,8 @@ Fixed in v1.0.1.1
 - Higher speed for forage harvesters cutters like mex5
 - Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
 - HUD size fixed
+- Capability to enable/disable mod behavior with Settings in xml file
+- Error when attaching front shield cutter
 ]]></ru>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
