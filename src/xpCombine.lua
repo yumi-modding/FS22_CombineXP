@@ -292,10 +292,10 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
         -- if self:getIsTurnedOn() and self.movingDirection~=-1 then -- and (self:isLowered(true) or self.cutterAllowCuttingWhileRaised) then    --20170427 - check lower/raise state too (especially useful for combine with cutter embedded
         local cutterIsTurnedOn = false
         for cutter,_ in pairs(spec_combine.attachedCutters) do
-            -- if cutter.spec_cutter then
+            if cutter.spec_cutter then
                 local spec_cutter = cutter.spec_cutter
                 cutterIsTurnedOn = self.movingDirection == spec_cutter.movingDirection and self:getLastSpeed() > 0.5 and (spec_cutter.allowCuttingWhileRaised or cutter:getIsLowered(true))
-            -- end
+            end
         end
 
         if self:getIsTurnedOn() and self.movingDirection~=-1 and cutterIsTurnedOn then
@@ -618,7 +618,7 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
         if spec_combine.numAttachedCutters > 0 then
             local cutterIsTurnedOn = false
             for _, cutter in pairs(spec_combine.attachedCutters) do
-                if cutter:getIsTurnedOn() then
+                if cutter.getIsTurnedOn ~= nil and cutter:getIsTurnedOn() then
                     local spec_cutter = cutter.spec_cutter
                     local isEffectActive = self.movingDirection == spec_cutter.movingDirection and self:getLastSpeed() > 0.5 and (spec_cutter.allowCuttingWhileRaised or cutter:getIsLowered(true))
                     cutterIsTurnedOn = isEffectActive
