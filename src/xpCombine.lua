@@ -104,6 +104,7 @@ function xpCombine:onLoad(savegame)
         end
         xmlPath = "combineXP.vehicles"..string.format("#powerBoost")
         powerBoost = Utils.getNoNil(tonumber(getXMLString(xmlFile, xmlPath)), 0)
+        powerBoost = MathUtil.clamp(powerBoost, 0, 20)
     end
 
     if basePerf <= 0 then

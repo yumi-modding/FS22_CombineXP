@@ -11,7 +11,7 @@ If you're tired of harvesting any crops with any combine at 10 kph, this mod is 
 The goal of this mod is to provide a new experience when using combine harvesters in the game to be closer to real life harvesting. This is a first release and new features under development will arrive soon.
 New features:
 - Capability to activate combine and cutter independently as IRL
-- Harvesting speed limit based on material quantity gathered, crop type and combine performance (based on power)
+- Harvesting speed limit based on material quantity gathered, crop type, combine performance (based on power) and crop moisture with Seasons mod
 - Display several data in HUD when harvesting: material capacity (T/h), combine load (%), instant yield (T/ha)
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
@@ -31,7 +31,7 @@ Fixed in v1.0.1.1
 - Higher speed for forage harvesters cutters like mex5
 - Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
 - HUD size fixed
-- Capability to enable/disable mod behavior with Settings in xml file
+- Capability to enable/disable mod behaviors with settings in xml file 
 - Error when attaching front shield cutter
 ]]></en>
         <fr><![CDATA[
@@ -39,7 +39,7 @@ Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quel
 Le but de ce mod est de fournir une nouvelle expérience lors de l'utilisation des moissonneuses-batteuses dans le jeu pour être plus proche de la réalité. Il s'agit d'une première version et de nouvelles fonctionnalités en cours de développement arriveront bientôt.
 Nouvelles fonctionnalités:
 - Possibilité d'activer la moissonneuse-batteuse et la barre de coupe indépendamment comme IRL
-- Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture et des performances de la moissonneuse (basées sur sa puissance)
+- Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture, des performances de la moissonneuse (basées sur sa puissance) et de l'humitidité de la culture avec le mod Seasons
 - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
@@ -57,17 +57,17 @@ New in v1.0.1.0
 - Charge machine et vitesse dépendante de l'humidité de la culture si le mod Seasons est actif ou de l'heure de la journée sinon
 Fixed in v1.0.1.1
 - Vitesse plus élevée pour les ensileuses trainées telles que la mex5
-- Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
-- HUD size fixed
-- Capability to enable/disable mod behavior with Settings in xml file
-- Error when attaching front shield cutter
+- Humidité de la culture et heure de la journée non prises en compte si allowThreshingDuringRain est true
+- Taille du HUD corrigée
+- Possibilité d'activer / désactiver certaines fonctions du  mod via l'édition d'un fichier xml
+- Erreur lors de l'attache d'un bouclier warning avant
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
 Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um denen im Reallife näher zu kommen. Dies ist eine erste Version und neue Funktionen, die derzeit entwickelt werden, werden in Kürze verfügbar sein.
 Eigenschaften:
 - Mähdrescher und das Schneidwerk unabhängig voneinander als IRL zu aktivieren
-- Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart und der Mähdrescherleistung (basierend auf der Power)
+- Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Power) und die Luftfeuchtigkeit der Ernte mit dem Seasons Mod
 - Zeigt Ihnen bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
@@ -84,18 +84,18 @@ New in v1.0.1.0
 - Motor beschleunigt beim Dreschen und Überladen
 - Motorlast und Drehzahl hängen von der Feuchtigkeit der Ernte ab, wenn der Seasons Mod aktiviert ist oder von der Tageszeit
 Fixed in v1.0.1.1
-- Higher speed for forage harvesters cutters like mex5
-- Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
-- HUD size fixed
-- Capability to enable/disable mod behavior with Settings in xml file
-- Error when attaching front shield cutter
+- Höhere Geschwindigkeit für Feldhäcksler wie mex5
+- Berücksichtigen Sie nicht die Feuchtigkeit der Ernte oder die Tageszeit, wenn allowThreshingDuringRain wahr ist
+- HUD-Größe festgelegt
+- Möglichkeit zum Aktivieren / Deaktivieren des Mod-Verhaltens mit den Einstellungen in der XML-Datei
+- Fehler beim Anbringen des Frontschutzschneiders		
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
 Цель этого мода - дать новый опыт использования комбайнов в игре, чтобы приблизиться к реальному. Это первая версия, и вскоре будут доступны новые функции, которые разрабатываются в настоящее время.
 Свойства:
 - Активировать комбайн и жатку независимо друг от друга как "в реальной жизни"(IRL)
-- Ограничение скорости сбора урожая в зависимости от количества собранного урожая, типа урожая и производительности комбайна (в зависимости от его мощности)
+- Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons		
 - Отображает несколько данных в HUD во время уборки: производительность комбайна (т/ч), загрузка комбайна (%), текущая урожайность (т/га)
 ==== ИЗМЕНЕНИЯ ====
 Fixed in 1.0.0.1
@@ -112,11 +112,11 @@ New in 1.0.1.0
 - Двигатель набирает обороты при обмолоте и разгрузке
 - Нагрузка на двигатель и скорость в зависимости от влажности урожая, если включен мод Seasons, или от времени суток
 Fixed in v1.0.1.1
-- Higher speed for forage harvesters cutters like mex5
-- Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
-- HUD size fixed
-- Capability to enable/disable mod behavior with Settings in xml file
-- Error when attaching front shield cutter
+- Повышенная скорость фрезы кормоуборочных комбайнов типа mex5
+- Не принимайте во внимание влажность урожая или время суток, если для параметра allowThreshingDuringRain установлено значение true
+- Исправлен размер HUD
+- Возможность включить / отключить поведение мода с помощью настроек в файле xml
+- Ошибка при прикреплении резака переднего щита		
 ]]></ru>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
