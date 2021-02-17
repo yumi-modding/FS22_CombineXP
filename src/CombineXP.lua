@@ -84,7 +84,7 @@ function CombineXP:loadDependantSpeed()
     local xmlFile = nil
 
     if modDirectory then
-        local modSettingsDir = modDirectory .. "../../modsSettings"
+        local modSettingsDir = getUserProfileAppPath().."modsSettings"
         local xmlFilePath = modSettingsDir.."/combineXP.xml"
         if fileExists(xmlFilePath) then
             xmlFile = loadXMLFile("combineXP", xmlFilePath);
@@ -110,7 +110,7 @@ end
 -- @doc Copy default parameters from mod zip file to modsSettings directory so end-user can edit it
 function CombineXP:copyCombineXPXML()
     if modDirectory then
-        local modSettingsDir = modDirectory .. "../../modsSettings"
+        local modSettingsDir = getUserProfileAppPath().."modsSettings"
         local xmlFilePath = modSettingsDir.."/combineXP.xml"
         local xmlFile;
         if not fileExists(xmlFilePath) then
