@@ -70,7 +70,7 @@ function xpCombine:onLoad(savegame)
         local xmlFile = nil
 
         if xpCombine.myCurrentModDirectory then
-            local modSettingsDir = xpCombine.myCurrentModDirectory .. "../../modsSettings"
+            local modSettingsDir = getUserProfileAppPath().."modsSettings"
             local xmlFilePath = modSettingsDir.."/combineXP.xml"
             if fileExists(xmlFilePath) then
                 xmlFile = loadXMLFile("combineXP", xmlFilePath);
