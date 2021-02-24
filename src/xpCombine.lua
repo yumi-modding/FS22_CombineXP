@@ -573,6 +573,18 @@ function xpCombine:startThreshing(superfunc)
     SpecializationUtil.raiseEvent(self, "onStartThreshing")
 end
 
+function xpCombine:onAlarmTriggerChanged(superfunc, alarmTrigger, state)
+    if xpCombine.debug then print("xpCombine:onAlarmTriggerChanged") end
+    local spec = self.spec_xpCombine
+
+    if spec and state and alarmTrigger.turnOffInTrigger and self:getIsTurnedOn() then
+        g_currentMission:showBlinkingWarning(g_i18n:getText("info_emptyTankToContinueThreshing"), 2000)
+    else
+        superfunc(self, alarmTrigger, state)
+	end
+end
+TurnOnVehicle.onAlarmTriggerChanged = Utils.overwrittenFunction(TurnOnVehicle.onAlarmTriggerChanged, xpCombine.onAlarmTriggerChanged)
+
 -- Prevent cutter to stop and move up when stoping the combine threshing
 function xpCombine:stopThreshing(superfunc)
     if xpCombine.debug then print("xpCombine:stopThreshing") end
