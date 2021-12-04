@@ -8,17 +8,17 @@
     <fruitType name="barley"        literPerSqm="0.8250" seedUsagePerSqm="0.0260" windrowLiterPerSqm="5.4"  mrMaterialQtyFx="1.05" /> <!-- same level as wheat, a little harder to thresh. windrow = about 4.9T per Ha -->
     <fruitType name="canola"        literPerSqm="0.4920" seedUsagePerSqm="0.0020" mrMaterialQtyFx="0.75" /> <!-- limit combine harvester because of the qty of "straw" compared to the grain -->
     <fruitType name="cotton"        literPerSqm="0.7500" seedUsagePerSqm="0.0500" />
-    <fruitType name="dryGrass"      literPerSqm="3.2500" seedUsagePerSqm="0.0070" windrowLiterPerSqm="3.25" mrMaterialQtyFx="2.9" /> <!-- setting not useful since when we cut grass, this is the grass setting which is taken into account. And then, this is the tedder who turn grass into hay (0.75 lose factor in the "overrideTedder" file to get a final value of 6.1T of hay per Hectare) -->        
-    <fruitType name="grass"         literPerSqm="3.2500" seedUsagePerSqm="0.0070" windrowLiterPerSqm="3.25" mrMaterialQtyFx="3.2" /> <!-- windrow = about 21T per Ha -->    
+    <fruitType name="dryGrass"      literPerSqm="3.2500" seedUsagePerSqm="0.0070" windrowLiterPerSqm="3.25" mrMaterialQtyFx="2.9" /> <!-- setting not useful since when we cut grass, this is the grass setting which is taken into account. And then, this is the tedder who turn grass into hay (0.75 lose factor in the "overrideTedder" file to get a final value of 6.1T of hay per Hectare) -->
+    <fruitType name="grass"         literPerSqm="3.2500" seedUsagePerSqm="0.0070" windrowLiterPerSqm="3.25" mrMaterialQtyFx="3.2" /> <!-- windrow = about 21T per Ha -->
     <fruitType name="maize"         literPerSqm="1.1700" seedUsagePerSqm="0.0045" mrMaterialQtyFx="1.15" />    <!-- limit combine harvester only because of the yield, no real straw to thresh -->
-    <fruitType name="oilseedRadish" literPerSqm="0.9900" seedUsagePerSqm="0.0020" />    
+    <fruitType name="oilseedRadish" literPerSqm="0.9900" seedUsagePerSqm="0.0020" />
     <fruitType name="oat"           literPerSqm="0.7250" seedUsagePerSqm="0.0210" windrowLiterPerSqm="6"    mrMaterialQtyFx="1.05" /> <!-- "avena sativa L. = common oat", about 8T/Ha yield, 5.5T/Ha straw -->
     <fruitType name="poplar"        literPerSqm="6.5000" seedUsagePerSqm="0.9000" mrMaterialQtyFx="16" /> <!--poplars are not "seeded" over all the field. There is a space between each "row". And so, about 50% of the field is actually sown by the "hired worker" with the "damcon" . Poplar yield is only used together with "fruitConverters" (default factor=2.5) -->
-    <fruitType name="potato"        literPerSqm="4.1300" seedUsagePerSqm="0.2300" />    
+    <fruitType name="potato"        literPerSqm="4.1300" seedUsagePerSqm="0.2300" />
     <fruitType name="rye"           literPerSqm="0.7500" seedUsagePerSqm="0.0180" windrowLiterPerSqm="7.5"  mrMaterialQtyFx="1.1" /> <!-- "Secale cereale", about 11T/Ha yield, 7T/Ha straw -->
     <fruitType name="soybean"       literPerSqm="0.4200" seedUsagePerSqm="0.0225" mrMaterialQtyFx="0.87" /> <!-- very easy to thresh, limit combine harvester only because of the yield, no real straw to thresh -->
-    <fruitType name="sugarBeet"     literPerSqm="7.2000" seedUsagePerSqm="0.0016" />    
-    <fruitType name="sugarcane"     literPerSqm="11.340" seedUsagePerSqm="1.2000" />    
+    <fruitType name="sugarBeet"     literPerSqm="7.2000" seedUsagePerSqm="0.0016" />
+    <fruitType name="sugarcane"     literPerSqm="11.340" seedUsagePerSqm="1.2000" />
     <fruitType name="sunflower"     literPerSqm="0.5200" seedUsagePerSqm="0.0030" mrMaterialQtyFx="0.62" />    <!-- no straw, poor yield, easy to thresh => combine limited by "damaging" the grain/loss while treshing -->
     <fruitType name="wheat"         literPerSqm="0.8900" seedUsagePerSqm="0.0230" windrowLiterPerSqm="4.5"  mrMaterialQtyFx="1" />    <!-- reference crop for materialQty compared to yield. windrow = about 4T per Ha -->
 </fruitTypes>

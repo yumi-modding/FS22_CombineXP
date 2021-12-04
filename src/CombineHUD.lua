@@ -37,7 +37,7 @@ end
 
 function CombineHUD:load()
     --print("CombineHUD:load")
-    self.uiScale = self:getUIScale()
+    self.uiScale = g_gameSettings:getValue("uiScale")
 
     if g_languageShort == "fr" then
         self.l10nHour = "h"
@@ -60,11 +60,6 @@ function CombineHUD:getNormalizedUVs(uvs)
     return getNormalizedUVs(uvs, self.atlasRefSize)
 end
 
-function CombineHUD:getUIScale()
-    --print("CombineHUD:getUIScale")
-    return self.speedMeterDisplay.uiScale
-end
-
 function CombineHUD:scalePixelToScreenVector(vector2D)
     --print("CombineHUD:scalePixelToScreenVector")
     return self.speedMeterDisplay:scalePixelToScreenVector(vector2D)
@@ -83,7 +78,7 @@ end
 function CombineHUD:createElements()
     --print("CombineHUD:createElements")
     local rightX = 1 - g_safeFrameOffsetX -- right of screen.
-    local bottomY = g_safeFrameOffsetY
+    local bottomY = 0.2 --22 g_safeFrameOffsetY
 
     local boxWidth, boxHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX)
     local marginWidth, marginHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX_MARGIN)
@@ -107,40 +102,40 @@ function CombineHUD:createElements()
     posY = posY + paddingHeight
 
     self.iconMass = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.MASS)
-    self.Mass = HUDElement:new(self.iconMass)
+    self.Mass = HUDElement.new(self.iconMass)
 
     self.iconSlash = self:createIcon(self.uiFilename, posX + iconMarginWidth, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.SLASH)
-    self.Slash = HUDElement:new(self.iconSlash)
+    self.Slash = HUDElement.new(self.iconSlash)
 
     posX = posX + iconSmallWidth + iconMarginWidth
     self.iconArea = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.AREA)
-    self.Area = HUDElement:new(self.iconArea)
+    self.Area = HUDElement.new(self.iconArea)
 
     posX = posX - iconSmallWidth - iconMarginWidth
     posY = posY + iconSmallHeight + iconMarginWidth
     self.iconEngineLoad = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.ENGINE_LOAD)
-    self.EngineLoad = HUDElement:new(self.iconEngineLoad)
+    self.EngineLoad = HUDElement.new(self.iconEngineLoad)
 
     posY = posY + iconSmallHeight + iconMarginWidth
     self.iconMass2 = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.MASS)
-    self.Mass2 = HUDElement:new(self.iconMass2)
+    self.Mass2 = HUDElement.new(self.iconMass2)
 
     self.iconSlash2 = self:createIcon(self.uiFilename, posX + iconMarginWidth, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.SLASH)
-    self.Slash2 = HUDElement:new(self.iconSlash2)
+    self.Slash2 = HUDElement.new(self.iconSlash2)
 
     posX = posX + iconSmallWidth + iconMarginWidth
     local operatingTimeWidth, operatingTimeHeight = getNormalizedScreenValues(unpack(SpeedMeterDisplay.SIZE.OPERATING_TIME))
     local operatingTimeOffsetX, operatingTimeOffsetY = getNormalizedScreenValues(unpack(SpeedMeterDisplay.POSITION.OPERATING_TIME))
-    self.iconHour = Overlay:new(g_baseHUDFilename, posX, posY, operatingTimeWidth, operatingTimeHeight)
-    self.iconHour:setUVs(getNormalizedUVs(SpeedMeterDisplay.UV.OPERATING_TIME))
-    self.Hour = HUDElement:new(self.iconHour)
+    self.iconHour = Overlay.new(g_baseHUDFilename, posX, posY, operatingTimeWidth, operatingTimeHeight)
+    self.iconHour:setUVs(GuiUtils.getUVs(SpeedMeterDisplay.UV.OPERATING_TIME))
+    self.Hour = HUDElement.new(self.iconHour)
 
     if g_seasons then
         local seasonsModDirectory = g_seasons.modDirectory
         posX = posX - iconSmallWidth - iconMarginWidth
         posY = posY + iconSmallHeight + iconMarginWidth
         self.iconMoisture = self:createIcon(self.uiFilename, posX, posY, iconSmallWidth, iconSmallHeight, CombineHUD.UV.MOISTURE)
-        self.Moisture = HUDElement:new(self.iconMoisture)
+        self.Moisture = HUDElement.new(self.iconMoisture)
     end
 
     self.base:addChild(self.Mass)
@@ -160,8 +155,8 @@ function CombineHUD:createMainBox(hudAtlasPath, x, y)
     --print("CombineHUD:createMainBox")
     local boxWidth, boxHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX)
     local posX = x - boxWidth
-    local boxOverlay = Overlay:new(hudAtlasPath, posX, y, boxWidth, boxHeight)
-    local boxElement = HUDElement:new(boxOverlay)
+    local boxOverlay = Overlay.new(hudAtlasPath, posX, y, boxWidth, boxHeight)
+    local boxElement = HUDElement.new(boxOverlay)
 
     boxElement:setVisible(true)
 
@@ -173,11 +168,11 @@ function CombineHUD:createBaseBox(hudAtlasPath, x, y)
     --print("CombineHUD:createBaseBox")
     local boxWidth, boxHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX)
     local posX = x - boxWidth
-    local boxOverlay = Overlay:new(hudAtlasPath, posX, y, boxWidth, boxHeight)
-    local boxElement = HUDElement:new(boxOverlay)
+    local boxOverlay = Overlay.new(hudAtlasPath, posX, y, boxWidth, boxHeight)
+    local boxElement = HUDElement.new(boxOverlay)
 
     boxElement:setColor(unpack(CombineHUD.COLOR.MEDIUM_GLASS))
-    boxElement:setUVs(self:getNormalizedUVs(CombineHUD.UV.FILL))
+    boxElement:setUVs(GuiUtils.getUVs(CombineHUD.UV.FILL, {256, 128}))
     boxElement:setVisible(true)
     -- boxElement:setBorders("1dp 0dp 1dp 4dp", CombineHUD.COLOR.BORDER)
 
@@ -186,9 +181,9 @@ end
 
 function CombineHUD:createIcon(imagePath, baseX, baseY, width, height, uvs)
     --print("CombineHUD:createIcon")
-    local iconOverlay = Overlay:new(imagePath, baseX, baseY, width, height)
+    local iconOverlay = Overlay.new(imagePath, baseX, baseY, width, height)
     iconOverlay:setColor(unpack(CombineHUD.COLOR.INACTIVE))
-    iconOverlay:setUVs(self:getNormalizedUVs(uvs))
+    iconOverlay:setUVs(GuiUtils.getUVs(uvs, {256, 128}))
     iconOverlay:setIsVisible(true)
 
     return iconOverlay

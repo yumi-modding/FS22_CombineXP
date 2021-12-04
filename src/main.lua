@@ -41,9 +41,9 @@ local function load(mission)
 
 end
 
-local function validateVehicleTypes(vehicleTypeManager)
-    -- print("validateVehicleTypes()")
-    CombineXP.installSpecializations(g_vehicleTypeManager, g_specializationManager, modDirectory, modName)
+local function validateTypes(manager)
+    -- print("validateTypes()")
+    CombineXP.installSpecializations(manager, g_specializationManager, modDirectory, modName)
 end
 
 -- Player clicked on start
@@ -74,7 +74,7 @@ local function init()
     Mission00.loadMission00Finished = Utils.appendedFunction(Mission00.loadMission00Finished, loadedMission)
     Mission00.onStartMission = Utils.appendedFunction(Mission00.onStartMission, startMission)
 
-    VehicleTypeManager.validateVehicleTypes = Utils.prependedFunction(VehicleTypeManager.validateVehicleTypes, validateVehicleTypes)
+    TypeManager.validateTypes = Utils.prependedFunction(TypeManager.validateTypes, validateTypes)
 end
 
 init()

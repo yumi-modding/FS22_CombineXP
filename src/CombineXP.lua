@@ -84,8 +84,8 @@ function CombineXP:loadDependantSpeed()
     local xmlFile = nil
 
     if modDirectory then
-        local modSettingsDir = getUserProfileAppPath().."modsSettings"
-        local xmlFilePath = modSettingsDir.."/combineXP.xml"
+        local modsSettingsDir = getUserProfileAppPath().."modsSettings"
+        local xmlFilePath = modsSettingsDir.."/combineXP.xml"
         if fileExists(xmlFilePath) then
             xmlFile = loadXMLFile("combineXP", xmlFilePath);
         else
@@ -95,12 +95,12 @@ function CombineXP:loadDependantSpeed()
     if xmlFile then
         g_combinexp.powerDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.powerDependantSpeed" .. string.format("#isActive")), true)
         g_combinexp.timeDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.timeDependantSpeed" .. string.format("#isActive")), true)
-        g_combinexp.timeDependantSpeed.cereal = AnimCurve:new(linearInterpolator1)
+        g_combinexp.timeDependantSpeed.cereal = AnimCurve.new(linearInterpolator1)
         g_combinexp.timeDependantSpeed.cereal:loadCurveFromXML(xmlFile, "combineXP.timeDependantSpeed.cereal", loadInterpolator1Curve)
-        g_combinexp.timeDependantSpeed.maize = AnimCurve:new(linearInterpolator1)
+        g_combinexp.timeDependantSpeed.maize = AnimCurve.new(linearInterpolator1)
         g_combinexp.timeDependantSpeed.maize:loadCurveFromXML(xmlFile, "combineXP.timeDependantSpeed.maize", loadInterpolator1Curve)
         g_combinexp.moistureDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.moistureDependantSpeed" .. string.format("#isActive")), true)
-        g_combinexp.moistureDependantSpeed.default = AnimCurve:new(linearInterpolator1)
+        g_combinexp.moistureDependantSpeed.default = AnimCurve.new(linearInterpolator1)
         g_combinexp.moistureDependantSpeed.default:loadCurveFromXML(xmlFile, "combineXP.moistureDependantSpeed.default", loadInterpolator1Curve)
         delete(xmlFile);
     end
@@ -110,15 +110,15 @@ end
 -- @doc Copy default parameters from mod zip file to modsSettings directory so end-user can edit it
 function CombineXP:copyCombineXPXML()
     if modDirectory then
-        local modSettingsDir = getUserProfileAppPath().."modsSettings"
-        local xmlFilePath = modSettingsDir.."/combineXP.xml"
+        local modsSettingsDir = getUserProfileAppPath().."modsSettings"
+        local xmlFilePath = modsSettingsDir.."/combineXP.xml"
         local xmlFile;
         if not fileExists(xmlFilePath) then
             local xmlSourceFilePath = modDirectory .. "/data/combineXP.xml"
             local xmlSourceFile;
             if fileExists(xmlSourceFilePath) then
             xmlSourceFile = loadXMLFile('combineXP', xmlSourceFilePath);
-            createFolder(modSettingsDir)
+            createFolder(modsSettingsDir)
             saveXMLFileTo(xmlSourceFile, xmlFilePath);
             end
         end
@@ -154,12 +154,14 @@ function CombineXP:update(dt)
     self.hud:update(dt)
 end
 
-function CombineXP.installSpecializations(vehicleTypeManager, specializationManager, modDirectory, modName)
-    specializationManager:addSpecialization("xpCombine", "xpCombine", Utils.getFilename("src/xpCombine.lua", modDirectory), nil)
-
-    for typeName, typeEntry in pairs(vehicleTypeManager:getVehicleTypes()) do
-        if SpecializationUtil.hasSpecialization(Combine, typeEntry.specializations) then
-            vehicleTypeManager:addSpecialization(typeName, modName .. ".xpCombine")
+function CombineXP.installSpecializations(manager, specializationManager, modDirectory, modName)
+    -- print("CombineXP.installSpecializations")
+    if manager.typeName == "vehicle" then
+        specializationManager:addSpecialization("xpCombine", "xpCombine", Utils.getFilename("src/xpCombine.lua", modDirectory), nil)
+        for typeName, typeEntry in pairs(g_vehicleTypeManager:getTypes()) do
+            if SpecializationUtil.hasSpecialization(Combine, typeEntry.specializations) then
+                g_vehicleTypeManager:addSpecialization(typeName, modName .. ".xpCombine")
+            end
         end
     end
 end

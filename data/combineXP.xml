@@ -3,28 +3,61 @@
     <!--
         Values are based on FS17_moreRealistic mod from Dural
         basePerf=max Ha per Hour wanted in 100% fertilized Wheat: 884 => 8.84 ha/h
-        when basePerf=0 xpCombine will compute a value based on machine hp (1.5 * hp) 
-        powerBoost value between 0 and 20: 0 => no power boost, max load = 100% ; 20 => 20% power boost, max load = 120%
+        when basePerf=0 xpCombine will compute a value based on machine hp (1.5 * hp)
+        powerBoost value between 0 and 100: 0 => no power boost, max load = 100% ; 20 => 20% power boost, max load = 120%
     -->
     <vehicles powerBoost="20">
+        <vehicle xmlPath="data/vehicles/andersonGroup/bioBalerWB55/bioBalerWB55.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/caseIH/a8800MR/a8800MR.xml" basePerf="165"/>
+        <vehicle xmlPath="data/vehicles/caseIH/axialFlow150/axialFlow150.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/caseIH/axialFlow250/axialFlow250.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/caseIH/moduleExpress635/moduleExpress635.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/claas/jaguar960TT/jaguar960TT.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/claas/lexion8000/lexion8000.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/claas/torion1914/torion1914.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/claas/trion750/trion750.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/deutzFahr/topLiner4090/topLiner4090.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/fendt/ideal/ideal.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/fendt/katana650/katana650.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/grimme/evo290/evo290.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/grimme/rexor6300/rexor6300.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/grimme/rootster604/rootster604.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/grimme/ventor4150/ventor4150.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/johnDeere/cp690/cp690.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/johnDeere/series9000/series9000.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/johnDeere/t560/t560.xml" basePerf="590"/>
+        <vehicle xmlPath="data/vehicles/johnDeere/x9_1100/x9_1100.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/krone/bigM450/bigM450.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/krone/bigX1180/bigX1180.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/lacotec/lhII/lhII.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/lizard/swt7/swt7.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/masseyFerguson/ideal/ideal.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/newHolland/braud9070L/braud9070L.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/newHolland/braud9090X/braud9090X.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/newHolland/chSeries/chSeries.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/newHolland/fr780/fr780.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/ropa/keiler2/keiler2.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/ropa/maus5/maus5.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/ropa/maus5/nawaRoMaus.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/ropa/panther2/panther2.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/ropa/tiger6S/tiger6S.xml" basePerf="0"/>
+        <vehicle xmlPath="data/vehicles/rostselmash/nova330/nova330.xml" basePerf="0"/>
+
+        <!-- vehicles from FS19 -->
         <vehicle xmlPath="data/vehicles/agco/ideal9/IDEAL9.xml" basePerf="0"/>
         <vehicle xmlPath="data/vehicles/bizon/z056/z056.xml" basePerf="130"/>
-        <vehicle xmlPath="data/vehicles/caseIH/A8800MR/A8800MR.xml" basePerf="165"/>
         <vehicle xmlPath="data/vehicles/caseIH/axial9240/axial9240.xml" basePerf="984"/>
-        <vehicle xmlPath="data/vehicles/caseIH/moduleExpress635/moduleExpress635.xml" basePerf="0"/>
         <vehicle xmlPath="data/vehicles/grimme/varitron470/varitron470.xml" basePerf="330"/>
         <vehicle xmlPath="data/vehicles/holmer/terraDosT4_40/terraDosT4_40.xml" basePerf="350"/>
         <vehicle xmlPath="data/vehicles/johnDeere/S790/S790.xml" basePerf="950"/>
-        <vehicle xmlPath="data/vehicles/johnDeere/T560/T560.xml" basePerf="590"/>
         <vehicle xmlPath="data/vehicles/masseyFerguson/activa7347/activa7347.xml" basePerf="470"/>
         <vehicle xmlPath="data/vehicles/newHolland/cr1090/cr1090.xml" basePerf="963"/>
         <vehicle xmlPath="data/vehicles/newHolland/TX32/TX32.xml" basePerf="0"/>
         <vehicle xmlPath="data/vehicles/ropa/panther2/panther2.xml" basePerf="0"/>
         <vehicle xmlPath="data/vehicles/ropa/tiger6/tiger6.xml" basePerf="0"/>
         <vehicle xmlPath="data/vehicles/rostselmash/161/161.xml" basePerf="620"/>
-        <vehicle xmlPath="data/vehicles/rostselmash/nova330/nova330.xml" basePerf="0"/>
     </vehicles>
-    <powerDependantSpeed isActive="true" />
+    <powerDependantSpeed isActive="true"/>
     <timeDependantSpeed isActive="true">
         <cereal>
             <key value="9" time="0"/>

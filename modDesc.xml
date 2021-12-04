@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="53">
+<modDesc descVersion="61">
     <author>yumi</author>
-    <version>1.0.1.1</version>        
+    <version>1.0.0.0</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -11,112 +11,32 @@ If you're tired of harvesting any crops with any combine at 10 kph, this mod is 
 The goal of this mod is to provide a new experience when using combine harvesters in the game to be closer to real life harvesting. This is a first release and new features under development will arrive soon.
 New features:
 - Capability to activate combine and cutter independently as IRL
-- Harvesting speed limit based on material quantity gathered, crop type, combine performance (based on power) and crop moisture with Seasons mod
+- Harvesting speed limit based on material quantity gathered, crop type, combine performance (based on power) and crop moisture depending on time of the day
 - Display several data in HUD when harvesting: material capacity (T/h), combine load (%), instant yield (T/ha)
-==== CHANGELOG ====
-Fixed in v1.0.0.1
-- Capability to reach combine load up to 120% to be able to keep 100% more easily with high yield crop
-- Higher speed for MF Activa 7347 and forage harvesters
-- No more error when mod zip file is renamed
-- Warning message translation
-Fixed in v1.0.0.2
-- HUD text scaling issue
-- HUD error when playing on Dedicated Server
-- Better management of sugarbeet and potatoes harvesters
-New in v1.0.1.0
-- Adding russian translation
-- Engine revs up when threshing and overloading
-- Engine load and speed depending on crop moisture if Seasons mod enabled or on time of the day
-Fixed in v1.0.1.1
-- Higher speed for forage harvesters cutters like mex5
-- Don't take into account crop moisture or time of the day when allowThreshingDuringRain is true
-- HUD size fixed
-- Capability to enable/disable mod behaviors with settings in xml file 
-- Error when attaching front shield cutter
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
 Le but de ce mod est de fournir une nouvelle expérience lors de l'utilisation des moissonneuses-batteuses dans le jeu pour être plus proche de la réalité. Il s'agit d'une première version et de nouvelles fonctionnalités en cours de développement arriveront bientôt.
 Nouvelles fonctionnalités:
 - Possibilité d'activer la moissonneuse-batteuse et la barre de coupe indépendamment comme IRL
-- Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture, des performances de la moissonneuse (basées sur sa puissance) et de l'humitidité de la culture avec le mod Seasons
+- Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture, des performances de la moissonneuse (basées sur sa puissance) et de l'humitidité de la culture en fonction de l'heure de la journée
 - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
-==== CHANGELOG ====
-Fixed in v1.0.0.1
-- Possibilité d'atteindre une charge machine de 120% pour être en mesure de conserver 100% plus facilement lors d'une récolte à haut rendement
-- Vitesse plus élevée pour MF Activa 7347 et les ensileuses
-- Plus d'erreur lorsque le fichier zip mod est renommé
-- Traduction des messages d'avertissement
-Fixed in v1.0.0.2
-- Problème de mise à l'échelle du HUD
-- Erreur du HUD lors d'une partie sur Dedicated Server
-- Meilleure gestion des récolteuses de betteraves et de pommes de terre
-New in v1.0.1.0
-- Ajout de la traduction russe
-- Le moteur monte en régime lors du battage et du déchargement
-- Charge machine et vitesse dépendante de l'humidité de la culture si le mod Seasons est actif ou de l'heure de la journée sinon
-Fixed in v1.0.1.1
-- Vitesse plus élevée pour les ensileuses trainées telles que la mex5
-- Humidité de la culture et heure de la journée non prises en compte si allowThreshingDuringRain est true
-- Taille du HUD corrigée
-- Possibilité d'activer / désactiver certaines fonctions du  mod via l'édition d'un fichier xml
-- Erreur lors de l'attache d'un bouclier warning avant
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
 Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um denen im Reallife näher zu kommen. Dies ist eine erste Version und neue Funktionen, die derzeit entwickelt werden, werden in Kürze verfügbar sein.
 Eigenschaften:
 - Mähdrescher und das Schneidwerk unabhängig voneinander als IRL zu aktivieren
-- Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Power) und die Luftfeuchtigkeit der Ernte mit dem Seasons Mod
+- Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Power) und die Luftfeuchtigkeit der Ernte je nach Tageszeit
 - Zeigt Ihnen bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
-==== CHANGELOG ====
-Fixed in v1.0.0.1
-- Möglichkeit, eine Maschinenlast von bis zu 120% zu erreichen, um während einer Ernte mit hohem Ertrag 100% leichter zu halten
-- Höhere Geschwindigkeit für MF Activa 7347 und Feldhäcksler
-- Kein Fehler mehr beim Umbenennen der Mod-Zip-Datei
-- Übersetzung von Warnmeldungen
-Fixed in v1.0.0.2
-- Problem mit der HUD-Textskalierung
-- HUD-Fehler beim Spielen auf einem dedizierten Server
-- Besseres Management von Zuckerrüben- und Kartoffelerntern
-New in v1.0.1.0
-- Russische Übersetzung hinzufügen
-- Motor beschleunigt beim Dreschen und Überladen
-- Motorlast und Drehzahl hängen von der Feuchtigkeit der Ernte ab, wenn der Seasons Mod aktiviert ist oder von der Tageszeit
-Fixed in v1.0.1.1
-- Höhere Geschwindigkeit für Feldhäcksler wie mex5
-- Berücksichtigen Sie nicht die Feuchtigkeit der Ernte oder die Tageszeit, wenn allowThreshingDuringRain wahr ist
-- HUD-Größe festgelegt
-- Möglichkeit zum Aktivieren / Deaktivieren des Mod-Verhaltens mit den Einstellungen in der XML-Datei
-- Fehler beim Anbringen des Frontschutzschneiders		
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
 Цель этого мода - дать новый опыт использования комбайнов в игре, чтобы приблизиться к реальному. Это первая версия, и вскоре будут доступны новые функции, которые разрабатываются в настоящее время.
 Свойства:
 - Активировать комбайн и жатку независимо друг от друга как "в реальной жизни"(IRL)
-- Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons		
+- Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons
 - Отображает несколько данных в HUD во время уборки: производительность комбайна (т/ч), загрузка комбайна (%), текущая урожайность (т/га)
-==== ИЗМЕНЕНИЯ ====
-Fixed in 1.0.0.1
-- Возможность достижения нагрузки комбайна до 120%, чтобы было легче удерживать 100% при высокой урожайности
-- Более высокая скорость для MF Activa 7347 и кормоуборочных комбайнов
-- Больше нет ошибок при переименовании zip-файла мода
-- Перевод предупреждающего сообщения
-Fixed in 1.0.0.2
-- Проблема с масштабированием текста HUD
-- Ошибка HUD при игре на выделенном сервере
-- Лучшее управление свёкло- и картофелеуборочными комбайнами
-New in 1.0.1.0
-- Добавление русского перевода
-- Двигатель набирает обороты при обмолоте и разгрузке
-- Нагрузка на двигатель и скорость в зависимости от влажности урожая, если включен мод Seasons, или от времени суток
-Fixed in v1.0.1.1
-- Повышенная скорость фрезы кормоуборочных комбайнов типа mex5
-- Не принимайте во внимание влажность урожая или время суток, если для параметра allowThreshingDuringRain установлено значение true
-- Исправлен размер HUD
-- Возможность включить / отключить поведение мода с помощью настроек в файле xml
-- Ошибка при прикреплении резака переднего щита		
 ]]></ru>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
@@ -126,6 +46,15 @@ Fixed in v1.0.1.1
         <sourceFile filename="src/main.lua" />
     </extraSourceFiles>
 
+    <actions>
+        <action name="CombineXP_SETTINGS"/>
+    </actions>
+    <inputBinding>
+        <actionBinding action="CombineXP_SETTINGS">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_c"/>
+        </actionBinding>
+    </inputBinding>
+
     <l10n>
         <text name="warning_firstStartThreshing">
             <fr>Vous devez d'abord démarrer le système de battage</fr>
@@ -133,6 +62,31 @@ Fixed in v1.0.1.1
             <de>Starten Sie zuerst das Mähdrescher-Dreschsystem!</de>
             <ru>Сначала запустите систему обмолота комбайна!</ru>
             <pl>Najpierw musisz uruchomić młócarnię w kombajnie</pl>
+        </text>
+        <text name="warning_highMoistureAtThisTime">
+            <fr>L'humidité de la culture est élevée à cette heure de la journée et réduit la vitesse de moisson</fr>
+            <en>Crop moisture is high at this time of the day and reduce combining speed</en>
+            <de>Die Luftfeuchtigkeit der Ernteist zu dieser Tageszeit hoch und verringert die Erntegeschwindigkeitslimit</de>
+            <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
+            <pl>Wilgotność upraw jest o tej porze dnia wysoka i zmniejsza prędkość łączenia</pl>
+        </text>
+        <text name="input_CombineXP_SETTINGS">
+            <en>Open Combine XPerience Settings</en>
+        </text>
+        <text name="CombineXP_SETTINGS">
+            <en>Combine XPerience Settings</en>
+        </text>
+        <text name="setGameplay">
+            <en>Set Combine XPerience Settings</en>
+        </text>
+        <text name="gameplayArcade">
+            <en>Arcade</en>
+        </text>
+        <text name="gameplayNormal">
+            <en>Normal</en>
+        </text>
+        <text name="gameplayRealistic">
+            <en>Realistic</en>
         </text>
     </l10n>
 
