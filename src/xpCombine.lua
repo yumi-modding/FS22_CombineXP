@@ -1,6 +1,6 @@
-﻿xpCombine = {};
+xpCombine = {};
 
-xpCombine.debug = false --true --
+xpCombine.debug = true --true --
 
 xpCombine.myCurrentModDirectory = g_currentModDirectory;
 xpCombine.modName = g_currentModName
@@ -8,6 +8,7 @@ xpCombine.modName = g_currentModName
 xpCombine.powerBoostArcade = 100;   -- 100% power boost
 xpCombine.powerBoostNormal = 20;    -- 20% power boost (default on FS19)
 xpCombine.powerBoostRealistic = 0;  -- No power boost
+xpCombine.timeCoef = 0
 
 -- @TEST:
 -- [x] Start threshing without cutter
@@ -119,13 +120,15 @@ function xpCombine:onLoad(savegame)
     if basePerf <= 0 then
     -- Then motorConfiguration hp
         local vehicleName = self:getFullName()
-        local coef = 1.5
+        local coef = 0
         local keyCategory = "vehicle.storeData.category"
         local category = self.xmlFile:getValue(keyCategory)
-        if category == "forageHarvesters" or category == "forageHarvesterCutters" then
+		if category == "harvesters" then
+			coef = xpCombine.timeCoef
+        elseif category == "forageHarvesters" or category == "forageHarvesterCutters" then
             coef = 6.
         elseif category == "beetVehicles" then
-            coef = 0.6
+            coef = 0.3
 		elseif category == "potatoVehicles" then
             coef = 0.3
         end
@@ -381,13 +384,13 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                     spec.speedLimit = spec.mrGenuineSpeedLimit;
                 else
 
-                    local maxAvgArea = spec.mrCombineLimiter.powerBoost * spec.mrCombineLimiter.basePerfAvgArea;
+                    local maxAvgArea = spec.mrCombineLimiter.powerBoost * spec.mrCombineLimiter.basePerfAvgArea * xpCombine.coef;
                     local predictLimitSet = false
                     --take into account the areaAcc
                     if areaAcc>0 then
                         --predict in 3s
                         local predictAvgArea = avgArea + areaAcc*3000
-                        if xpCombine.debug then print("predictAvgArea="..tostring(predictAvgArea) .. " - new speedLimit="..tostring(spec.speedLimit)) end
+                        if xpCombine.debug then print("predictAvgArea="..tostring(predictAvgArea) .. " - new speedLimit="..tostring(spec.speedLimit) .. " - coef="..tostring(xpCombine.coef)) end
                         if predictAvgArea>1.5*maxAvgArea then
                             spec.speedLimit = math.max(2, math.min(0.95*spec.speedLimit, 0.9*avgSpeed*3.6))
                             predictLimitSet = true
@@ -490,6 +493,7 @@ function xpCombine:getMoistureDependantSpeed(fruitType, defaultSpeedLimit)
         fruitType == FruitType.MAIZE then
         local time = g_seasons.weather.cropMoistureContent
         speed = g_combinexp.moistureDependantSpeed.default:get(time)
+		xpCombine.timeCoef = speed / 10
     else
         speed = 10
     end
@@ -509,8 +513,10 @@ function xpCombine:getTimeDependantSpeed(fruitType, defaultSpeedLimit)
         fruitType == FruitType.SOYBEAN or
         fruitType == FruitType.SUNFLOWER then
         speed = g_combinexp.timeDependantSpeed.cereal:get(time)
+		xpCombine.timeCoef = speed / 10
     elseif fruitType == FruitType.MAIZE then
         speed = g_combinexp.timeDependantSpeed.maize:get(time)
+		xpCombine.timeCoef = speed / 10
     else
         speed = 10
     end
