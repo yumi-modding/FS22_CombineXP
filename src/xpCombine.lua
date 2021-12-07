@@ -133,7 +133,7 @@ function xpCombine:onLoad(savegame)
         local fallbackConfigKey = "vehicle.motorized.motorConfigurations.motorConfiguration(0)"
         local fallbackOldKey = "vehicle"
         local power = ConfigurationUtil.getConfigurationValue(self.xmlFile, key, "", "#hp", getXMLString, nil, fallbackConfigKey, fallbackOldKey)
-        if power ~= nil and tonumber(power) > 0 then
+        if power ~= nil and tonumber(power) ~= nil and tonumber(power) > 0 then
             -- print("key "..key)
             -- print("motorId "..motorId)
             -- print("power "..power)
