@@ -25,11 +25,12 @@ xpCombine.powerBoostRealistic = 0;  -- No power boost
 -- [/] Manual attach compatibility
 -- [/] Waiting worker compatibility
 -- [ ] Try other Combine type vehicles
--- [ ]  - sugarBeet
+-- [x]  - sugarBeet
 -- [x]  - maize
--- [ ]  - potatoe
+-- [x]  - potatoe
 -- [ ]  - cotton
 -- [ ]  - vine
+-- [ ]  - attachable combine
 -- [ ] Edit settingss
 
 function xpCombine.prerequisitesPresent(specializations)
@@ -119,12 +120,12 @@ function xpCombine:onLoad(savegame)
     if basePerf <= 0 then
     -- Then motorConfiguration hp
         local vehicleName = self:getFullName()
-        local coef = 1.5
+        local coef = 1 -- It was 1.5 on FS19, but 1 seems OK
         local keyCategory = "vehicle.storeData.category"
         local category = self.xmlFile:getValue(keyCategory)
         if category == "forageHarvesters" or category == "forageHarvesterCutters" then
             coef = 6.
-        elseif category == "beetVehicles" then
+        elseif category == "beetVehicles" or category == "beetHarvesting" then
             coef = 0.6
 		elseif category == "potatoVehicles" then
             coef = 0.3
@@ -132,7 +133,10 @@ function xpCombine:onLoad(savegame)
         local key, motorId = ConfigurationUtil.getXMLConfigurationKey(self.xmlFile, self.configurations.motor, "vehicle.motorized.motorConfigurations.motorConfiguration", "vehicle.motorized", "motor")
         local fallbackConfigKey = "vehicle.motorized.motorConfigurations.motorConfiguration(0)"
         local fallbackOldKey = "vehicle"
-        local power = ConfigurationUtil.getConfigurationValue(self.xmlFile, key, "", "#hp", getXMLString, nil, fallbackConfigKey, fallbackOldKey)
+        local power = nil
+        if SpecializationUtil.hasSpecialization(Motorized, self.specializations) then
+            power = ConfigurationUtil.getConfigurationValue(self.xmlFile, key, "", "#hp", nil, fallbackConfigKey, fallbackOldKey)
+        end
         if power ~= nil and tonumber(power) > 0 then
             -- print("key "..key)
             -- print("motorId "..motorId)
@@ -450,7 +454,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
             else
                 spec_xpCombine.mrGenuineSpeedLimit = limit
             end
-
+            spec_xpCombine.highMoisture = false
             local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec_combine.fillUnitIndex))
             if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN and not spec_combine.allowThreshingDuringRain then
                 local loadLimit = limit
@@ -694,7 +698,7 @@ function xpCombine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgno
 
         local triggerUp, triggerDown, triggerAlways, startActive, callbackState, disableConflictingBindings = false, true, false, true, nil, true
         local state, actionEventId, otherEvents = g_inputBinding:registerActionEvent(InputAction.CombineXP_SETTINGS, self, xpCombine.showSettingsDialog, triggerUp, triggerDown, triggerAlways, startActive, callbackState, disableConflictingBindings)
-        g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_LOW)
+        g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_LOW)
     
         if isActiveForInputIgnoreSelection then
             --TODO: add if active ?
