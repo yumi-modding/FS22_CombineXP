@@ -78,7 +78,7 @@ end
 function CombineHUD:createElements()
     --print("CombineHUD:createElements")
     local rightX = 1 - g_safeFrameOffsetX -- right of screen.
-    local bottomY = 0.2 --22 g_safeFrameOffsetY
+    local bottomY = g_safeFrameOffsetY
 
     local boxWidth, boxHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX)
     local marginWidth, marginHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX_MARGIN)
@@ -91,10 +91,10 @@ function CombineHUD:createElements()
     iconSmallHeight = iconSmallHeight * 0.6
     local iconSmallMarginWidth, _ = self:scalePixelToScreenVector(CombineHUD.SIZE.ICON_SMALL_MARGIN)
 
-    self.main = self:createMainBox(nil, rightX - marginWidth, bottomY - marginHeight)
+    self.main = self:createMainBox(nil, rightX - marginWidth, bottomY + marginHeight)
     self.speedMeterDisplay:addChild(self.main)
 
-    self.base = self:createBaseBox(self.uiFilename, rightX - marginWidth, bottomY - marginHeight)
+    self.base = self:createBaseBox(self.uiFilename, rightX - marginWidth, bottomY + marginHeight)
     self.main:addChild(self.base)
 
     local posX, posY = self.base:getPosition()
@@ -172,7 +172,7 @@ function CombineHUD:createBaseBox(hudAtlasPath, x, y)
     local boxElement = HUDElement.new(boxOverlay)
 
     boxElement:setColor(unpack(CombineHUD.COLOR.MEDIUM_GLASS))
-    boxElement:setUVs(GuiUtils.getUVs(CombineHUD.UV.FILL, {256, 128}))
+    boxElement:setUVs(GuiUtils.getUVs(CombineHUD.UV.FILL, self.atlasRefSize))
     boxElement:setVisible(true)
     -- boxElement:setBorders("1dp 0dp 1dp 4dp", CombineHUD.COLOR.BORDER)
 
@@ -183,7 +183,7 @@ function CombineHUD:createIcon(imagePath, baseX, baseY, width, height, uvs)
     --print("CombineHUD:createIcon")
     local iconOverlay = Overlay.new(imagePath, baseX, baseY, width, height)
     iconOverlay:setColor(unpack(CombineHUD.COLOR.INACTIVE))
-    iconOverlay:setUVs(GuiUtils.getUVs(uvs, {256, 128}))
+    iconOverlay:setUVs(GuiUtils.getUVs(uvs, self.atlasRefSize))
     iconOverlay:setIsVisible(true)
 
     return iconOverlay
@@ -285,7 +285,7 @@ CombineHUD.TEXT_SIZE = {
 }
 
 CombineHUD.SIZE = {
-    BOX_MARGIN = { 400, 400 },
+    BOX_MARGIN = { 400, -200 },
     BOX_PADDING = { 4, 4 },
     ICON = { 40, 40 },
     ICON_MARGIN = { 15, 0 },
