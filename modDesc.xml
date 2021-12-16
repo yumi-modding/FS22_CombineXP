@@ -38,6 +38,14 @@ Eigenschaften:
 - Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons
 - Отображает несколько данных в HUD во время уборки: производительность комбайна (т/ч), загрузка комбайна (%), текущая урожайность (т/га)
 ]]></ru>
+        <pl><![CDATA[
+Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
+Celem tego modu jest zapewnienie nowych wrażeń podczas korzystania z kombajnów w grze, aby być bliżej zbiorów w prawdziwym życiu. Jest to pierwsze wydanie i wkrótce pojawią się nowe funkcje.
+Nowe funkcje:
+- Możliwość niezależnej aktywacji kombajnu i hederu/przystawki jak w prawiwym życiu
+- Ograniczenie prędkości koszenia w oparciu o ilość zbieranego materiału, rodzaj uprawy, wydajność kombajnu (w oparciu o moc) i wilgotność plonu w zależności od pory dnia
+- Wyświetlanie kilku danych na HUDzie podczas zbioru: wydajność zbioru (t/h), obciążenie kombajnu (%), ogólna wydajność (t/ha)
+]]></pl>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
     <multiplayer supported="true"/>
@@ -68,25 +76,31 @@ Eigenschaften:
             <en>Crop moisture is high at this time of the day and reduce combining speed</en>
             <de>Die Luftfeuchtigkeit der Ernteist zu dieser Tageszeit hoch und verringert die Erntegeschwindigkeitslimit</de>
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
-            <pl>Wilgotność upraw jest o tej porze dnia wysoka i zmniejsza prędkość łączenia</pl>
+            <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
         </text>
         <text name="input_CombineXP_SETTINGS">
             <en>Open Combine XPerience Settings</en>
+            <pl>Otwórz ustawienia Combine XPerience</pl>
         </text>
         <text name="CombineXP_SETTINGS">
             <en>Combine XPerience Settings</en>
+            <pl>Ustawienia Combine XPerience</pl>
         </text>
         <text name="setGameplay">
             <en>Set Combine XPerience Settings</en>
+            <pl>Ustawienia trybu Combine XPerience<pl>
         </text>
         <text name="gameplayArcade">
             <en>Arcade</en>
+            <pl>Zręcznościowy</pl>
         </text>
         <text name="gameplayNormal">
             <en>Normal</en>
+            <pl>Normlany</pl>
         </text>
         <text name="gameplayRealistic">
             <en>Realistic</en>
+            <pl>Realistyczny</pl>
         </text>
     </l10n>
 
