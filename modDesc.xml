@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="61">
+<modDesc descVersion="63">
     <author>yumi</author>
     <version>1.0.0.0</version>        
     <title>
@@ -46,6 +46,14 @@ Nowe funkcje:
 - Ograniczenie prędkości koszenia w oparciu o ilość zbieranego materiału, rodzaj uprawy, wydajność kombajnu (w oparciu o moc) i wilgotność plonu w zależności od pory dnia
 - Wyświetlanie kilku danych na HUDzie podczas zbioru: wydajność zbioru (t/h), obciążenie kombajnu (%), ogólna wydajność (t/ha)
 ]]></pl>
+        <br><![CDATA[
+Se você está cansado de colher qualquer lavoura com qualquer colheitadeira a 10 km / h, este modo é para você.
+O objetivo deste mod é fornecer uma nova experiência ao usar colheitadeiras no jogo para estar mais perto da colheita da vida real. Este é um primeiro lançamento e novos recursos em desenvolvimento chegarão em breve.
+Novas características:
+- Capacidade de ativar a colheitadeira e o cortador independentemente como IRL
+- Limite de velocidade de colheita com base na quantidade de material coletado, tipo de cultura, desempenho da colheitadeira (baseado na sua potência) e a umidade da cultura dependendo da hora do dia
+- Exibe vários dados no HUD durante a colheita: capacidade de material (T/h), carga da colheitadeira (%), rendimento da lavoura (T/ha)
+]]></br>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
     <multiplayer supported="true"/>
@@ -70,6 +78,7 @@ Nowe funkcje:
             <de>Starten Sie zuerst das Mähdrescher-Dreschsystem!</de>
             <ru>Сначала запустите систему обмолота комбайна!</ru>
             <pl>Najpierw musisz uruchomić młócarnię w kombajnie</pl>
+			<br>Você deve primeiro iniciar o sistema de debulha</br>
         </text>
         <text name="warning_highMoistureAtThisTime">
             <fr>L'humidité de la culture est élevée à cette heure de la journée et réduit la vitesse de moisson</fr>
@@ -77,30 +86,71 @@ Nowe funkcje:
             <de>Die Luftfeuchtigkeit der Ernteist zu dieser Tageszeit hoch und verringert die Erntegeschwindigkeitslimit</de>
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
             <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
-        </text>
+			      <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
+       </text>
         <text name="input_CombineXP_SETTINGS">
+            <fr>Ouvrir les paramètres de Combine XPerience</fr>>
             <en>Open Combine XPerience Settings</en>
+            <de>Öffnen Sie die Combine XPerience-Einstellungen</de>
+            <ru></ru>
             <pl>Otwórz ustawienia Combine XPerience</pl>
+			<br>Abrrir configurações do Combine XPerience</br>
         </text>
         <text name="CombineXP_SETTINGS">
+            <fr>Paramètres de Combine XPerience</fr>
             <en>Combine XPerience Settings</en>
             <pl>Ustawienia Combine XPerience</pl>
         </text>
         <text name="setGameplay">
-            <en>Set Combine XPerience Settings</en>
+            <en>Set Combine XPerience Settings</en>            
+            <de>Combine XPerience-Einstellungen</de>
+            <ru>Настройки Combine XPerience</ru>
             <pl>Ustawienia trybu Combine XPerience<pl>
+			<br>Configurações do Combine XPerience</br>
+        </text>
+        <text name="setGameplay">
+            <fr><![CDATA[Définir les paramètres de Combine Xperience:
+                 Arcade = 100% boost, pas d'effet de l'heure du jour / Normal = 20% boost / Réaliste = Pas de boost
+            ]]></fr>
+            <en><![CDATA[Set Combine XPerience Settings:
+                Arcade = 100% boost, no day time effect / Normal = 20% boost / Realistic = No boost
+            ]]></en>
+            <de><![CDATA[Setzen Sie die Combine XPerience-Einstellungen:
+                Arkade = 100 % Boost, kein Tageseffekt / Normal = 20 % Boost / Realistisch = Kein Boost
+            ]]></de>
+            <ru><![CDATA[Установите настройки Combine XPerience
+                Аркада = 100% boost, нет дневного эффекта / Нормальный = 20% boost / Реалистичный = нет boost
+            ]]></ru>
+            <pl><![CDATA[Ustawienia trybu Combine XPerience:
+                Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost
+            ]]></pl>
+			<br><![CDATA[Definir configurações do Combine XPerience:
+                Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
+            ]]></br>
         </text>
         <text name="gameplayArcade">
+            <fr>Arcade</fr>
             <en>Arcade</en>
+            <de>Arkade</de>
+            <ru>Аркада</ru>
             <pl>Zręcznościowy</pl>
+			<br>Videogame</br>
         </text>
         <text name="gameplayNormal">
+            <fr>Normal</fr>
             <en>Normal</en>
+            <de>Normal</de>
+            <ru>Нормальный</ru>
             <pl>Normlany</pl>
+			<br>Normal</br>
         </text>
         <text name="gameplayRealistic">
+            <fr>Réaliste</fr>
             <en>Realistic</en>
+            <de>Realistisch</de>
+            <ru>Реалистичный</ru>
             <pl>Realistyczny</pl>
+			<br>Realista</br>
         </text>
     </l10n>
 

@@ -28,10 +28,10 @@ xpCombine.powerBoostRealistic = 0;  -- No power boost
 -- [x]  - sugarBeet
 -- [x]  - maize
 -- [x]  - potatoe
--- [ ]  - cotton
+-- [x]  - cotton
 -- [ ]  - vine
 -- [ ]  - attachable combine
--- [ ] Edit settingss
+-- [x] Edit settingss
 
 function xpCombine.prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Combine, specializations)
@@ -783,7 +783,6 @@ function xpCombine:saveSettings()
                 xmlFile = XMLFile.load("combineXP", xpCombine.myCurrentModDirectory .. "data/combineXP.xml");
             end
             local powerBoost = (spec.mrCombineLimiter.powerBoost - 1) * 100
-            print(powerBoost)
             xmlFile:setInt("combineXP.vehicles"..string.format("#powerBoost"), powerBoost)
             xmlFile:setBool("combineXP.timeDependantSpeed" .. string.format("#isActive"), g_combinexp.timeDependantSpeed.isActive)
             xmlFile:save()
