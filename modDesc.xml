@@ -38,6 +38,14 @@ Eigenschaften:
 - Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons
 - Отображает несколько данных в HUD во время уборки: производительность комбайна (т/ч), загрузка комбайна (%), текущая урожайность (т/га)
 ]]></ru>
+        <pl><![CDATA[
+Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
+Celem tego modu jest zapewnienie nowych wrażeń podczas korzystania z kombajnów w grze, aby być bliżej zbiorów w prawdziwym życiu. Jest to pierwsze wydanie i wkrótce pojawią się nowe funkcje.
+Nowe funkcje:
+- Możliwość niezależnej aktywacji kombajnu i hederu/przystawki jak w prawiwym życiu
+- Ograniczenie prędkości koszenia w oparciu o ilość zbieranego materiału, rodzaj uprawy, wydajność kombajnu (w oparciu o moc) i wilgotność plonu w zależności od pory dnia
+- Wyświetlanie kilku danych na HUDzie podczas zbioru: wydajność zbioru (t/h), obciążenie kombajnu (%), ogólna wydajność (t/ha)
+]]></pl>
         <br><![CDATA[
 Se você está cansado de colher qualquer lavoura com qualquer colheitadeira a 10 km / h, este modo é para você.
 O objetivo deste mod é fornecer uma nova experiência ao usar colheitadeiras no jogo para estar mais perto da colheita da vida real. Este é um primeiro lançamento e novos recursos em desenvolvimento chegarão em breve.
@@ -77,15 +85,15 @@ Novas características:
             <en>Crop moisture is high at this time of the day and reduce combining speed</en>
             <de>Die Luftfeuchtigkeit der Ernteist zu dieser Tageszeit hoch und verringert die Erntegeschwindigkeitslimit</de>
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
-            <pl>Wilgotność upraw jest o tej porze dnia wysoka i zmniejsza prędkość łączenia</pl>
+            <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
 			<br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
         </text>
         <text name="input_CombineXP_SETTINGS">
             <fr>Ouvrir les paramètres de Combine XPerience</fr>>
             <en>Open Combine XPerience Settings</en>
             <de>Öffnen Sie die Combine XPerience-Einstellungen</de>
-            <ru></ru>
-            <pl></pl>
+            <ru>Откройте настройки Combine XPerience</ru>
+            <pl>Otwórz ustawienia Combine XPerience</pl>
 			<br>Abrrir configurações do Combine XPerience</br>
         </text>
         <text name="CombineXP_SETTINGS">
@@ -109,8 +117,8 @@ Novas características:
             <ru><![CDATA[Установите настройки Combine XPerience
                 Аркада = 100% boost, нет дневного эффекта / Нормальный = 20% boost / Реалистичный = нет boost
             ]]></ru>
-            <pl><![CDATA[Ustaw ustawienia Combine XPerience:
-                Arkada = 100% boost, brak efektu czasu dziennego / Normalna = 20% boost / Realistyczny = Brak boost
+            <pl><![CDATA[Ustawienia trybu Combine XPerience:
+                Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normlany = 20% boost / Realistyczny = Brak boost
             ]]></pl>
 			<br><![CDATA[Definir configurações do Combine XPerience:
                 Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
@@ -121,7 +129,7 @@ Novas características:
             <en>Arcade</en>
             <de>Arkade</de>
             <ru>Аркада</ru>
-            <pl>Arkada</pl>
+            <pl>Zręcznościowy</pl>
 			<br>Videogame</br>
         </text>
         <text name="gameplayNormal">
@@ -129,7 +137,7 @@ Novas características:
             <en>Normal</en>
             <de>Normal</de>
             <ru>Нормальный</ru>
-            <pl>Normalna</pl>
+            <pl>Normlany</pl>
 			<br>Normal</br>
         </text>
         <text name="gameplayRealistic">
