@@ -42,7 +42,7 @@ Eigenschaften:
 Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
 Celem tego modu jest zapewnienie nowych wrażeń podczas korzystania z kombajnów w grze, aby być bliżej zbiorów w prawdziwym życiu. Jest to pierwsze wydanie i wkrótce pojawią się nowe funkcje.
 Nowe funkcje:
-- Możliwość niezależnej aktywacji kombajnu i hederu/przystawki jak w prawiwym życiu
+- Możliwość niezależnej aktywacji kombajnu i hederu/przystawki jak w prawdziwym życiu
 - Ograniczenie prędkości koszenia w oparciu o ilość zbieranego materiału, rodzaj uprawy, wydajność kombajnu (w oparciu o moc) i wilgotność plonu w zależności od pory dnia
 - Wyświetlanie kilku danych na HUDzie podczas zbioru: wydajność zbioru (t/h), obciążenie kombajnu (%), ogólna wydajność (t/ha)
 ]]></pl>
@@ -78,7 +78,7 @@ Novas características:
             <de>Starten Sie zuerst das Mähdrescher-Dreschsystem!</de>
             <ru>Сначала запустите систему обмолота комбайна!</ru>
             <pl>Najpierw musisz uruchomić młócarnię w kombajnie</pl>
-			<br>Você deve primeiro iniciar o sistema de debulha</br>
+            <br>Você deve primeiro iniciar o sistema de debulha</br>
         </text>
         <text name="warning_highMoistureAtThisTime">
             <fr>L'humidité de la culture est élevée à cette heure de la journée et réduit la vitesse de moisson</fr>
@@ -86,7 +86,7 @@ Novas características:
             <de>Die Luftfeuchtigkeit der Ernteist zu dieser Tageszeit hoch und verringert die Erntegeschwindigkeitslimit</de>
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
             <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
-			      <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
+            <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
        </text>
         <text name="input_CombineXP_SETTINGS">
             <fr>Ouvrir les paramètres de Combine XPerience</fr>>
@@ -99,14 +99,9 @@ Novas características:
         <text name="CombineXP_SETTINGS">
             <fr>Paramètres de Combine XPerience</fr>
             <en>Combine XPerience Settings</en>
+			<de>Die Combine XPerience-Einstellungen</de>
+            <ru>настройки Combine XPerience</ru>
             <pl>Ustawienia Combine XPerience</pl>
-        </text>
-        <text name="setGameplay">
-            <en>Set Combine XPerience Settings</en>            
-            <de>Combine XPerience-Einstellungen</de>
-            <ru>Настройки Combine XPerience</ru>
-            <pl>Ustawienia trybu Combine XPerience<pl>
-			<br>Configurações do Combine XPerience</br>
         </text>
         <text name="setGameplay">
             <fr><![CDATA[Définir les paramètres de Combine Xperience:
@@ -122,8 +117,8 @@ Novas características:
                 Аркада = 100% boost, нет дневного эффекта / Нормальный = 20% boost / Реалистичный = нет boost
             ]]></ru>
             <pl><![CDATA[Ustawienia trybu Combine XPerience:
-                Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost
-            ]]></pl>
+Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost]]>
+			</pl>
 			<br><![CDATA[Definir configurações do Combine XPerience:
                 Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
             ]]></br>
@@ -134,7 +129,7 @@ Novas características:
             <de>Arkade</de>
             <ru>Аркада</ru>
             <pl>Zręcznościowy</pl>
-			<br>Videogame</br>
+            <br>Videogame</br>
         </text>
         <text name="gameplayNormal">
             <fr>Normal</fr>
@@ -142,7 +137,7 @@ Novas características:
             <de>Normal</de>
             <ru>Нормальный</ru>
             <pl>Normlany</pl>
-			<br>Normal</br>
+            <br>Normal</br>
         </text>
         <text name="gameplayRealistic">
             <fr>Réaliste</fr>
@@ -150,8 +145,7 @@ Novas características:
             <de>Realistisch</de>
             <ru>Реалистичный</ru>
             <pl>Realistyczny</pl>
-			<br>Realista</br>
+            <br>Realista</br>
         </text>
     </l10n>
-
 </modDesc>
