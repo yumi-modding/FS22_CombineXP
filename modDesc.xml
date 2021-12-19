@@ -86,8 +86,8 @@ Novas características:
             <de>Die Luftfeuchtigkeit der Ernteist zu dieser Tageszeit hoch und verringert die Erntegeschwindigkeitslimit</de>
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
             <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
-			<br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
-        </text>
+			      <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
+       </text>
         <text name="input_CombineXP_SETTINGS">
             <fr>Ouvrir les paramètres de Combine XPerience</fr>>
             <en>Open Combine XPerience Settings</en>
@@ -99,9 +99,13 @@ Novas características:
         <text name="CombineXP_SETTINGS">
             <fr>Paramètres de Combine XPerience</fr>
             <en>Combine XPerience Settings</en>
+            <pl>Ustawienia Combine XPerience</pl>
+        </text>
+        <text name="setGameplay">
+            <en>Set Combine XPerience Settings</en>            
             <de>Combine XPerience-Einstellungen</de>
             <ru>Настройки Combine XPerience</ru>
-            <pl>Ustawienia Combine XPerience</pl>
+            <pl>Ustawienia trybu Combine XPerience<pl>
 			<br>Configurações do Combine XPerience</br>
         </text>
         <text name="setGameplay">
@@ -118,7 +122,7 @@ Novas características:
                 Аркада = 100% boost, нет дневного эффекта / Нормальный = 20% boost / Реалистичный = нет boost
             ]]></ru>
             <pl><![CDATA[Ustawienia trybu Combine XPerience:
-                Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normlany = 20% boost / Realistyczny = Brak boost
+                Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost
             ]]></pl>
 			<br><![CDATA[Definir configurações do Combine XPerience:
                 Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
