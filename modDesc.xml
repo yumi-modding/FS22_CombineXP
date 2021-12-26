@@ -54,6 +54,14 @@ Novas características:
 - Limite de velocidade de colheita com base na quantidade de material coletado, tipo de cultura, desempenho da colheitadeira (baseado na sua potência) e a umidade da cultura dependendo da hora do dia
 - Exibe vários dados no HUD durante a colheita: capacidade de material (T/h), carga da colheitadeira (%), rendimento da lavoura (T/ha)
 ]]></br>
+        <it><![CDATA[
+Se sei stanco di raccogliere qualsiasi raccolto con qualsiasi mietitrebbia a 10 km/h, questa mod è per te.
+L'obiettivo di questa mod è fornire una nuova esperienza quando si utilizzano le mietitrebbie nel gioco per essere più vicini alla raccolta della vita reale. Questa è una prima versione e presto arriveranno nuove funzionalità in fase di sviluppo.
+Nuove caratteristiche:
+- Possibilità di attivare la mietitrebbia e la taglierina indipendentemente come IRL
+- Limite di velocità di raccolta in base alla quantità di materiale raccolto, al tipo di coltura, alle prestazioni della mietitrebbia (in base alla potenza) e all'umidità del raccolto a seconda dell'ora del giorno
+- Visualizza diversi dati nell'HUD durante la raccolta: capacità del materiale (T/h), carico della mietitrebbia (%), resa istantanea (T/ha)
+]]></it>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
     <multiplayer supported="true"/>
@@ -79,6 +87,7 @@ Novas características:
             <ru>Сначала запустите систему обмолота комбайна!</ru>
             <pl>Najpierw musisz uruchomić młócarnię w kombajnie</pl>
             <br>Você deve primeiro iniciar o sistema de debulha</br>
+	    <it>Avviare prima il sistema di trebbiatura della mietitrebbia!</it>
         </text>
         <text name="warning_highMoistureAtThisTime">
             <fr>L'humidité de la culture est élevée à cette heure de la journée et réduit la vitesse de moisson</fr>
@@ -87,6 +96,7 @@ Novas características:
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
             <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
             <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
+	    <it>L'umidità del raccolto è elevata a quest'ora del giorno e riduce il limite di velocità di raccolta.</it>
        </text>
         <text name="input_CombineXP_SETTINGS">
             <fr>Ouvrir les paramètres de Combine XPerience</fr>>
@@ -95,6 +105,7 @@ Novas características:
             <ru>Откройте настройки Combine XPerience</ru>
             <pl>Otwórz ustawienia Combine XPerience</pl>
 			<br>Abrrir configurações do Combine XPerience</br>
+	    <it>Apri le impostazioni di CombineXP</it>
         </text>
         <text name="CombineXP_SETTINGS">
             <fr>Paramètres de Combine XPerience</fr>
@@ -102,6 +113,7 @@ Novas características:
 			<de>Die Combine XPerience-Einstellungen</de>
             <ru>настройки Combine XPerience</ru>
             <pl>Ustawienia Combine XPerience</pl>
+	    <it>Impostazioni di CombineXP</it>
         </text>
         <text name="setGameplay">
             <fr><![CDATA[Définir les paramètres de Combine Xperience:
@@ -122,6 +134,9 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
 			<br><![CDATA[Definir configurações do Combine XPerience:
                 Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
             ]]></br>
+            <it><![CDATA[Imposta le impostazioni di CombineXP:
+                Arcade = potenziamento del 100%, nessun effetto diurno / Normale = potenziamento del 20% / Realistico = nessun potenziamento
+            ]]></it>
         </text>
         <text name="gameplayArcade">
             <fr>Arcade</fr>
@@ -130,6 +145,7 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
             <ru>Аркада</ru>
             <pl>Zręcznościowy</pl>
             <br>Videogame</br>
+	    <it>Arcade</it>
         </text>
         <text name="gameplayNormal">
             <fr>Normal</fr>
@@ -138,6 +154,7 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
             <ru>Нормальный</ru>
             <pl>Normlany</pl>
             <br>Normal</br>
+	    <it>Normale</it>
         </text>
         <text name="gameplayRealistic">
             <fr>Réaliste</fr>
@@ -146,6 +163,7 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
             <ru>Реалистичный</ru>
             <pl>Realistyczny</pl>
             <br>Realista</br>
+	    <it>Realistico</it>
         </text>
     </l10n>
 </modDesc>
