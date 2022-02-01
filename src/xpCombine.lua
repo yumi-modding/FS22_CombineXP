@@ -177,7 +177,7 @@ function xpCombine:onLoad(savegame)
     spec.mrCombineLimiter.engineLoad = 0.
     spec.mrCombineLimiter.loadMultiplier = 1.
     spec.mrCombineLimiter.yield = 0.
-    spec.highMoisture = false
+    spec.mrCombineLimiter.highMoisture = false
 
     spec.mrCombineLastTotalPower = 0;
 
@@ -225,6 +225,7 @@ function xpCombine:onReadStream(streamId, connection)
     spec.mrCombineLimiter.engineLoad = streamReadFloat32(streamId)
     spec.mrCombineLimiter.loadMultiplier = streamReadFloat32(streamId)
     spec.mrCombineLimiter.yield = streamReadFloat32(streamId)
+    spec.mrCombineLimiter.highMoisture = streamReadBool(streamId)
 end
 
 ---Called on write stream.
@@ -234,6 +235,7 @@ function xpCombine:onWriteStream(streamId, connection)
     streamWriteFloat32(streamId, spec.mrCombineLimiter.engineLoad)
     streamWriteFloat32(streamId, spec.mrCombineLimiter.loadMultiplier)
     streamWriteFloat32(streamId, spec.mrCombineLimiter.yield)
+    streamWriteBool(streamId, spec.mrCombineLimiter.highMoisture)
 end
 
 ---Called on read update stream.
@@ -246,6 +248,7 @@ function xpCombine:onReadUpdateStream(streamId, timestamp, connection)
             spec.mrCombineLimiter.engineLoad = streamReadFloat32(streamId)
             spec.mrCombineLimiter.loadMultiplier = streamReadFloat32(streamId)
             spec.mrCombineLimiter.yield = streamReadFloat32(streamId)
+            spec.mrCombineLimiter.highMoisture = streamReadBool(streamId)
         end
     end
 end
@@ -260,6 +263,7 @@ function xpCombine:onWriteUpdateStream(streamId, connection, dirtyMask)
             streamWriteFloat32(streamId, spec.mrCombineLimiter.engineLoad)
             streamWriteFloat32(streamId, spec.mrCombineLimiter.loadMultiplier)
             streamWriteFloat32(streamId, spec.mrCombineLimiter.yield)
+            streamWriteBool(streamId, spec.mrCombineLimiter.highMoisture)
         end
     end
 end
@@ -454,7 +458,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
             else
                 spec_xpCombine.mrGenuineSpeedLimit = limit
             end
-            spec_xpCombine.highMoisture = false
+            spec_xpCombine.mrCombineLimiter.highMoisture = false
             local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec_combine.fillUnitIndex))
             if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN and not spec_combine.allowThreshingDuringRain then
                 local loadLimit = limit
@@ -469,7 +473,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
                         limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
                         spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
                         -- Add warning msg if moisture is high to harvest (depending on time of the day)
-                        spec_xpCombine.highMoisture = limit < 4
+                        spec_xpCombine.mrCombineLimiter.highMoisture = limit < 4
                         -- print("speedLimit from Time       : "..tostring(limit))
                         -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
                     end
@@ -633,7 +637,7 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
         local hud = g_combinexp.hud
         hud:setVehicle(self)
         hud:drawText()
-        if g_combinexp.timeDependantSpeed.isActive and spec.highMoisture then
+        if g_combinexp.timeDependantSpeed.isActive and spec.mrCombineLimiter.highMoisture then
             g_currentMission:showBlinkingWarning(g_i18n:getText("warning_highMoistureAtThisTime"), 2000)
         end
     else

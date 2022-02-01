@@ -23,11 +23,11 @@ Nouvelles fonctionnalités:
 - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
 ]]></fr>
         <de><![CDATA[
-Wenn Sie es satt haben das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
-Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um denen im Reallife näher zu kommen. Dies ist eine erste Version und neue Funktionen, die derzeit entwickelt werden, werden in Kürze verfügbar sein.
+Wenn Sie es satt haben, das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
+Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um denen in der Realität näher zu kommen. Dies ist eine erste Version und neue Funktionen, die derzeit entwickelt werden, werden in Kürze verfügbar sein.
 Eigenschaften:
-- Mähdrescher und das Schneidwerk unabhängig voneinander als IRL zu aktivieren
-- Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Power) und die Luftfeuchtigkeit der Ernte je nach Tageszeit
+- Mähdrescher und das Schneidwerk unabhängig voneinander wie in der Realität zu aktivieren
+- Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Gesamtleistung) und die Luftfeuchtigkeit der Ernte je nach Tageszeit
 - Zeigt Ihnen bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
 ]]></de>
         <ru><![CDATA[
@@ -87,7 +87,7 @@ Nuove caratteristiche:
             <ru>Сначала запустите систему обмолота комбайна!</ru>
             <pl>Najpierw musisz uruchomić młócarnię w kombajnie</pl>
             <br>Você deve primeiro iniciar o sistema de debulha</br>
-	    <it>Avviare prima il sistema di trebbiatura della mietitrebbia!</it>
+	        <it>Avviare prima il sistema di trebbiatura della mietitrebbia!</it>
         </text>
         <text name="warning_highMoistureAtThisTime">
             <fr>L'humidité de la culture est élevée à cette heure de la journée et réduit la vitesse de moisson</fr>
@@ -96,8 +96,8 @@ Nuove caratteristiche:
             <ru>В это время суток влажность урожая высока, что снижает скорость комбайна.</ru>
             <pl>Wilgotność uprawy jest wysoka o tej porze dnia przez co zmniejszy się prędkość pracy kombajnu</pl>
             <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
-	    <it>L'umidità del raccolto è elevata a quest'ora del giorno e riduce il limite di velocità di raccolta.</it>
-       </text>
+	        <it>L'umidità del raccolto è elevata a quest'ora del giorno e riduce il limite di velocità di raccolta.</it>
+        </text>
         <text name="input_CombineXP_SETTINGS">
             <fr>Ouvrir les paramètres de Combine XPerience</fr>>
             <en>Open Combine XPerience Settings</en>
@@ -105,7 +105,7 @@ Nuove caratteristiche:
             <ru>Откройте настройки Combine XPerience</ru>
             <pl>Otwórz ustawienia Combine XPerience</pl>
 			<br>Abrrir configurações do Combine XPerience</br>
-	    <it>Apri le impostazioni di CombineXP</it>
+	        <it>Apri le impostazioni di CombineXP</it>
         </text>
         <text name="CombineXP_SETTINGS">
             <fr>Paramètres de Combine XPerience</fr>
@@ -113,7 +113,7 @@ Nuove caratteristiche:
 			<de>Die Combine XPerience-Einstellungen</de>
             <ru>настройки Combine XPerience</ru>
             <pl>Ustawienia Combine XPerience</pl>
-	    <it>Impostazioni di CombineXP</it>
+	        <it>Impostazioni di CombineXP</it>
         </text>
         <text name="setGameplay">
             <fr><![CDATA[Définir les paramètres de Combine Xperience:
@@ -129,7 +129,7 @@ Nuove caratteristiche:
                 Аркада = 100% boost, нет дневного эффекта / Нормальный = 20% boost / Реалистичный = нет boost
             ]]></ru>
             <pl><![CDATA[Ustawienia trybu Combine XPerience:
-Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost]]>
+                SZręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost]]>
 			</pl>
 			<br><![CDATA[Definir configurações do Combine XPerience:
                 Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
@@ -145,7 +145,7 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
             <ru>Аркада</ru>
             <pl>Zręcznościowy</pl>
             <br>Videogame</br>
-	    <it>Arcade</it>
+	        <it>Arcade</it>
         </text>
         <text name="gameplayNormal">
             <fr>Normal</fr>
@@ -154,7 +154,7 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
             <ru>Нормальный</ru>
             <pl>Normlany</pl>
             <br>Normal</br>
-	    <it>Normale</it>
+	        <it>Normale</it>
         </text>
         <text name="gameplayRealistic">
             <fr>Réaliste</fr>
@@ -163,7 +163,7 @@ Zręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost
             <ru>Реалистичный</ru>
             <pl>Realistyczny</pl>
             <br>Realista</br>
-	    <it>Realistico</it>
+	        <it>Realistico</it>
         </text>
     </l10n>
 </modDesc>
