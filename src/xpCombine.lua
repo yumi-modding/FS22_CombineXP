@@ -473,7 +473,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
                         limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
                         spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
                         -- Add warning msg if moisture is high to harvest (depending on time of the day)
-                        spec_xpCombine.mrCombineLimiter.highMoisture = limit < 4
+                        spec_xpCombine.mrCombineLimiter.highMoisture = (loadLimit / limit) > 4
                         -- print("speedLimit from Time       : "..tostring(limit))
                         -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
                     end
