@@ -49,7 +49,7 @@ function xpCombine.registerOverwrittenFunctions(vehicleType)
     -- SpecializationUtil.registerOverwrittenFunction(vehicleType, "getCanBeTurnedOn", xpCombine.getCanBeTurnedOn)  -- Error if used
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "startThreshing", xpCombine.startThreshing)
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "stopThreshing", xpCombine.stopThreshing)
-    SpecializationUtil.registerOverwrittenFunction(vehicleType, "getIsThreshingAllowed", xpCombine.getIsThreshingAllowed)
+    SpecializationUtil.registerOverwrittenFunction(vehicleType, "verifyCombine", xpCombine.verifyCombine)
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "removeActionEvents", xpCombine.removeActionEvents)
 end
 
@@ -659,13 +659,13 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
 end
 
 -- Disable harvesting if combine threshing is off
-function xpCombine:getIsThreshingAllowed(superFunc, earlyWarning)
-    -- if xpCombine.debug then print("xpCombine:getIsThreshingAllowed") end
+function xpCombine:verifyCombine(superFunc, fruitType, outputFillType)
+    -- if xpCombine.debug then print("xpCombine:verifyCombine") end
     local isAIActive = self:getIsAIActive()
     if not self:getIsTurnedOn() and not isAIActive then
         return false
     end
-    return superFunc(self, earlyWarning)
+    return superFunc(self, fruitType, outputFillType)
 end
 
 -- Combine with at least <powerConsumer ptoRpm="350" neededMaxPtoPower="10"/> will consume power when unloading
