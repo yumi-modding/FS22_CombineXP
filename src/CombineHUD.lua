@@ -24,6 +24,7 @@ function CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilena
     instance.tonPerHour = 0.
     instance.engineLoad = 0.
     instance.yield = 0.
+    instance.gameplay = 0.
 
     return instance
 end
@@ -237,6 +238,7 @@ function CombineHUD:setData(mrCombineLimiter)
         yield = 0.
     end
     self.yield = yield
+    self.gameplay = g_combinexp.powerBoost
 end
 
 function CombineHUD:drawText()
@@ -266,6 +268,16 @@ function CombineHUD:drawText()
     end
     renderText(textX, textY, textSize, string.format("%.1f %%", self.engineLoad))
     setTextColor(unpack(CombineHUD.COLOR.TEXT_WHITE))
+
+    local gameplay = string.sub(g_i18n:getText("gameplayNormal"), 1, 1) .. "                                  "
+    if self.gameplay >= 100 then
+        gameplay = string.sub(g_i18n:getText("gameplayArcade"), 1, 1) .. "                                  "
+    elseif self.gameplay >= 20 then
+        gameplay = string.sub(g_i18n:getText("gameplayNormal"), 1, 1) .. "                                  "
+    elseif self.gameplay >= 0 then
+        gameplay = string.sub(g_i18n:getText("gameplayRealistic"), 1, 1) .. "                                  "
+    end
+    renderText(textX, textY, 0.7 * textSize, gameplay)
 
     textY = textY + iconSmallHeight + iconMarginWidth
     renderText(textX, textY, textSize, string.format("%.1f T/"..self.l10nHour, self.tonPerHour))
