@@ -18,6 +18,10 @@ function CombineXP:new(mission, i18n, inputBinding, gui, soundManager, modDirect
     local uiFilename = Utils.getFilename("resources/combineXP.dds", modDirectory)
     self.hud = CombineHUD:new(mission, i18n, inputBinding, gui, modDirectory, uiFilename)
 
+    local modTitle = g_modManager:getModByName(modName).title
+    self.settings = CombineSettings:new(modTitle)
+
+    self.powerBoost = 0.
     self.powerDependantSpeed = {}
     self.timeDependantSpeed = {}
     self.moistureDependantSpeed = {}
@@ -28,6 +32,7 @@ end
 function CombineXP:delete()
     --print("CombineXP:delete")
     self.hud:delete()
+    self.settings:delete()
 end
 
 
@@ -84,8 +89,8 @@ function CombineXP:loadDependantSpeed()
     local xmlFile = nil
 
     if modDirectory then
-        local modsSettingsDir = getUserProfileAppPath().."modsSettings"
-        local xmlFilePath = modsSettingsDir.."/combineXP.xml"
+        local modSettingsDir = getUserProfileAppPath().."modSettings"
+        local xmlFilePath = modSettingsDir.."/combineXP.xml"
         if fileExists(xmlFilePath) then
             xmlFile = loadXMLFile("combineXP", xmlFilePath);
         else
@@ -93,6 +98,8 @@ function CombineXP:loadDependantSpeed()
         end
     end
     if xmlFile then
+        local powerBoost = Utils.getNoNil(tonumber(getXMLString(xmlFile, "combineXP.vehicles"..string.format("#powerBoost"))), 0)
+        g_combinexp.powerBoost = MathUtil.clamp(powerBoost, 0, 100)
         g_combinexp.powerDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.powerDependantSpeed" .. string.format("#isActive")), true)
         g_combinexp.timeDependantSpeed.isActive = Utils.getNoNil(getXMLBool(xmlFile, "combineXP.timeDependantSpeed" .. string.format("#isActive")), true)
         g_combinexp.timeDependantSpeed.cereal = AnimCurve.new(linearInterpolator1)
@@ -107,18 +114,18 @@ function CombineXP:loadDependantSpeed()
 
 end
 
--- @doc Copy default parameters from mod zip file to modsSettings directory so end-user can edit it
+-- @doc Copy default parameters from mod zip file to modSettings directory so end-user can edit it
 function CombineXP:copyCombineXPXML()
     if modDirectory then
-        local modsSettingsDir = getUserProfileAppPath().."modsSettings"
-        local xmlFilePath = modsSettingsDir.."/combineXP.xml"
+        local modSettingsDir = getUserProfileAppPath().."modSettings"
+        local xmlFilePath = modSettingsDir.."/combineXP.xml"
         local xmlFile;
         if not fileExists(xmlFilePath) then
             local xmlSourceFilePath = modDirectory .. "/data/combineXP.xml"
             local xmlSourceFile;
             if fileExists(xmlSourceFilePath) then
             xmlSourceFile = loadXMLFile('combineXP', xmlSourceFilePath);
-            createFolder(modsSettingsDir)
+            createFolder(modSettingsDir)
             saveXMLFileTo(xmlSourceFile, xmlFilePath);
             end
         end
@@ -148,6 +155,7 @@ end
 function CombineXP:onMissionLoaded(mission)
     -- print("CombineXP:onMissionLoaded")
     self.hud:load()
+    self.settings:load()
 end
 
 function CombineXP:update(dt)

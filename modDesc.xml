@@ -70,15 +70,6 @@ Nuove caratteristiche:
         <sourceFile filename="src/main.lua" />
     </extraSourceFiles>
 
-    <actions>
-        <action name="CombineXP_SETTINGS"/>
-    </actions>
-    <inputBinding>
-        <actionBinding action="CombineXP_SETTINGS">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl KEY_c"/>
-        </actionBinding>
-    </inputBinding>
-
     <l10n>
         <text name="warning_firstStartThreshing">
             <fr>Vous devez d'abord démarrer le système de battage</fr>
@@ -98,45 +89,22 @@ Nuove caratteristiche:
             <br>A umidade da lavoura é alta nesta hora do dia reduzindo a velocidade da colheitadeira</br>
 	        <it>L'umidità del raccolto è elevata a quest'ora del giorno e riduce il limite di velocità di raccolta.</it>
         </text>
-        <text name="input_CombineXP_SETTINGS">
-            <fr>Ouvrir les paramètres de Combine XPerience</fr>>
-            <en>Open Combine XPerience Settings</en>
-            <de>Öffnen Sie die Combine XPerience-Einstellungen</de>
-            <ru>Откройте настройки Combine XPerience</ru>
-            <pl>Otwórz ustawienia Combine XPerience</pl>
-			<br>Abrrir configurações do Combine XPerience</br>
-	        <it>Apri le impostazioni di CombineXP</it>
+        <text name="combineGameplaySetting">
+            <fr>Gameplay</fr>
+            <en>Gameplay</en>
+			<de>Spielweise</de>
+            <ru>Геймплей</ru>
+            <pl>rozgrywka</pl>
+	        <it>Gioco</it>
         </text>
-        <text name="CombineXP_SETTINGS">
-            <fr>Paramètres de Combine XPerience</fr>
-            <en>Combine XPerience Settings</en>
-			<de>Die Combine XPerience-Einstellungen</de>
-            <ru>настройки Combine XPerience</ru>
-            <pl>Ustawienia Combine XPerience</pl>
-	        <it>Impostazioni di CombineXP</it>
-        </text>
-        <text name="setGameplay">
-            <fr><![CDATA[Définir les paramètres de Combine Xperience:
-                 Arcade = 100% boost, pas d'effet de l'heure du jour / Normal = 20% boost / Réaliste = Pas de boost
-            ]]></fr>
-            <en><![CDATA[Set Combine XPerience Settings:
-                Arcade = 100% boost, no day time effect / Normal = 20% boost / Realistic = No boost
-            ]]></en>
-            <de><![CDATA[Setzen Sie die Combine XPerience-Einstellungen:
-                Arkade = 100 % Boost, kein Tageseffekt / Normal = 20 % Boost / Realistisch = Kein Boost
-            ]]></de>
-            <ru><![CDATA[Установите настройки Combine XPerience
-                Аркада = 100% boost, нет дневного эффекта / Нормальный = 20% boost / Реалистичный = нет boost
-            ]]></ru>
-            <pl><![CDATA[Ustawienia trybu Combine XPerience:
-                SZręcznościowy = 100% boost, brak efektu czasu dziennego / Normalny = 20% boost / Realistyczny = Brak boost]]>
-			</pl>
-			<br><![CDATA[Definir configurações do Combine XPerience:
-                Videogame = 100% boost, sem efeito de hora do dia / Normal = 20% boost / Realista = No boost
-            ]]></br>
-            <it><![CDATA[Imposta le impostazioni di CombineXP:
-                Arcade = potenziamento del 100%, nessun effetto diurno / Normale = potenziamento del 20% / Realistico = nessun potenziamento
-            ]]></it>
+        <text name="combineGameplayTooltip">
+            <fr>Arcade = 100% boost / Normal = 20% boost / Réaliste = Pas de boost</fr>
+            <en>Arcade = 100% boost / Normal = 20% boost / Realistic = No boost</en>
+            <de>Arkade = 100 % Boost / Normal = 20 % Boost / Realistisch = Kein Boost</de>
+            <ru>Аркада = 100% boost / Нормальный = 20% boost / Реалистичный = нет boost</ru>
+            <pl>SZręcznościowy = 100% boost / Normalny = 20% boost / Realistyczny = Brak boost</pl>
+			<br>Videogame = 100% boost / Normal = 20% boost / Realista = No boost</br>
+            <it>Arcade = potenziamento del 100% / Normale = potenziamento del 20% / Realistico = nessun potenziamento</it>
         </text>
         <text name="gameplayArcade">
             <fr>Arcade</fr>
@@ -164,6 +132,42 @@ Nuove caratteristiche:
             <pl>Realistyczny</pl>
             <br>Realista</br>
 	        <it>Realistico</it>
+        </text>
+        <text name="combinePowerSetting">
+            <fr>Limite de puissance moteur</fr>
+            <en>Engine power limit</en>
+            <de>Motorleistungsgrenze</de>
+            <ru>Ограничение мощности двигателя</ru>
+            <pl>Ograniczenie mocy silnika</pl>
+            <br>Limite de potência do motor</br>
+	        <it>Limite di potenza del motore</it>
+        </text>
+        <text name="combinePowerTooltip">
+            <fr>Tient compte de la puissance du moteur pour limiter la vitesse de récolte</fr>
+            <en>Consider engine power to limit harvesting speed</en>
+            <de>Berücksichtigen Sie die Motorleistung, um die Erntegeschwindigkeit zu begrenzen</de>
+            <ru>Учитывайте мощность двигателя, чтобы ограничить скорость сбора урожая</ru>
+            <pl>Uwzględnij moc silnika, aby ograniczyć prędkość zbioru</pl>
+            <br>Considere a potência do motor para limitar a velocidade de colheita</br>
+	        <it>Considerare la potenza del motore per limitare la velocità di raccolta</it>
+        </text>
+        <text name="combineDaytimeSetting">
+            <fr>Limite de l'heure de la journée</fr>
+            <en>Daytime limit</en>
+            <de>Tageslimit</de>
+            <ru>Дневной лимит</ru>
+            <pl>Limit dzienny</pl>
+            <br>Limite diurno</br>
+	        <it>Limite diurno</it>
+        </text>
+        <text name="combineDaytimeTooltip">
+            <fr>Tient compte de l'heure de la journée pour limiter la vitesse afin de simuler l'humidité des cultures</fr>
+            <en>Consider daytime to limit speed to simulate crop moisture</en>
+            <de>Berücksichtigen Sie den Tag, um die Geschwindigkeit zu begrenzen, um die Feuchtigkeit des Ernteguts zu simulieren</de>
+            <ru>Учитывайте дневное время, чтобы ограничить скорость для имитации влажности урожая.</ru>
+            <pl>Zastanów się nad porą dnia, aby ograniczyć prędkość, aby symulować wilgotność upraw</pl>
+            <br>Considere o dia para limitar a velocidade para simular a umidade da cultura</br>
+	        <it>Considera il giorno per limitare la velocità per simulare l'umidità del raccolto</it>
         </text>
     </l10n>
 </modDesc>
