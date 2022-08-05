@@ -1,7 +1,6 @@
 ﻿xpCombine = {};
 
 xpCombine.debug = false --true --
-
 xpCombine.myCurrentModDirectory = g_currentModDirectory;
 xpCombine.modName = g_currentModName
 
@@ -22,7 +21,7 @@ xpCombine.powerBoostRealistic = 0;  -- No power boost
 -- [x] Start Worker with cutter folded
 -- [x] Try harvesting with cutter deactivated
 -- [x] Harvesting at 5am
--- [/] Manual attach compatibility
+-- [x] Manual attach compatibility
 -- [/] Waiting worker compatibility
 -- [ ] Try other Combine type vehicles
 -- [x]  - sugarBeet
@@ -31,7 +30,18 @@ xpCombine.powerBoostRealistic = 0;  -- No power boost
 -- [x]  - cotton
 -- [ ]  - vine
 -- [ ]  - attachable combine
--- [x] Edit settingss
+-- [x] Edit settings
+
+-- [x] Open settings in quickhelp disappear after 1st use
+-- [x] In hosted MP, setting not working on client
+-- [ ] Update mod preview
+
+-- [x] Move xpCombine.mrCombineLimiter.powerBoost to g_combinexp + impacts
+-- [x] Check if Event is needed for MP/Dedi Settings
+-- [x] Set all settings in Event if needed
+-- [x] Move settings to Game settings instead of General (initGameSettingsGui)
+-- [x] Manage load/save settings
+-- [ ] Client retrieves server settings when joining a game
 
 function xpCombine.prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Combine, specializations)
@@ -40,7 +50,6 @@ end
 function xpCombine.registerFunctions(vehicleType)
     if xpCombine.debug then print("xpCombine:registerFunctions") end
     SpecializationUtil.registerFunction(vehicleType, "getTimeDependantSpeed", xpCombine.getTimeDependantSpeed)
-    SpecializationUtil.registerFunction(vehicleType, "saveSettings", xpCombine.saveSettings)
 end
 
 function xpCombine.registerOverwrittenFunctions(vehicleType)
@@ -49,7 +58,7 @@ function xpCombine.registerOverwrittenFunctions(vehicleType)
     -- SpecializationUtil.registerOverwrittenFunction(vehicleType, "getCanBeTurnedOn", xpCombine.getCanBeTurnedOn)  -- Error if used
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "startThreshing", xpCombine.startThreshing)
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "stopThreshing", xpCombine.stopThreshing)
-    SpecializationUtil.registerOverwrittenFunction(vehicleType, "getIsThreshingAllowed", xpCombine.getIsThreshingAllowed)
+    SpecializationUtil.registerOverwrittenFunction(vehicleType, "verifyCombine", xpCombine.verifyCombine)
     SpecializationUtil.registerOverwrittenFunction(vehicleType, "removeActionEvents", xpCombine.removeActionEvents)
 end
 
@@ -73,15 +82,14 @@ function xpCombine:onLoad(savegame)
     local spec = self.spec_xpCombine
 
     local basePerf = 0.    --basePerf=max Ha per Hour wanted in 100% fertilized Wheat
-    local powerBoost = 0.
 
     -- First load from data xmlFile
     if xpCombine.myCurrentModDirectory then
         local xmlFile = nil
 
         if xpCombine.myCurrentModDirectory then
-            local modsSettingsDir = getUserProfileAppPath().."modsSettings"
-            local xmlFilePath = modsSettingsDir.."/combineXP.xml"
+            local modSettingsDir = getUserProfileAppPath().."modSettings"
+            local xmlFilePath = modSettingsDir.."/combineXP.xml"
             if fileExists(xmlFilePath) then
                 xmlFile = loadXMLFile("combineXP", xmlFilePath);
             else
@@ -112,9 +120,6 @@ function xpCombine:onLoad(savegame)
             end
             i = i + 1
         end
-        xmlPath = "combineXP.vehicles"..string.format("#powerBoost")
-        powerBoost = Utils.getNoNil(tonumber(getXMLString(xmlFile, xmlPath)), 0)
-        powerBoost = MathUtil.clamp(powerBoost, 0, 100)
     end
 
     if basePerf <= 0 then
@@ -169,7 +174,6 @@ function xpCombine:onLoad(savegame)
     spec.mrCombineLimiter.distanceForMeasuring = 3; -- 3 meters
     spec.mrCombineLimiter.currentTime = 0;
     spec.mrCombineLimiter.basePerfAvgArea = basePerf / 36; -- m2 per second (fully fertilized)
-    spec.mrCombineLimiter.powerBoost = 1 + 0.01 * powerBoost;
     spec.mrCombineLimiter.currentAvgArea = 0;
 
     spec.mrCombineLimiter.totalOutputMass = 0.
@@ -389,7 +393,8 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                     spec.speedLimit = spec.mrGenuineSpeedLimit;
                 else
 
-                    local maxAvgArea = spec.mrCombineLimiter.powerBoost * spec.mrCombineLimiter.basePerfAvgArea;
+                    --local maxAvgArea = spec.mrCombineLimiter.powerBoost * spec.mrCombineLimiter.basePerfAvgArea;
+                    local maxAvgArea = (1 + 0.01 * g_combinexp.powerBoost) * spec.mrCombineLimiter.basePerfAvgArea;
                     local predictLimitSet = false
                     --take into account the areaAcc
                     if areaAcc>0 then
@@ -429,7 +434,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
 
         else
             spec.speedLimit = spec.mrGenuineSpeedLimit;
-            spec.mrCombineLimiter.currentAvgArea = 0;
+            spec.mrCombineLimiter.currentAvgArea = 0;   
             --self.mrAvgCombineCuttersArea = 0;
             spec.mrCombineLimiter.tonPerHour = 0
         end
@@ -440,7 +445,7 @@ end
 
 -- Adjust harvesting speedLimit based on several criterias
 function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
-    -- if xpCombine.debug then print("xpCombine:getSpeedLimit") end
+    -- if xpCombine.debug then print("xpCombine:getSpeedLimit: "..tostring(g_combinexp.powerBoost).." - "..tostring(g_combinexp.powerDependantSpeed.isActive).." - "..tostring(g_combinexp.timeDependantSpeed.isActive)) end
     local spec_combine = self.spec_combine
     local spec_aiVehicle = self.spec_aiVehicle
     local spec_xpCombine = self.spec_xpCombine
@@ -473,7 +478,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
                         limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
                         spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
                         -- Add warning msg if moisture is high to harvest (depending on time of the day)
-                        spec_xpCombine.mrCombineLimiter.highMoisture = limit < 4
+                        spec_xpCombine.mrCombineLimiter.highMoisture = (loadLimit / limit) > 4
                         -- print("speedLimit from Time       : "..tostring(limit))
                         -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
                     end
@@ -659,13 +664,13 @@ function xpCombine:onDraw(superFunc, isActiveForInput, isActiveForInputIgnoreSel
 end
 
 -- Disable harvesting if combine threshing is off
-function xpCombine:getIsThreshingAllowed(superFunc, earlyWarning)
-    -- if xpCombine.debug then print("xpCombine:getIsThreshingAllowed") end
+function xpCombine:verifyCombine(superFunc, fruitType, outputFillType)
+    -- if xpCombine.debug then print("xpCombine:verifyCombine") end
     local isAIActive = self:getIsAIActive()
     if not self:getIsTurnedOn() and not isAIActive then
-        return false
+        return nil
     end
-    return superFunc(self, earlyWarning)
+    return superFunc(self, fruitType, outputFillType)
 end
 
 -- Combine with at least <powerConsumer ptoRpm="350" neededMaxPtoPower="10"/> will consume power when unloading
@@ -697,99 +702,10 @@ end
 function xpCombine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnoreSelection)
     if xpCombine.debug then print("xpCombine:onRegisterActionEvents") end
     if self.isClient then
-        local spec = self.spec_xpCombine
-        self:clearActionEventsTable(spec.actionEvents)
-
-        local triggerUp, triggerDown, triggerAlways, startActive, callbackState, disableConflictingBindings = false, true, false, true, nil, true
-        local state, actionEventId, otherEvents = g_inputBinding:registerActionEvent(InputAction.CombineXP_SETTINGS, self, xpCombine.showSettingsDialog, triggerUp, triggerDown, triggerAlways, startActive, callbackState, disableConflictingBindings)
-        g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_LOW)
-    
         if isActiveForInputIgnoreSelection then
             --TODO: add if active ?
             local hud = g_combinexp.hud
             hud:setVehicle(self)
-
-        end
-    end
-end
-
-function xpCombine:showSettingsDialog()
-    if xpCombine.debug then print("xpCombine:showSettingsDialog") end
-    local spec = self.spec_xpCombine
-    
-    local actions = {
-        { g_i18n:getText("gameplayArcade"), xpCombine.toggleGameplayArcade },
-        { g_i18n:getText("gameplayNormal"), xpCombine.toggleGameplayNormal },
-        { g_i18n:getText("gameplayRealistic"), xpCombine.toggleGameplayRealistic }
-    }
-
-    local options = {}
-    for index, value in ipairs(actions) do
-        options[#options + 1] = index .. ") " .. value[1]
-    end
-
-    local dialogArguments = {
-        text = g_i18n:getText("setGameplay"),
-        title = g_i18n:getText("CombineXP_SETTINGS"),
-        options = options,
-        target = self,
-        args = { },
-        callback = function(target, selectedOption, a)
-            if type(selectedOption) ~= "number" or selectedOption == 0 then
-                return
-            end
-
-            local delegate = actions[selectedOption][2]
-            delegate(self, target, a)
-        end,
-    }
-
-    g_gui:showOptionDialog(dialogArguments)
-
-end
-
-function xpCombine:toggleGameplayArcade()
-    if xpCombine.debug then print("xpCombine:toggleGameplayArcade") end
-    local spec = self.spec_xpCombine
-    spec.mrCombineLimiter.powerBoost = 1 + 0.01 * xpCombine.powerBoostArcade
-    g_combinexp.timeDependantSpeed.isActive = false
-    self:saveSettings()
-end
-
-function xpCombine:toggleGameplayNormal()
-    if xpCombine.debug then print("xpCombine:toggleGameplayNormal") end
-    local spec = self.spec_xpCombine
-    spec.mrCombineLimiter.powerBoost = 1 + 0.01 * xpCombine.powerBoostNormal
-    g_combinexp.timeDependantSpeed.isActive = true
-    self:saveSettings()
-end
-
-function xpCombine:toggleGameplayRealistic()
-    if xpCombine.debug then print("xpCombine:toggleGameplayRealistic") end
-    local spec = self.spec_xpCombine
-    spec.mrCombineLimiter.powerBoost = 1 + 0.01 * xpCombine.powerBoostRealistic
-    g_combinexp.timeDependantSpeed.isActive = true
-    self:saveSettings()
-end
-
-function xpCombine:saveSettings()
-    if xpCombine.debug then print("xpCombine:saveSettings") end
-    local spec = self.spec_xpCombine
-    -- First load from data xmlFile
-    if xpCombine.myCurrentModDirectory then
-        local xmlFile = nil
-        if xpCombine.myCurrentModDirectory then
-            local modsSettingsDir = getUserProfileAppPath().."modsSettings"
-            local xmlFilePath = modsSettingsDir.."/combineXP.xml"
-            if fileExists(xmlFilePath) then
-                xmlFile = XMLFile.load("combineXP", xmlFilePath);
-            else
-                xmlFile = XMLFile.load("combineXP", xpCombine.myCurrentModDirectory .. "data/combineXP.xml");
-            end
-            local powerBoost = (spec.mrCombineLimiter.powerBoost - 1) * 100
-            xmlFile:setInt("combineXP.vehicles"..string.format("#powerBoost"), powerBoost)
-            xmlFile:setBool("combineXP.timeDependantSpeed" .. string.format("#isActive"), g_combinexp.timeDependantSpeed.isActive)
-            xmlFile:save()
         end
     end
 end
