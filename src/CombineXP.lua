@@ -139,7 +139,10 @@ function CombineXP:onMissionStart(mission)
     CombineXP.copyCombineXPXML()
     CombineXP.loadMaterialQtyFx()
     CombineXP.loadDependantSpeed()
-
+    if g_server == nil then
+        -- Request settings from the server
+        g_client:getServerConnection():sendEvent(xpCombineStateRequestEvent:new())
+    end
 end
 
 ------------------------------------------------

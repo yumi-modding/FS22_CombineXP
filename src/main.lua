@@ -7,7 +7,7 @@ source(modDirectory .. "src/xpCutter.lua")
 source(modDirectory .. "src/CombineHUD.lua")
 source(modDirectory .. "src/CombineSettings.lua")
 source(modDirectory .. "src/xpCombineEvent.lua")
-
+source(modDirectory .. "src/xpCombineStateRequestEvent.lua")
 
 local combinexp
 

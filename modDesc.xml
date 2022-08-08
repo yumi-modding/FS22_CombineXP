@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="63">
+<modDesc descVersion="67">
     <author>yumi</author>
     <version>1.0.0.0</version>        
     <title>
@@ -8,7 +8,7 @@
     <description>
         <en><![CDATA[
 If you're tired of harvesting any crops with any combine at 10 kph, this mod is for you.
-The goal of this mod is to provide a new experience when using combine harvesters in the game to be closer to real life harvesting. This is a first release and new features under development will arrive soon.
+The goal of this mod is to provide a new experience when using combine harvesters in the game to be closer to real life harvesting.
 New features:
 - Capability to activate combine and cutter independently as IRL
 - Harvesting speed limit based on material quantity gathered, crop type, combine performance (based on power) and crop moisture depending on time of the day
@@ -16,7 +16,7 @@ New features:
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
-Le but de ce mod est de fournir une nouvelle expérience lors de l'utilisation des moissonneuses-batteuses dans le jeu pour être plus proche de la réalité. Il s'agit d'une première version et de nouvelles fonctionnalités en cours de développement arriveront bientôt.
+Le but de ce mod est de fournir une nouvelle expérience lors de l'utilisation des moissonneuses-batteuses dans le jeu pour être plus proche de la réalité.
 Nouvelles fonctionnalités:
 - Possibilité d'activer la moissonneuse-batteuse et la barre de coupe indépendamment comme IRL
 - Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture, des performances de la moissonneuse (basées sur sa puissance) et de l'humitidité de la culture en fonction de l'heure de la journée
@@ -24,7 +24,7 @@ Nouvelles fonctionnalités:
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben, das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
-Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um denen in der Realität näher zu kommen. Dies ist eine erste Version und neue Funktionen, die derzeit entwickelt werden, werden in Kürze verfügbar sein.
+Das Ziel dieses Mods ist es, eine neue Erfahrung bei der Verwendung von Mähdreschern im Spiel zu bieten, um denen in der Realität näher zu kommen.
 Eigenschaften:
 - Mähdrescher und das Schneidwerk unabhängig voneinander wie in der Realität zu aktivieren
 - Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Gesamtleistung) und die Luftfeuchtigkeit der Ernte je nach Tageszeit
@@ -32,7 +32,7 @@ Eigenschaften:
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
-Цель этого мода - дать новый опыт использования комбайнов в игре, чтобы приблизиться к реальному. Это первая версия, и вскоре будут доступны новые функции, которые разрабатываются в настоящее время.
+Цель этого мода - дать новый опыт использования комбайнов в игре, чтобы приблизиться к реальному.
 Свойства:
 - Активировать комбайн и жатку независимо друг от друга как "в реальной жизни"(IRL)
 - Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons
@@ -40,7 +40,7 @@ Eigenschaften:
 ]]></ru>
         <pl><![CDATA[
 Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
-Celem tego modu jest zapewnienie nowych wrażeń podczas korzystania z kombajnów w grze, aby być bliżej zbiorów w prawdziwym życiu. Jest to pierwsze wydanie i wkrótce pojawią się nowe funkcje.
+Celem tego modu jest zapewnienie nowych wrażeń podczas korzystania z kombajnów w grze, aby być bliżej zbiorów w prawdziwym życiu.
 Nowe funkcje:
 - Możliwość niezależnej aktywacji kombajnu i hederu/przystawki jak w prawdziwym życiu
 - Ograniczenie prędkości koszenia w oparciu o ilość zbieranego materiału, rodzaj uprawy, wydajność kombajnu (w oparciu o moc) i wilgotność plonu w zależności od pory dnia
@@ -48,7 +48,7 @@ Nowe funkcje:
 ]]></pl>
         <br><![CDATA[
 Se você está cansado de colher qualquer lavoura com qualquer colheitadeira a 10 km / h, este modo é para você.
-O objetivo deste mod é fornecer uma nova experiência ao usar colheitadeiras no jogo para estar mais perto da colheita da vida real. Este é um primeiro lançamento e novos recursos em desenvolvimento chegarão em breve.
+O objetivo deste mod é fornecer uma nova experiência ao usar colheitadeiras no jogo para estar mais perto da colheita da vida real.
 Novas características:
 - Capacidade de ativar a colheitadeira e o cortador independentemente como IRL
 - Limite de velocidade de colheita com base na quantidade de material coletado, tipo de cultura, desempenho da colheitadeira (baseado na sua potência) e a umidade da cultura dependendo da hora do dia
@@ -56,7 +56,7 @@ Novas características:
 ]]></br>
         <it><![CDATA[
 Se sei stanco di raccogliere qualsiasi raccolto con qualsiasi mietitrebbia a 10 km/h, questa mod è per te.
-L'obiettivo di questa mod è fornire una nuova esperienza quando si utilizzano le mietitrebbie nel gioco per essere più vicini alla raccolta della vita reale. Questa è una prima versione e presto arriveranno nuove funzionalità in fase di sviluppo.
+L'obiettivo di questa mod è fornire una nuova esperienza quando si utilizzano le mietitrebbie nel gioco per essere più vicini alla raccolta della vita reale.
 Nuove caratteristiche:
 - Possibilità di attivare la mietitrebbia e la taglierina indipendentemente come IRL
 - Limite di velocità di raccolta in base alla quantità di materiale raccolto, al tipo di coltura, alle prestazioni della mietitrebbia (in base alla potenza) e all'umidità del raccolto a seconda dell'ora del giorno

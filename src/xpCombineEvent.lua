@@ -7,19 +7,19 @@ InitEventClass(xpCombineEvent, "xpCombineEvent")
 
 function xpCombineEvent.emptyNew()
     if xpCombineEvent.debug then print("xpCombineEvent:emptyNew") end
-	local self = Event.new(xpCombineEvent_mt)
-	return self
+    local self = Event.new(xpCombineEvent_mt)
+    return self
 end
 
 function xpCombineEvent.new(powerBoost, powerDependantSpeedActive, timeDependantSpeedActive)
     if xpCombineEvent.debug then print("xpCombineEvent:new") end
-	local self = xpCombineEvent.emptyNew()
+    local self = xpCombineEvent.emptyNew()
 
     self.powerBoost = powerBoost
     self.powerDependantSpeedActive = powerDependantSpeedActive
     self.timeDependantSpeedActive = timeDependantSpeedActive
 
-	return self
+    return self
 end
 
 function xpCombineEvent:writeStream(streamId, connection)
@@ -34,18 +34,18 @@ function xpCombineEvent:readStream(streamId, connection)
     self.powerBoost = streamReadUInt8(streamId)
     self.powerDependantSpeedActive = streamReadBool(streamId)
     self.timeDependantSpeedActive = streamReadBool(streamId)
-	self:run(connection)
+    self:run(connection)
 end
 
 function xpCombineEvent:run(connection)
     if xpCombineEvent.debug then print("xpCombineEvent:run") end
-	if not connection:getIsServer() then
-		-- local senderUserId = g_currentMission.userManager:getUserIdByConnection(connection)
-		-- local senderFarm = g_farmManager:getFarmByUserId(senderUserId)
-		-- local isMasterUser = connection:getIsLocal() or g_currentMission.userManager:getIsConnectionMasterUser(connection)
+    if not connection:getIsServer() then
+        -- local senderUserId = g_currentMission.userManager:getUserIdByConnection(connection)
+        -- local senderFarm = g_farmManager:getFarmByUserId(senderUserId)
+        -- local isMasterUser = connection:getIsLocal() or g_currentMission.userManager:getIsConnectionMasterUser(connection)
 
         g_server:broadcastEvent(self, false, connection)
-	end
+    end
     g_combinexp.powerBoost = self.powerBoost
     g_combinexp.powerDependantSpeed.isActive = self.powerDependantSpeedActive
     g_combinexp.timeDependantSpeed.isActive = self.timeDependantSpeedActive

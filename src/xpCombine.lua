@@ -41,7 +41,7 @@ xpCombine.powerBoostRealistic = 0;  -- No power boost
 -- [x] Set all settings in Event if needed
 -- [x] Move settings to Game settings instead of General (initGameSettingsGui)
 -- [x] Manage load/save settings
--- [ ] Client retrieves server settings when joining a game
+-- [x] Client retrieves server settings when joining a game
 
 function xpCombine.prerequisitesPresent(specializations)
     return SpecializationUtil.hasSpecialization(Combine, specializations)
