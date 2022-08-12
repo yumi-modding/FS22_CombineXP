@@ -92,21 +92,21 @@ Nuove caratteristiche:
         <text name="combineGameplaySetting">
             <fr>Gameplay</fr>
             <en>Gameplay</en>
-			<de>Spielweise</de>
-            <ru>Геймплей</ru>
+            <de>Spielweise</de>
+            <ru>Игровой процесс</ru>
             <pl>rozgrywka</pl>
-	        <it>Gioco</it>
+            <it>Gioco</it>
         </text>
         <text name="combineGameplayTooltip">
             <fr>Arcade = 100% boost / Normal = 20% boost / Réaliste = Pas de boost</fr>
             <en>Arcade = 100% boost / Normal = 20% boost / Realistic = No boost</en>
             <de>Arkade = 100 % Boost / Normal = 20 % Boost / Realistisch = Kein Boost</de>
-            <ru>Аркада = 100% boost / Нормальный = 20% boost / Реалистичный = нет boost</ru>
+            <ru>Аркада (Упрощённый) = форсаж двигателя на 100% / Нормальный = форсаж двигателя на 20% / Реалистичный = без форсажа двигателя</ru>
             <pl>SZręcznościowy = 100% boost / Normalny = 20% boost / Realistyczny = Brak boost</pl>
-			<br>Videogame = 100% boost / Normal = 20% boost / Realista = No boost</br>
+            <br>Videogame = 100% boost / Normal = 20% boost / Realista = No boost</br>
             <it>Arcade = potenziamento del 100% / Normale = potenziamento del 20% / Realistico = nessun potenziamento</it>
         </text>
-        <text name="gameplayArcade">
+	<text name="gameplayArcade">
             <fr>Arcade</fr>
             <en>Arcade</en>
             <de>Arkade</de>
@@ -155,19 +155,18 @@ Nuove caratteristiche:
             <fr>Limite de l'heure de la journée</fr>
             <en>Daytime limit</en>
             <de>Tageslimit</de>
-            <ru>Дневной лимит</ru>
+            <ru>Ограничение для времени суток</ru>
             <pl>Limit dzienny</pl>
             <br>Limite diurno</br>
-	        <it>Limite diurno</it>
+            <it>Limite diurno</it>
         </text>
         <text name="combineDaytimeTooltip">
             <fr>Tient compte de l'heure de la journée pour limiter la vitesse afin de simuler l'humidité des cultures</fr>
             <en>Consider daytime to limit speed to simulate crop moisture</en>
-            <de>Berücksichtigen Sie den Tag, um die Geschwindigkeit zu begrenzen, um die Feuchtigkeit des Ernteguts zu simulieren</de>
-            <ru>Учитывайте дневное время, чтобы ограничить скорость для имитации влажности урожая.</ru>
+            <de>Erwägen Sie tagsüber eine Geschwindigkeitsbegrenzung, um die Feuchtigkeit der Ernte zu simulieren.</de>
+            <ru>Учитывайте время суток, чтобы ограничить скорость для имитации влажности урожая.</ru>
             <pl>Zastanów się nad porą dnia, aby ograniczyć prędkość, aby symulować wilgotność upraw</pl>
             <br>Considere o dia para limitar a velocidade para simular a umidade da cultura</br>
-	        <it>Considera il giorno per limitare la velocità per simulare l'umidità del raccolto</it>
+            <it>Considera il giorno per limitare la velocità per simulare l'umidità del raccolto</it>
         </text>
-    </l10n>
 </modDesc>
