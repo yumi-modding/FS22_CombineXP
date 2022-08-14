@@ -374,7 +374,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                 -- str = tostring(spec.lastMultiplier).." - "..tostring(spec.mrCombineLimiter.totalArea).." - "..tostring(g_currentMission:getFruitPixelsToSqm()).." - "..tostring(spec.mrCombineLimiter.currentTime)
                 -- print(str)
                 -- 588 = 1000 / 1.7 since max yield = 1.7 base yield when fertilized
-                local avgArea = 500 * spec.mrCombineLimiter.totalArea * materialFx * g_currentMission:getFruitPixelsToSqm() / spec.mrCombineLimiter.currentTime; -- m2 per second (takes into account fertilizer state and so, since our reference capacity is with full yield, we have to multiply by 0.5
+                local avgArea = 500 * spec.mrCombineLimiter.totalArea * materialFx * g_currentMission:getFruitPixelsToSqm() / spec.mrCombineLimiter.currentTime * spec.mrCombineLimiter.loadMultiplier; --load multiplier directly influences the load on the combine -- m2 per second (takes into account fertilizer state and so, since our reference capacity is with full yield, we have to multiply by 0.5
                 local avgSpeed = 1000 * spec.mrCombineLimiter.totaldistance / spec.mrCombineLimiter.currentTime; --m/s
                 -- print("avgArea: "..tostring(avgArea).." - ".."avgSpeed: "..tostring(avgSpeed))
                 --20170606 - check the current increase "acceleration" for the avgArea
@@ -400,7 +400,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
                     if areaAcc>0 then
                         --predict in 3s
                         local predictAvgArea = avgArea + areaAcc*3000
-                        if xpCombine.debug then print("predictAvgArea="..tostring(predictAvgArea) .. " - new speedLimit="..tostring(spec.speedLimit)) end
+                        if xpCombine.debug then print("predictAvgArea="..tostring(predictAvgArea) .. " - new speedLimit="..tostring(spec.speedLimit) .. " - loadMultiplier:="..tostring(spec.mrCombineLimiter.loadMultiplier)) end --load multiplier in log
                         if predictAvgArea>1.5*maxAvgArea then
                             spec.speedLimit = math.max(2, math.min(0.95*spec.speedLimit, 0.9*avgSpeed*3.6))
                             predictLimitSet = true
@@ -478,9 +478,12 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
                         limit = xpCombine:getTimeDependantSpeed(fruitType, loadLimit)
                         spec_xpCombine.mrCombineLimiter.loadMultiplier = loadLimit / limit
                         -- Add warning msg if moisture is high to harvest (depending on time of the day)
-                        spec_xpCombine.mrCombineLimiter.highMoisture = (loadLimit / limit) > 4
+                        spec_xpCombine.mrCombineLimiter.highMoisture = (loadLimit / limit) > 1.25
                         -- print("speedLimit from Time       : "..tostring(limit))
                         -- print("loadLimit / limit          : "..tostring(loadLimit / limit))
+					else
+						spec_xpCombine.mrCombineLimiter.loadMultiplier = 1 --reset value to 1 if time dependent inactive
+														
                     end
                 end
             end
@@ -500,6 +503,7 @@ function xpCombine:getMoistureDependantSpeed(fruitType, defaultSpeedLimit)
         fruitType == FruitType.CANOLA or
         fruitType == FruitType.SOYBEAN or
         fruitType == FruitType.SUNFLOWER or
+		fruitType == FruitType.SORGHUM or --adding sorghum compatibility
         fruitType == FruitType.MAIZE then
         local time = g_seasons.weather.cropMoistureContent
         speed = g_combinexp.moistureDependantSpeed.default:get(time)
@@ -520,6 +524,7 @@ function xpCombine:getTimeDependantSpeed(fruitType, defaultSpeedLimit)
         fruitType == FruitType.OAT or
         fruitType == FruitType.CANOLA or
         fruitType == FruitType.SOYBEAN or
+		fruitType == FruitType.SORGHUM or --adding sorghum compatibility
         fruitType == FruitType.SUNFLOWER then
         speed = g_combinexp.timeDependantSpeed.cereal:get(time)
     elseif fruitType == FruitType.MAIZE then
