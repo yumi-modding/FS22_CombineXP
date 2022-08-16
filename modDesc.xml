@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="67">
     <author>yumi</author>
-    <version>1.0.0.0</version>        
+    <version>1.0.0.1</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -106,7 +106,7 @@ Nuove caratteristiche:
             <br>Videogame = 100% boost / Normal = 20% boost / Realista = No boost</br>
             <it>Arcade = potenziamento del 100% / Normale = potenziamento del 20% / Realistico = nessun potenziamento</it>
         </text>
-	<text name="gameplayArcade">
+	    <text name="gameplayArcade">
             <fr>Arcade</fr>
             <en>Arcade</en>
             <de>Arkade</de>
@@ -169,4 +169,5 @@ Nuove caratteristiche:
             <br>Considere o dia para limitar a velocidade para simular a umidade da cultura</br>
             <it>Considera il giorno per limitare la velocità per simulare l'umidità del raccolto</it>
         </text>
+    </l10n>
 </modDesc>
