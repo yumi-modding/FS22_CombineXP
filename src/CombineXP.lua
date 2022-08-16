@@ -1,7 +1,8 @@
 
 CombineXP = {};
 
-modDirectory = g_currentModDirectory
+local modDirectory = g_currentModDirectory
+local modSettingsDir = g_modSettingsDirectory
 local CombineXP_mt = Class(CombineXP)
 
 function CombineXP:new(mission, i18n, inputBinding, gui, soundManager, modDirectory, modName)
@@ -89,7 +90,6 @@ function CombineXP:loadDependantSpeed()
     local xmlFile = nil
 
     if modDirectory then
-        local modSettingsDir = getUserProfileAppPath().."modSettings"
         local xmlFilePath = modSettingsDir.."/combineXP.xml"
         if fileExists(xmlFilePath) then
             xmlFile = loadXMLFile("combineXP", xmlFilePath);
@@ -117,16 +117,14 @@ end
 -- @doc Copy default parameters from mod zip file to modSettings directory so end-user can edit it
 function CombineXP:copyCombineXPXML()
     if modDirectory then
-        local modSettingsDir = getUserProfileAppPath().."modSettings"
         local xmlFilePath = modSettingsDir.."/combineXP.xml"
-        local xmlFile;
         if not fileExists(xmlFilePath) then
             local xmlSourceFilePath = modDirectory .. "/data/combineXP.xml"
             local xmlSourceFile;
             if fileExists(xmlSourceFilePath) then
-            xmlSourceFile = loadXMLFile('combineXP', xmlSourceFilePath);
-            createFolder(modSettingsDir)
-            saveXMLFileTo(xmlSourceFile, xmlFilePath);
+                xmlSourceFile = loadXMLFile('combineXP', xmlSourceFilePath);
+                createFolder(modSettingsDir)
+                saveXMLFileTo(xmlSourceFile, xmlFilePath);
             end
         end
     end

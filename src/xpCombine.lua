@@ -2,6 +2,7 @@
 
 xpCombine.debug = false --true --
 xpCombine.myCurrentModDirectory = g_currentModDirectory;
+xpCombine.modSettingsDir = g_modSettingsDirectory
 xpCombine.modName = g_currentModName
 
 xpCombine.powerBoostArcade = 100;   -- 100% power boost
@@ -88,8 +89,7 @@ function xpCombine:onLoad(savegame)
         local xmlFile = nil
 
         if xpCombine.myCurrentModDirectory then
-            local modSettingsDir = getUserProfileAppPath().."modSettings"
-            local xmlFilePath = modSettingsDir.."/combineXP.xml"
+            local xmlFilePath = xpCombine.modSettingsDir.."/combineXP.xml"
             if fileExists(xmlFilePath) then
                 xmlFile = loadXMLFile("combineXP", xmlFilePath);
             else

@@ -2,6 +2,7 @@
 ---@class CombineSettings
 CombineSettings = {}
 
+local modSettingsDir = g_modSettingsDirectory
 CombineSettings.debug = false --true --
 local xpCombineSettings_mt = Class(CombineSettings)
 
@@ -117,12 +118,11 @@ function CombineSettings:saveSettings()
     if xpCombine.myCurrentModDirectory then
         local xmlFile = nil
         if xpCombine.myCurrentModDirectory then
-            local modSettingsDir = getUserProfileAppPath().."modSettings"
             local xmlFilePath = modSettingsDir.."/combineXP.xml"
             if fileExists(xmlFilePath) then
                 xmlFile = XMLFile.load("combineXP", xmlFilePath);
             else
-                xmlFile = XMLFile.load("combineXP", xpCombine.myCurrentModDirectory .. "data/combineXP.xml");
+                print("Eror: Cannot save settings to "..xmlFilePath)
             end
             xmlFile:setInt("combineXP.vehicles"..string.format("#powerBoost"), g_combinexp.powerBoost)
             xmlFile:setBool("combineXP.powerDependantSpeed" .. string.format("#isActive"), g_combinexp.powerDependantSpeed.isActive)
