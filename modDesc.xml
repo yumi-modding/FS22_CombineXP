@@ -13,6 +13,10 @@ New features:
 - Capability to activate combine and cutter independently as IRL
 - Harvesting speed limit based on material quantity gathered, crop type, combine performance (based on power) and crop moisture depending on time of the day
 - Display several data in HUD when harvesting: material capacity (T/h), combine load (%), instant yield (T/ha)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Fixed issue with settings saving
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -21,6 +25,10 @@ Nouvelles fonctionnalités:
 - Possibilité d'activer la moissonneuse-batteuse et la barre de coupe indépendamment comme IRL
 - Limite la vitesse de moisson en fonction de la quantité récoltée, du type de culture, des performances de la moissonneuse (basées sur sa puissance) et de l'humitidité de la culture en fonction de l'heure de la journée
 - Affiche différentes données dans le HUD lors de la récolte: quantité de récolte (T/h), charge de la moissonneuse (%), rendement instantané (T/ha)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Correction d'erreur de sauvegarde des settings
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben, das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -29,6 +37,10 @@ Eigenschaften:
 - Mähdrescher und das Schneidwerk unabhängig voneinander wie in der Realität zu aktivieren
 - Erntegeschwindigkeitslimit basierend auf der gesammelten Materialmenge, der Ernteart, der Mähdrescherleistung (basierend auf der Gesamtleistung) und die Luftfeuchtigkeit der Ernte je nach Tageszeit
 - Zeigt Ihnen bei der Ernte mehrere Daten im HUD an: Materialkapazität (T/h), kombinierte Ladung (%), sofortiger Ertrag (T/ha)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Problem beim Speichern der Einstellungen behoben
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
@@ -37,6 +49,10 @@ Eigenschaften:
 - Активировать комбайн и жатку независимо друг от друга как "в реальной жизни"(IRL)
 - Ограничение скорости сбора урожая в зависимости от количества собранного материала, типа урожая, производительности комбайна (в зависимости от мощности) и влажности урожая с модом Seasons
 - Отображает несколько данных в HUD во время уборки: производительность комбайна (т/ч), загрузка комбайна (%), текущая урожайность (т/га)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Исправлена проблема с сохранением настроек
 ]]></ru>
         <pl><![CDATA[
 Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
@@ -45,6 +61,10 @@ Nowe funkcje:
 - Możliwość niezależnej aktywacji kombajnu i hederu/przystawki jak w prawdziwym życiu
 - Ograniczenie prędkości koszenia w oparciu o ilość zbieranego materiału, rodzaj uprawy, wydajność kombajnu (w oparciu o moc) i wilgotność plonu w zależności od pory dnia
 - Wyświetlanie kilku danych na HUDzie podczas zbioru: wydajność zbioru (t/h), obciążenie kombajnu (%), ogólna wydajność (t/ha)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Naprawiono problem z zapisywaniem ustawień
 ]]></pl>
         <br><![CDATA[
 Se você está cansado de colher qualquer lavoura com qualquer colheitadeira a 10 km / h, este modo é para você.
@@ -53,6 +73,10 @@ Novas características:
 - Capacidade de ativar a colheitadeira e o cortador independentemente como IRL
 - Limite de velocidade de colheita com base na quantidade de material coletado, tipo de cultura, desempenho da colheitadeira (baseado na sua potência) e a umidade da cultura dependendo da hora do dia
 - Exibe vários dados no HUD durante a colheita: capacidade de material (T/h), carga da colheitadeira (%), rendimento da lavoura (T/ha)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Corrigido problema com salvamento de configurações
 ]]></br>
         <it><![CDATA[
 Se sei stanco di raccogliere qualsiasi raccolto con qualsiasi mietitrebbia a 10 km/h, questa mod è per te.
@@ -61,6 +85,10 @@ Nuove caratteristiche:
 - Possibilità di attivare la mietitrebbia e la taglierina indipendentemente come IRL
 - Limite di velocità di raccolta in base alla quantità di materiale raccolto, al tipo di coltura, alle prestazioni della mietitrebbia (in base alla potenza) e all'umidità del raccolto a seconda dell'ora del giorno
 - Visualizza diversi dati nell'HUD durante la raccolta: capacità del materiale (T/h), carico della mietitrebbia (%), resa istantanea (T/ha)
+
+==== CHANGELOG ====
+Fixed in v1.0.0.1
+- Risolto problema con il salvataggio delle impostazioni
 ]]></it>
     </description>
     <iconFilename>modIcon.dds</iconFilename>

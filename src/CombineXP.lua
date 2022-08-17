@@ -90,7 +90,7 @@ function CombineXP:loadDependantSpeed()
     local xmlFile = nil
 
     if modDirectory then
-        local xmlFilePath = modSettingsDir.."/combineXP.xml"
+        local xmlFilePath = modSettingsDir.."combineXP.xml"
         if fileExists(xmlFilePath) then
             xmlFile = loadXMLFile("combineXP", xmlFilePath);
         else
@@ -116,10 +116,11 @@ end
 
 -- @doc Copy default parameters from mod zip file to modSettings directory so end-user can edit it
 function CombineXP:copyCombineXPXML()
+    -- print("CombineXP:copyCombineXPXML")
     if modDirectory then
-        local xmlFilePath = modSettingsDir.."/combineXP.xml"
+        local xmlFilePath = modSettingsDir.."combineXP.xml"
         if not fileExists(xmlFilePath) then
-            local xmlSourceFilePath = modDirectory .. "/data/combineXP.xml"
+            local xmlSourceFilePath = modDirectory .. "data/combineXP.xml"
             local xmlSourceFile;
             if fileExists(xmlSourceFilePath) then
                 xmlSourceFile = loadXMLFile('combineXP', xmlSourceFilePath);
@@ -134,7 +135,6 @@ end
 function CombineXP:onMissionStart(mission)
     -- print("CombineXP:onMissionStart")
 
-    CombineXP.copyCombineXPXML()
     CombineXP.loadMaterialQtyFx()
     CombineXP.loadDependantSpeed()
     if g_server == nil then
@@ -155,6 +155,7 @@ end
 ---Mission was loaded (without vehicles and items)
 function CombineXP:onMissionLoaded(mission)
     -- print("CombineXP:onMissionLoaded")
+    CombineXP.copyCombineXPXML()    -- to be called on server
     self.hud:load()
     self.settings:load()
 end
