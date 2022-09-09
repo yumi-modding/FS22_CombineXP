@@ -447,10 +447,19 @@ end
 function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
     -- if xpCombine.debug then print("xpCombine:getSpeedLimit: "..tostring(g_combinexp.powerBoost).." - "..tostring(g_combinexp.powerDependantSpeed.isActive).." - "..tostring(g_combinexp.timeDependantSpeed.isActive)) end
     local spec_combine = self.spec_combine
-    local spec_aiVehicle = self.spec_aiVehicle
     local spec_xpCombine = self.spec_xpCombine
+    local self_vehicle = self
     local limit, doCheckSpeedLimit = superfunc(self, onlyIfWorking)
     -- print(self:getFullName().." "..tostring(limit))
+    if spec_xpCombine == nil then
+        -- Manage FS22_RealSpeedLimit mod
+        if self.rootVehicle then
+            spec_combine = self.rootVehicle.spec_combine
+            spec_xpCombine = self.rootVehicle.spec_xpCombine
+            spec_realSpeedLimit = self.rootVehicle.spec_realSpeedLimit
+            self_vehicle = self.rootVehicle
+        end
+    end
     if spec_xpCombine then
         local isTurnedOn = self:getIsTurnedOn()
         if isTurnedOn then
@@ -464,7 +473,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
                 spec_xpCombine.mrGenuineSpeedLimit = limit
             end
             spec_xpCombine.mrCombineLimiter.highMoisture = false
-            local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self:getFillUnitFillType(spec_combine.fillUnitIndex))
+            local fruitType = g_fruitTypeManager:getFruitTypeIndexByFillTypeIndex(self_vehicle:getFillUnitFillType(spec_combine.fillUnitIndex))
             if limit < math.huge and fruitType ~= nil and fruitType ~= FruitType.UNKNOWN and not spec_combine.allowThreshingDuringRain then
                 local loadLimit = limit
                 -- print("speedLimit                 : "..tostring(limit))

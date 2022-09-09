@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="67">
+<modDesc descVersion="68">
     <author>yumi</author>
-    <version>1.0.0.1</version>        
+    <version>1.0.0.2</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -17,6 +17,8 @@ New features:
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Fixed issue with settings saving
+Fixed in v1.0.0.2
+- Fixed conflict with Real Speed Limit mod
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -29,6 +31,8 @@ Nouvelles fonctionnalités:
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Correction d'erreur de sauvegarde des settings
+Fixed in v1.0.0.2
+- Correction de conflit avec le mod Limite De Vitesse Réelle
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben, das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -41,6 +45,8 @@ Eigenschaften:
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Problem beim Speichern der Einstellungen behoben
+Fixed in v1.0.0.2
+- Konflikt mit Echtes Tempolimit-Mod behoben
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
@@ -53,6 +59,8 @@ Fixed in v1.0.0.1
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Исправлена проблема с сохранением настроек
+Fixed in v1.0.0.2
+- Исправлен конфликт с модом Real Speed Limit
 ]]></ru>
         <pl><![CDATA[
 Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
@@ -65,6 +73,8 @@ Nowe funkcje:
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Naprawiono problem z zapisywaniem ustawień
+Fixed in v1.0.0.2
+- Naprawiono konflikt z modą Rzeczywiste Ograniczenie Prędkości
 ]]></pl>
         <br><![CDATA[
 Se você está cansado de colher qualquer lavoura com qualquer colheitadeira a 10 km / h, este modo é para você.
@@ -77,6 +87,8 @@ Novas características:
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Corrigido problema com salvamento de configurações
+Fixed in v1.0.0.2
+- Corrigido conflito com o mod Real Speed Limit
 ]]></br>
         <it><![CDATA[
 Se sei stanco di raccogliere qualsiasi raccolto con qualsiasi mietitrebbia a 10 km/h, questa mod è per te.
@@ -89,6 +101,8 @@ Nuove caratteristiche:
 ==== CHANGELOG ====
 Fixed in v1.0.0.1
 - Risolto problema con il salvataggio delle impostazioni
+Fixed in v1.0.0.2
+- Risolto il problema con il mod Limite Di Velocità Reale
 ]]></it>
     </description>
     <iconFilename>modIcon.dds</iconFilename>
