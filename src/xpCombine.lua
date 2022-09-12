@@ -461,7 +461,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
         end
     end
     if spec_xpCombine then
-        local isTurnedOn = self:getIsTurnedOn()
+        local isTurnedOn = self_vehicle:getIsTurnedOn()
         if isTurnedOn then
             if g_combinexp.powerDependantSpeed.isActive then
                 spec_xpCombine.mrGenuineSpeedLimit = 1.5 * limit
