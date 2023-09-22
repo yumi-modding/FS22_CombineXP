@@ -129,7 +129,7 @@ function xpCombine:onLoad(savegame)
         local keyCategory = "vehicle.storeData.category"
         local category = self.xmlFile:getValue(keyCategory)
         if category == "forageHarvesters" or category == "forageHarvesterCutters" then
-            coef = 6.
+            coef = 12.
         elseif category == "beetVehicles" or category == "beetHarvesting" then
             coef = 0.6
 		elseif category == "potatoVehicles" then
@@ -187,6 +187,7 @@ function xpCombine:onLoad(savegame)
 
     spec.mrIsCombineSpeedLimitActive = false;
 
+    spec.speedLimit = 15.
     spec.lastRealArea = 0.
     spec.lastMultiplier = 1
 
@@ -434,7 +435,7 @@ function xpCombine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSele
 
         else
             spec.speedLimit = spec.mrGenuineSpeedLimit;
-            spec.mrCombineLimiter.currentAvgArea = 0;   
+            spec.mrCombineLimiter.currentAvgArea = 0;
             --self.mrAvgCombineCuttersArea = 0;
             spec.mrCombineLimiter.tonPerHour = 0
         end
@@ -464,7 +465,7 @@ function xpCombine:getSpeedLimit(superfunc, onlyIfWorking)
         local isTurnedOn = self_vehicle:getIsTurnedOn()
         if isTurnedOn then
             if g_combinexp.powerDependantSpeed.isActive then
-                spec_xpCombine.mrGenuineSpeedLimit = 1.5 * limit
+                spec_xpCombine.mrGenuineSpeedLimit = math.max(1.5 * limit, 18.)
                 if spec_xpCombine.speedLimit and spec_xpCombine.speedLimit > 0 then
                     limit = spec_xpCombine.speedLimit
                     -- if xpCombine.debug then print("speedLimit from materialQty: "..tostring(limit)) end

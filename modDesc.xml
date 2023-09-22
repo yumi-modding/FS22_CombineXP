@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="68">
+<modDesc descVersion="75">
     <author>yumi</author>
-    <version>1.0.0.2</version>        
+    <version>1.0.0.3</version>        
     <title>
         <en>Combine XPerience</en>
     </title>
@@ -19,6 +19,9 @@ Fixed in v1.0.0.1
 - Fixed issue with settings saving
 Fixed in v1.0.0.2
 - Fixed conflict with Real Speed Limit mod
+Fixed in v1.0.0.3
+- Fixed conflict with Vehicle Control Addon mod when using keep speed on dedicated server
+- Increase limit speed for forage harvesters to work faster
 ]]></en>
         <fr><![CDATA[
 Si vous en avez assez de moissonner n'importe quelle culture avec n'importe quelle moissonneuse à 10 km/h, ce mod est pour vous.
@@ -33,6 +36,9 @@ Fixed in v1.0.0.1
 - Correction d'erreur de sauvegarde des settings
 Fixed in v1.0.0.2
 - Correction de conflit avec le mod Limite De Vitesse Réelle
+Fixed in v1.0.0.3
+- Correction de conflit avec le mod Vehicle Control Addon lors de l'utilisation de Conserver la vitesse sur serveur dédié
+- Augmentation de la vitesse limite pour que les ensileuses récoltent plus vite
 ]]></fr>
         <de><![CDATA[
 Wenn Sie es satt haben, das Feld mit einem beliebigen Mähdrescher bei 10 km/h zu ernten, ist dieser Mod genau das richtige für Sie.
@@ -47,6 +53,9 @@ Fixed in v1.0.0.1
 - Problem beim Speichern der Einstellungen behoben
 Fixed in v1.0.0.2
 - Konflikt mit Echtes Tempolimit-Mod behoben
+Fixed in v1.0.0.3
+- Konflikt mit dem Vehicle Control Addon-Mod behoben, wenn Geschwindigkeit permanent halten auf einem dedizierten Server verwendet wurde
+- Grenzgeschwindigkeit erhöhen, damit Feldhäcksler schneller arbeiten können
 ]]></de>
         <ru><![CDATA[
 Если вам надоело убирать поле любым комбайном на скорости 10 км/ч, этот мод для вас.
@@ -61,6 +70,9 @@ Fixed in v1.0.0.1
 - Исправлена проблема с сохранением настроек
 Fixed in v1.0.0.2
 - Исправлен конфликт с модом Real Speed Limit
+Fixed in v1.0.0.3
+- Исправлен конфликт с модом Vehicle Control Addon при использовании режима поддержания скорости на выделенном сервере.
+- Увеличьте предельную скорость кормоуборочных комбайнов, чтобы они работали быстрее.
 ]]></ru>
         <pl><![CDATA[
 Jeśli masz dość koszenia zbóż dowolnym kombajnem z prędkością 10 km/h, ten mod jest dla Ciebie.
@@ -75,6 +87,9 @@ Fixed in v1.0.0.1
 - Naprawiono problem z zapisywaniem ustawień
 Fixed in v1.0.0.2
 - Naprawiono konflikt z modą Rzeczywiste Ograniczenie Prędkości
+Fixed in v1.0.0.3
+- Naprawiono konflikt z modyfikacją dodatku Kontrola pojazdu podczas korzystania z funkcji utrzymywania prędkości na serwerze dedykowanym
+- Zwiększenie prędkości granicznej, aby sieczkarnie polowe pracowały szybciej
 ]]></pl>
         <br><![CDATA[
 Se você está cansado de colher qualquer lavoura com qualquer colheitadeira a 10 km / h, este modo é para você.
@@ -89,6 +104,9 @@ Fixed in v1.0.0.1
 - Corrigido problema com salvamento de configurações
 Fixed in v1.0.0.2
 - Corrigido conflito com o mod Real Speed Limit
+Fixed in v1.0.0.3
+- Corrigido conflito com o mod Vehicle Control Addon ao usar manter velocidade em servidor dedicado
+- Aumentar a velocidade limite para que as colhedoras de forragem trabalhem mais rápido
 ]]></br>
         <it><![CDATA[
 Se sei stanco di raccogliere qualsiasi raccolto con qualsiasi mietitrebbia a 10 km/h, questa mod è per te.
@@ -103,9 +121,12 @@ Fixed in v1.0.0.1
 - Risolto problema con il salvataggio delle impostazioni
 Fixed in v1.0.0.2
 - Risolto il problema con il mod Limite Di Velocità Reale
+Fixed in v1.0.0.3
+- Risolto il conflitto con la mod Vehicle Control Addon quando si utilizzava Mantieni velocità sul server dedicato
+- Aumentare la velocità limite affinché le trince possano lavorare più velocemente
 ]]></it>
     </description>
-    <iconFilename>modIcon.dds</iconFilename>
+    <iconFilename>icon_CombineXP.dds</iconFilename>
     <multiplayer supported="true"/>
     
     <extraSourceFiles>
