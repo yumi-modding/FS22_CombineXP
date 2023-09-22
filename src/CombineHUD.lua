@@ -98,7 +98,9 @@ function CombineHUD:createElements()
     self.base = self:createBaseBox(self.uiFilename, rightX - marginWidth, bottomY + marginHeight)
     self.main:addChild(self.base)
 
-    local posX, posY = self.base:getPosition()
+    -- local posX, posY = self.base:getPosition()
+	local posX = g_currentMission.inGameMenu.hud.speedMeter.gaugeCenterX
+	local posY = g_currentMission.inGameMenu.hud.speedMeter.gaugeCenterY - (g_currentMission.inGameMenu.hud.speedMeter.speedIndicatorRadiusY * self.uiScale)
     posX = posX + paddingWidth
     posY = posY + paddingHeight
 
@@ -168,8 +170,10 @@ end
 function CombineHUD:createBaseBox(hudAtlasPath, x, y)
     --print("CombineHUD:createBaseBox")
     local boxWidth, boxHeight = self:scalePixelToScreenVector(CombineHUD.SIZE.BOX)
-    local posX = x - boxWidth
-    local boxOverlay = Overlay.new(hudAtlasPath, posX, y, boxWidth, boxHeight)
+	local posX = g_currentMission.inGameMenu.hud.speedMeter.gaugeCenterX
+	local posY = g_currentMission.inGameMenu.hud.speedMeter.gaugeCenterY - (g_currentMission.inGameMenu.hud.speedMeter.speedIndicatorRadiusY * self.uiScale)
+    -- local posX = x - boxWidth
+    local boxOverlay = Overlay.new(hudAtlasPath, posX, posY, boxWidth, boxHeight)
     local boxElement = HUDElement.new(boxOverlay)
 
     boxElement:setColor(unpack(CombineHUD.COLOR.MEDIUM_GLASS))
