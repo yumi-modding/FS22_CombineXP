@@ -40,7 +40,7 @@ function CombineHUD:load()
     --print("CombineHUD:load")
     self.uiScale = g_gameSettings:getValue("uiScale")
 
-    if g_languageShort == "fr" then
+    if g_languageShort == "fr" or "pl" then --better for polish translation
         self.l10nHour = "h"
     else
         self.l10nHour = string.gsub(string.gsub(g_i18n:getText("ui_hours_none"), "--:--", ""), "%s", "")
@@ -232,7 +232,7 @@ function CombineHUD:setData(mrCombineLimiter)
     if loadMultiplier ~= loadMultiplier then
         loadMultiplier = 1
     end
-    self.engineLoad = 100 * mrCombineLimiter.engineLoad * loadMultiplier
+    self.engineLoad = 100 * mrCombineLimiter.engineLoad --* loadMultiplier --The HUD will not display unrealistic engine load values which will not affect the speed reductions anyway
     local yield = mrCombineLimiter.yield
     if yield ~= yield then
         yield = 0.
